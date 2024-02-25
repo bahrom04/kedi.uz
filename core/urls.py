@@ -9,8 +9,11 @@ from .schema import swagger_urlpatterns
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("ckeditor/", include("ckeditor_uploader.urls")),
+    path("api/v1/common/", include("apps.common.urls", namespace="common")),
+    path("api/v1/users/", include("apps.users.urls", namespace="users")),
     path(
-        "ckeditor/upload/",serve,
+        "ckeditor/upload/",
+        serve,
         {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
     ),
 ]

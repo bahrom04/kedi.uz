@@ -1,10 +1,16 @@
+from datetime import datetime
+from typing import List
 from django.db import models
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from ckeditor_uploader.fields import RichTextUploadingField
 from django.core.validators import MinValueValidator, MaxValueValidator
+
+from django.contrib.auth.models import UserManager as DjangoUserManager
+from django.core.exceptions import ValidationError
 from ckeditor_uploader.fields import RichTextUploadingField
 from location_field.models.plain import PlainLocationField
-from datetime import datetime
+from ckeditor_uploader.fields import RichTextUploadingField
+
 
 
 class BaseModel(models.Model):
@@ -35,6 +41,8 @@ class Media(BaseModel):
     class Meta:
         verbose_name = _("Media")
         verbose_name_plural = _("Media")
+
+
 
 
 class Region(models.Model):
