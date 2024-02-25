@@ -22,3 +22,9 @@ class BlogAdmin(admin.ModelAdmin):
 class EventAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(models.Position)
+class PositionAdmin(admin.ModelAdmin):
+    exclude = ('latitude', 'longitude')
+
+
+
