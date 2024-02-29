@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from common import models
-from common.auth import serializers
+from users import models
+from users.auth import serializers
 from common.generics import MutateView
 
 
@@ -14,7 +14,7 @@ class RegistrationView(MutateView):
     serializer_class = serializers.RegistrationSerializer
 
     def perform_mutate(self, serializer):
-        instance: models.TempUser = serializer.save()
+        instance: models.CustomUser = serializer.save()
         if settings.EMAIL_WORKING:
             instance.send_confirmation_email()
 

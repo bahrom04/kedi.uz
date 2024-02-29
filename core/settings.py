@@ -25,6 +25,7 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 DJANGO_APPS = [
+    'jazzmin',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -34,8 +35,8 @@ DJANGO_APPS = [
 ]
 
 CUSTOM_APPS = [
-    "apps.common",
-    "apps.users",
+    "apps.common.apps.CommonConfig",
+    "apps.users.apps.UsersConfig",
 ]
 
 THIRD_PARTY_APPS = [
@@ -126,7 +127,7 @@ USE_I18N = True
 USE_TZ = True
 
 # auth
-AUTH_USER_MODEL = "apps.users.User"
+AUTH_USER_MODEL = "users.User"
 
 EMAIL_WORKING = os.getenv("EMAIL_WORKING", True)
 EMAIL_HOST = os.getenv("EMAIL_HOST", "")

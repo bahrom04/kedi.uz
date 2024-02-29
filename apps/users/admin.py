@@ -2,21 +2,21 @@ from django.contrib import admin
 from django.conf import settings
 from apps.users import models
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
-from django.contrib.auth.models import Group
+from django.utils.translation import gettext_lazy as _
 
 
-admin.site.site_header = _("Administration")
-admin.site.site_title = _("Management")
+# admin.site.site_header = _("Administration")
+# admin.site.site_title = _("Management")
 
 
-class CustomGroupAdmin(admin.ModelAdmin):
-    readonly_fields = [
-        "name",
-    ]
+# class CustomGroupAdmin(admin.ModelAdmin):
+#     readonly_fields = [
+#         "name",
+#     ]
 
 
-admin.site.unregister(Group)
-admin.site.register(Group, CustomGroupAdmin)
+# admin.site.unregister(Group)
+# admin.site.register(Group, CustomGroupAdmin)
 
 
 # Register your models here.
@@ -28,13 +28,6 @@ class UserAdmin(DjangoUserAdmin):
     list_display_links = ("id", "email")
     #     readonly_fields = ("last_login", "date_joined")
     list_per_page = 20
-
-    def save_model(self, request, obj: models.User, form, change):
-        is_superuser_changed = obj.tracker.has_changed("is_superuser")
-        obj.save()
-
-        if settings.DEBUG:
-            return
 
     def get_list_filter(self, request):
         list_filter = super().get_list_filter(request)

@@ -12,7 +12,7 @@ from apps.users.managers import UserManager
 
 
 class User(AbstractUser, BaseModel):
-    username = None
+    # username = None
     email = models.EmailField(_("email address"), unique=True)
 
     admin_event_position = models.ForeignKey(
@@ -64,9 +64,7 @@ class CustomUser(models.Model):
     first_name = models.CharField(_("first name"), max_length=150, blank=True)
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
     email = models.EmailField(_("email address"), blank=True)
-    country = models.ForeignKey(
-        "Country", on_delete=models.PROTECT, verbose_name=_("country")
-    )
+
     password = models.CharField(_("password"), max_length=128)  # hashed password
     secret = models.CharField(
         _("secret"), max_length=128, default=generate_temp_user_secret
@@ -99,7 +97,6 @@ class CustomUser(models.Model):
             email=self.email,
             first_name=self.first_name,
             last_name=self.last_name,
-            country=self.country,
         )
         user.password = self.password
         user.save()

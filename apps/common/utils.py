@@ -6,6 +6,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils import timezone
 from django.template.loader import render_to_string
 from django.utils.crypto import get_random_string
+from django.utils.translation import gettext_lazy as _
+
 
 REG_CONFIRM_EMAIL_SUB = _("Ekologiya: New user registration confirmation")
 RESPONSE_RECEIVED = _("Response received from the Ekologiya")

@@ -3,35 +3,39 @@ from django.db import transaction
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
-from common import models
+from users import models
 from verification.serializers import VerificationSerializer
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.TempUser
-        fields = ["id", "first_name", "last_name", "email", "country", "password"]
+        model = models.CustomUser
+        fields = ["id", "first_name", "last_name", "email", "password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def validate_email(self, value):
         if models.User.objects.filter(email=value).exists():
-            raise serializers.ValidationError(_("User with this email already exists"), code="email_exists")
+            raise serializers.ValidationError(
+                _("User with this email already exists"), code="email_exists"
+            )
         return value
 
     def validate(self, attrs):
         password = attrs.pop("password")
-        temp_user = models.TempUser(**attrs)
+        temp_user = models.CustomUser(**attrs)
         try:
             validate_password(password, user=temp_user)
         except serializers.DjangoValidationError as e:
-            raise serializers.ValidationError({"password": serializers.as_serializer_error(e)["non_field_errors"]})
+            raise serializers.ValidationError(
+                {"password": serializers.as_serializer_error(e)["non_field_errors"]}
+            )
 
         attrs["password"] = password
         return attrs
 
     def create(self, validated_data):
         password = validated_data.pop("password")
-        user = models.TempUser(**validated_data)
+        user = models.CustomUser(**validated_data)
         user.set_password(password)
         user.save()
         return user
@@ -43,33 +47,30 @@ class RegistrationVerifySerializer(serializers.Serializer):
     @staticmethod
     def validate_token(value):
         """
-        token is in format of id:secret for a TempUser instance
+        token is in format of id:secret for a CustomUser instance
         """
 
         try:
             id, secret = value.split(":")
-            temp_user = models.TempUser.objects.get(id=id, secret=secret)
+            temp_user = models.CustomUser.objects.get(id=id, secret=secret)
         except ValueError:
             raise serializers.ValidationError(_("Invalid token"), code="invalid_token")
-        except models.TempUser.DoesNotExist:
+        except models.CustomUser.DoesNotExist:
             raise serializers.ValidationError(_("Invalid token"), code="invalid_token")
 
         # check if email is in use
         if models.User.objects.filter(email=temp_user.email).exists():
-            raise serializers.ValidationError(_("Token is expired"), code="expired_token")
+            raise serializers.ValidationError(
+                _("Token is expired"), code="expired_token"
+            )
 
         return temp_user
 
     def create(self, validated_data):
         with transaction.atomic():
-            temp_user: models.TempUser = validated_data["token"]
+            temp_user: models.CustomUser = validated_data["token"]
             user = temp_user.create_user()
         return user
-
-    def to_representation(self, instance):
-        return {
-            "id": instance.id,
-        }
 
 
 class PasswordResetSerializer(serializers.Serializer):
@@ -80,7 +81,9 @@ class PasswordResetSerializer(serializers.Serializer):
         try:
             validate_password(value)
         except serializers.DjangoValidationError as e:
-            raise serializers.ValidationError(serializers.as_serializer_error(e)["non_field_errors"])
+            raise serializers.ValidationError(
+                serializers.as_serializer_error(e)["non_field_errors"]
+            )
         return value
 
     def create(self, validated_data):
@@ -90,12 +93,11 @@ class PasswordResetSerializer(serializers.Serializer):
         try:
             user = models.User.objects.get(email=session.address)
         except models.User.DoesNotExist:
-            raise serializers.ValidationError(_("User does not exist"), code="user_not_found")
+            raise serializers.ValidationError(
+                _("User does not exist"), code="user_not_found"
+            )
         user.set_password(password)
         user.save()
         return user
 
-    def to_representation(self, instance):
-        return {
-            "id": instance.id,
-        }
+   
