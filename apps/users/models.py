@@ -15,14 +15,6 @@ class User(AbstractUser, BaseModel):
     # username = None
     email = models.EmailField(_("email address"), unique=True)
 
-    admin_event_position = models.ForeignKey(
-        "common.Position",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="users",
-    )
-    private_email = models.EmailField(_("private email address"), null=True, blank=True)
     work_phone_number = models.CharField(
         _("work phone number"),
         max_length=18,
@@ -31,48 +23,24 @@ class User(AbstractUser, BaseModel):
         blank=True,
     )
     telegram = models.URLField(_("telegram"), null=True, blank=True)
-    photo = models.ImageField(_("photo"), upload_to="users/")
-    job_position = models.CharField(_("position"), max_length=255)
+    avator = models.ImageField(_("avatar"), upload_to="users/")
     bio = models.TextField(_("comment"), null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS: List[str] = []
     objects = UserManager()
 
-    raw_password = models.CharField(
-        max_length=255, null=True, blank=True, editable=False
-    )
+    password = models.CharField(max_length=255, null=True, blank=True, editable=False)
 
-    class Meta:
-        verbose_name = _("user")
-        verbose_name_plural = _("users")
-
-    def save(self, *args, **kwargs):
-        if self._password is not None:
-            self.raw_password = self._password
-        super().save(*args, **kwargs)
-
-    @property
-    def user_position(self):
-        return self.admin_event_position if self.admin_event_position else ""
-
-    def __str__(self):
-        return f"{self.email}"
-
-
-class CustomUser(models.Model):
-    first_name = models.CharField(_("first name"), max_length=150, blank=True)
-    last_name = models.CharField(_("last name"), max_length=150, blank=True)
-    email = models.EmailField(_("email address"), blank=True)
-
-    password = models.CharField(_("password"), max_length=128)  # hashed password
-    secret = models.CharField(
-        _("secret"), max_length=128, default=generate_temp_user_secret
-    )
-
-    class Meta:
-        verbose_name = _("Custom user")
-        verbose_name_plural = _("Custom users")
+    def create_user(self):
+        user = User.objects.create_user(
+            email=self.email,
+            first_name=self.first_name,
+            last_name=self.last_name,
+        )
+        user.password = self.password
+        user.save()
+        return user
 
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
@@ -92,16 +60,13 @@ class CustomUser(models.Model):
             email_template="auth/email_confirm.html",
         )
 
-    def create_user(self) -> User:
-        user = User.objects.create_user(
-            email=self.email,
-            first_name=self.first_name,
-            last_name=self.last_name,
-        )
-        user.password = self.password
-        user.save()
-        return user
-
     @property
     def token(self):
         return f"{self.id}:{self.secret}"
+
+    class Meta:
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
+
+    def __str__(self):
+        return f"{self.email}"

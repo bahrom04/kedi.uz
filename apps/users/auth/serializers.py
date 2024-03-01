@@ -10,7 +10,7 @@ from verification.serializers import VerificationSerializer
 class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CustomUser
-        fields = ["id", "first_name", "last_name", "email", "password"]
+        fields = ["first_name", "last_name", "email", "password"]
         extra_kwargs = {"password": {"write_only": True}}
 
     def validate_email(self, value):
@@ -22,9 +22,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         password = attrs.pop("password")
-        temp_user = models.CustomUser(**attrs)
+        user = models.User(**attrs)
         try:
-            validate_password(password, user=temp_user)
+            validate_password(password, user=user)
         except serializers.DjangoValidationError as e:
             raise serializers.ValidationError(
                 {"password": serializers.as_serializer_error(e)["non_field_errors"]}
@@ -35,7 +35,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop("password")
-        user = models.CustomUser(**validated_data)
+        user = models.User(**validated_data)
         user.set_password(password)
         user.save()
         return user
@@ -52,24 +52,24 @@ class RegistrationVerifySerializer(serializers.Serializer):
 
         try:
             id, secret = value.split(":")
-            temp_user = models.CustomUser.objects.get(id=id, secret=secret)
+            user = models.User.objects.get(id=id, secret=secret)
         except ValueError:
             raise serializers.ValidationError(_("Invalid token"), code="invalid_token")
         except models.CustomUser.DoesNotExist:
             raise serializers.ValidationError(_("Invalid token"), code="invalid_token")
 
         # check if email is in use
-        if models.User.objects.filter(email=temp_user.email).exists():
+        if models.User.objects.filter(email=user.email).exists():
             raise serializers.ValidationError(
                 _("Token is expired"), code="expired_token"
             )
 
-        return temp_user
+        return user
 
     def create(self, validated_data):
         with transaction.atomic():
-            temp_user: models.CustomUser = validated_data["token"]
-            user = temp_user.create_user()
+            user: models.User = validated_data["token"]
+            user = user.create_user()
         return user
 
 

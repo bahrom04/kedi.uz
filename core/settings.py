@@ -40,7 +40,7 @@ CUSTOM_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    # "rest_framework",
+    "rest_framework",
     "drf_yasg",
     # "corsheaders",
     # "modeltranslation",
@@ -48,7 +48,6 @@ THIRD_PARTY_APPS = [
     "rest_framework_swagger",
     "ckeditor",
     "ckeditor_uploader",
-    # 'mapwidgets',
     "location_field.apps.DefaultConfig",
 ]
 
@@ -173,5 +172,10 @@ LOCATION_FIELD = {
     "search.provider": "nominatim",
 }
 
-# GDAL_LIBRARY_PATH = '.\venv\Lib\site-packages\osgeo\gdal304.dll'
-# GEOS_LIBRARY_PATH = '.\venv\Lib\site-packages\osgeo\geos_c.dll'
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

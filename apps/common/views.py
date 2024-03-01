@@ -4,7 +4,9 @@ from apps.common.models import Position
 
 
 def index(request):
-    posotions = list(Position.objects.values("latitude", "longitude")[:100])
+    posotions = list(
+        Position.objects.filter(event__title="Hashar").values("latitude", "longitude")
+    )
     print(posotions)
     context = {}
     return render(request, "index.html", context={"positions": posotions})

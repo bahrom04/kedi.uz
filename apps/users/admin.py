@@ -23,7 +23,7 @@ from django.utils.translation import gettext_lazy as _
 @admin.register(models.User)
 class UserAdmin(DjangoUserAdmin):
     ordering = ("email",)
-    list_display = ("id", "email", "admin_event_position", "first_name", "last_name")
+    list_display = ("id", "email", "first_name", "last_name")
     search_fields = ("first_name", "last_name", "email")
     list_display_links = ("id", "email")
     #     readonly_fields = ("last_login", "date_joined")
@@ -68,6 +68,3 @@ class UserAdmin(DjangoUserAdmin):
         return fieldsets
 
 
-@admin.register(models.CustomUser)
-class CustomUserAdmin(admin.ModelAdmin):
-    pass
