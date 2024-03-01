@@ -25,7 +25,7 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 DJANGO_APPS = [
-    'jazzmin',
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = [
     "rest_framework_swagger",
     "ckeditor",
     "ckeditor_uploader",
+    'mapwidgets',
     "location_field.apps.DefaultConfig",
 ]
 
@@ -69,7 +70,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -143,9 +144,9 @@ FRONTEND_REG_CONFIRM_URL = os.getenv("FRONTEND_REG_CONFIRM_URL", "")
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "static"
-# STATICFILES_DIRS = (BASE_DIR / "staticfiles",)
+
+STATIC_ROOT = BASE_DIR / 'productionfiles'
+STATIC_URL = 'static/'
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"

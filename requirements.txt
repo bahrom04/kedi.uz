@@ -15,3 +15,5 @@ urllib3==2.2.1
 django-rest-swagger
 drf-yasg
 django-jazzmin
+django-map-widgets
+pipwin
