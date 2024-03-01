@@ -48,7 +48,7 @@ THIRD_PARTY_APPS = [
     "rest_framework_swagger",
     "ckeditor",
     "ckeditor_uploader",
-    'mapwidgets',
+    # 'mapwidgets',
     "location_field.apps.DefaultConfig",
 ]
 
@@ -172,3 +172,6 @@ LOCATION_FIELD = {
     "map.provider": "openstreetmap",
     "search.provider": "nominatim",
 }
+
+# GDAL_LIBRARY_PATH = '.\venv\Lib\site-packages\osgeo\gdal304.dll'
+# GEOS_LIBRARY_PATH = '.\venv\Lib\site-packages\osgeo\geos_c.dll'
