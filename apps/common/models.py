@@ -132,6 +132,12 @@ class Position(BaseModel):
 
     event = models.ForeignKey(Event, on_delete=models.PROTECT, related_name="events")
 
+    def save(self, *args, **kwargs):
+        if self.latitude is None and self.longitude is None:
+            self.latitude, self.longitude = self.location.split(",")
+
+        super().save(*args, **kwargs)
+
     class Meta:
         verbose_name = _("Position")
         verbose_name_plural = _("Position")
