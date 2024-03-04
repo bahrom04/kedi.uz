@@ -7,6 +7,10 @@ class UserManager(DjangoUserManager):
         """
         Create and save a user with the given email, and password.
         """
+        if not email:
+            raise ValueError("An email is required")
+        if not password:
+            raise ValueError("A password is required")
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.password = make_password(password)

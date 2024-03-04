@@ -1,55 +1,61 @@
-from django.conf import settings
-from rest_framework.exceptions import ValidationError
-from rest_framework.fields import EmailField
+from django.contrib.auth import get_user_model, login, logout
 from rest_framework.response import Response
+from rest_framework import generics, status
 from rest_framework.views import APIView
-from rest_framework_simplejwt.views import TokenObtainPairView
-
-from users import models
-from users.auth import serializers
-from common.generics import MutateView
-
-
-class RegistrationView(MutateView):
-    serializer_class = serializers.RegistrationSerializer
-
-    def perform_mutate(self, serializer):
-        instance: models.CustomUser = serializer.save()
-        if settings.EMAIL_WORKING:
-            instance.send_confirmation_email()
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.authentication import SessionAuthentication
+from apps.users.auth import serializers
+from apps.common.validators import (
+    custom_validation,
+    validate_email,
+    validate_password,
+    validate_username,
+)
 
 
-class RegistrationVerifyView(MutateView):
-    serializer_class = serializers.RegistrationVerifySerializer
+class UserRegisterView(APIView):
+    # queryset = User.objects.all()
+    # serializer_class = serializers.RegistrationSerializer
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        validated_data = custom_validation(request.data)
+        serializer = serializers.RegistrationSerializer(data=validated_data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.create(validated_data)
+            if user:
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class CheckAccountView(APIView):
-    """
-    Check if an account exists with the given email.
-    Query params:
-        email: str
-    """
+class UserLoginView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = [SessionAuthentication]
 
-    def get(self, request, *args, **kwargs):
-        email = request.GET.get("email")
-        try:
-            EmailField().run_validation(email)
-        except ValidationError as e:
-            return Response({"email": e.detail}, status=400)
-
-        if models.User.objects.filter(email=email).exists():
-            return Response({"exists": True})
-        return Response({"exists": False})
+    def post(self, request):
+        data = request.data
+        assert validate_email(data)
+        assert validate_password(data)
+        serializer = serializers.LoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.check_user(data)
+            login(request, user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class PasswordResetView(MutateView):
-    serializer_class = serializers.PasswordResetSerializer
+class UserLogoutView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
 
-    def perform_mutate(self, serializer):
-        serializer.save()
-        session = serializer.validated_data["verification"]["session"]
-        session.expire()
+    def post(self, request):
+        logout(request)
+        return Response(status=status.HTTP_200_OK)
 
 
-class LoginView(TokenObtainPairView):
-    throttle_scope = "login"
+class UserDetailView(APIView):
+	permission_classes = [IsAuthenticated]
+	authentication_classes = [SessionAuthentication]
+
+	def get(self, request):
+		serializer = serializers.UserDetailSerializer(request.user)
+		return Response({'user': serializer.data}, status=status.HTTP_200_OK)

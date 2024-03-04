@@ -5,5 +5,5 @@ from apps.users import views
 app_name = "users"
 
 urlpatterns = [
-    # path("auth/", include("apps.users.auth.urls")),
+    path("", include("apps.users.auth.urls")),
 ]

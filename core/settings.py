@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -20,7 +21,16 @@ DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3080",
+    "http://127.0.0.1:3000",
+]
+CORS_ALLOW_CREDENTIALS = True
 
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_HEADERS = ["*"]
 # Application definition
 
 # Application definition
@@ -41,20 +51,22 @@ CUSTOM_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",
-    "drf_yasg",
-    # "corsheaders",
-    # "modeltranslation",
-    # "captcha",
+    "rest_framework_simplejwt",
     "rest_framework_swagger",
+    "drf_yasg",
+    "corsheaders",
     "ckeditor",
     "ckeditor_uploader",
     "location_field.apps.DefaultConfig",
+    # "modeltranslation",
+    # "captcha",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -129,7 +141,6 @@ USE_TZ = True
 # auth
 AUTH_USER_MODEL = "users.User"
 
-EMAIL_WORKING = os.getenv("EMAIL_WORKING", True)
 EMAIL_HOST = os.getenv("EMAIL_HOST", "")
 EMAIL_PORT = os.getenv("EMAIL_PORT", "")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
@@ -140,19 +151,13 @@ EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "")
 
 FRONTEND_REG_CONFIRM_URL = os.getenv("FRONTEND_REG_CONFIRM_URL", "")
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-
-STATIC_ROOT = BASE_DIR / 'productionfiles'
-STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "productionfiles"
+STATIC_URL = "static/"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 SWAGGER_ENABLED = True
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -167,15 +172,16 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 10,
+}
+
 LOCATION_FIELD = {
     "map.provider": "openstreetmap",
     "search.provider": "nominatim",
-}
-
-REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
 }

@@ -19,3 +19,4 @@ django-map-widgets
 pipwin
 Pillow==10.2.0
 djangorestframework
+django-cors-headers
