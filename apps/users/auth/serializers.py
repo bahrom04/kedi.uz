@@ -36,7 +36,7 @@ class LoginSerializer(serializers.Serializer):
 class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         models = models.User
-        fields = ("email", "username")
+        fields = ["email", "username"]
 
 
 # class RegistrationVerifySerializer(serializers.Serializer):

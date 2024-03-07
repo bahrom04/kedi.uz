@@ -1,5 +1,4 @@
 from django.urls import include, path
-from apps.users import views
 
 
 app_name = "users"

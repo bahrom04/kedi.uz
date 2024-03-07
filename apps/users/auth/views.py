@@ -11,7 +11,7 @@ from apps.common.validators import (
     validate_password,
     validate_username,
 )
-
+from apps.users import models
 
 class UserRegisterView(APIView):
     # queryset = User.objects.all()
@@ -28,7 +28,8 @@ class UserRegisterView(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserLoginView(APIView):
+class UserLoginView(generics.CreateAPIView):
+    serializer = serializers.LoginSerializer
     permission_classes = [AllowAny]
     authentication_classes = [SessionAuthentication]
 
@@ -43,7 +44,7 @@ class UserLoginView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class UserLogoutView(APIView):
+class UserLogoutView(generics.CreateAPIView):
     permission_classes = [AllowAny]
     authentication_classes = []
 
@@ -52,10 +53,13 @@ class UserLogoutView(APIView):
         return Response(status=status.HTTP_200_OK)
 
 
-class UserDetailView(APIView):
-	permission_classes = [IsAuthenticated]
-	authentication_classes = [SessionAuthentication]
+class UserDetailView(generics.RetrieveAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserDetailSerializer
+    lookup_field = "pk"
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication]
 
-	def get(self, request):
-		serializer = serializers.UserDetailSerializer(request.user)
-		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
+	# def get(self, request):
+	# 	serializer = serializers.UserDetailSerializer(request.user)
+	# 	return Response({'user': serializer.data}, status=status.HTTP_200_OK)

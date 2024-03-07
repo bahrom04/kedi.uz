@@ -185,3 +185,6 @@ LOCATION_FIELD = {
     "map.provider": "openstreetmap",
     "search.provider": "nominatim",
 }
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

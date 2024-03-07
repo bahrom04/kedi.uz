@@ -4,18 +4,20 @@ from django.conf.urls.static import static
 from django.views.static import serve
 from django.conf import settings
 from .schema import swagger_urlpatterns
-
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("ckeditor/", include("ckeditor_uploader.urls")),
-    path("api/v1/common/", include("apps.common.urls", namespace="common")),
-    path("api/v1/users/", include("apps.users.urls", namespace="users")),
     path(
         "ckeditor/upload/",
         serve,
         {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
     ),
+    path("ckeditor/", include("ckeditor_uploader.urls")),
+    path("api/v1/common/", include("apps.common.urls", namespace="common")),
+    path("api/v1/users/", include("apps.users.urls", namespace="users")),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("", TemplateView.as_view(template_name="home.html"), name="home")
 ]
 
 if settings.SWAGGER_ENABLED:
