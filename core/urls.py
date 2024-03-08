@@ -14,7 +14,7 @@ urlpatterns = [
         {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
     ),
     path("ckeditor/", include("ckeditor_uploader.urls")),
-    path("api/v1/common/", include("apps.common.urls", namespace="common")),
+    path("common/", include("apps.common.urls", namespace="common")),
     path("accounts/", include("apps.users.urls", namespace="users")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("", TemplateView.as_view(template_name="home.html"), name="home")
