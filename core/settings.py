@@ -152,7 +152,7 @@ EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "")
 FRONTEND_REG_CONFIRM_URL = os.getenv("FRONTEND_REG_CONFIRM_URL", "")
 
 STATIC_URL = "/static/"
-STATIC_BASE_DIRS = [os.path.join(BASE_DIR, "staticfiles")]
+STATIC_BASE_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"

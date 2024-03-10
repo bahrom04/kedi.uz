@@ -1,45 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} 
+    Bahrom
+{% endblock %}
 
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Document</title>
+{% block content %}
 
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<main class="content" style=" max-width: 800px; margin: 0 10px ;  padding: 0 10px;">
+    <div>
+      <a id="btn-toggle" href="#" class="sidebar-toggler break-point-lg">
+        <i class="ri-menu-line ri-xl"></i>
+      </a>
 
-     <style>
-          #map {
-               height: 600px;
-               width: 1200px;
-          }
-     </style>
-</head>
+      <br>
+      <h2 class="name font-weight-bold mb-1" style="font-size: 40px; font-weight: bold;">Resent Posts</h2>
+    </div>
+    <br>
 
-<body>
-     <div id="map"></div>
-     {{ positions|json_script:"stations_json" }}
+<!-- cards -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for post in posts %}
+    <div class="col">
+        <div class="card">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+            {% endif %}
+        <div class="card-body">
+            <h4 class="card-title">{{ post.title }}</h4>
+            <span class="badge text-bg-info">{{ post.created_at }}</span>
+            <span> <i class="fa-solid fa-eye"></i></i>{{ post.views }}</span>
 
-     <p>ho</p>
-     
+            {% for tag in tags %}
+                <span class="badge rounded-pill text-bg-dark">{{ tag }}</span>
+            {% endfor %}
+            <br><br>
+            {% if post.short_description %}
+                <p class="card-text">{{ post.short_description }}</p>
+            {% endif %}
+            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read more</a>
 
-     <script>
-          var map = L.map('map').setView([41.34232315482164, 69.21032774291236], 13);
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+<!-- cards end -->
 
-          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-               maxZoom: 19,
-               attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          }).addTo(map);
+    
+   
+    <footer class="footer">
+      <small style="margin-bottom: 20px; display: inline-block">
+        © 2023
+        <a target="_blank" href="https://bahrombek.uz"> bahrombek.uz</a>
+      </small>
+      <br />
 
-          let stations = JSON.parse(document.getElementById('stations_json').textContent);
+      <div class="social-links">
+        <a href="https://github.com/bahrom04" target="_blank">
+          <i class="ri-github-fill ri-xl"></i>
+        </a>
+        
+        <a href="https://www.linkedin.com/in/bahrom-bek-6b8a49212/" target="_blank">
+          <i class="ri-linkedin-box-fill ri-xl"></i>
+        </a>
+      </div>
+      <br>
+    </footer>
 
-          stations.forEach(station => {
-               L.marker([station.latitude, station.longitude]).addTo(map);
-          })
-     </script>
-</body>
+  </main>
 
-</html>
+{% endblock %}

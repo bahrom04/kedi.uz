@@ -1,17 +1,136 @@
-<!-- templates/base.html -->
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Responsive layout with advanced sidebar menu built with SCSS and vanilla Javascript" />
+  <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/favicon.png' %}" />
+  <link rel="stylesheet" href="{% static 'main.css' %}" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles      /default.min.css">
+
+  <!-- Title -->
+  <title> {% block title%} Pro Sidebar {% endblock %} </title>
+  {% block style %} {% endblock %}
 </head>
 
-<body>
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
+<body style="font-family: source sans pro,sans-serif;">
+  <div class="layout has-sidebar fixed-sidebar fixed-header">
+    <aside id="sidebar" class="sidebar break-point-lg has-bg-image">
+      <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
+      <div class="image-wrapper">
+        <!-- sidebar background image -->
+        <img src="{% static 'assets/images/sidebar-bg.jpg' %}" alt="sidebar background" />
+      </div>
+      <div class="sidebar-layout">
+        <div class="sidebar-header">
+          <div class="pro-sidebar-logo">
+            <!-- <div>B</div> -->
+            <h5>bahrombek.uz
+              <span class="badge secondary"> Beta</span>
+            </h5>
+
+          </div>
+        </div>
+        <div class="sidebar-content">
+          <nav class="menu open-current-submenu">
+            <ul>
+              <li class="menu-header"><span> GENERAL </span></li>
+
+              <li class="menu-item">
+                <a href="{% url 'home' %}">
+                  <span class="menu-icon">
+                    <i class="ri-book-2-fill"></i>
+                  </span>
+                  <span class="menu-title">Home</span>
+                </a>
+              </li>
+
+
+              <li class="menu-item">
+                <span class="menu-icon">
+                  <i class="ri-book-2-fill"></i>
+                </span>
+                <span class="menu-title">About</span>
+                </a>
+              </li>
+
+
+
+              <!-- <li class="menu-item sub-menu">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-bar-chart-2-fill"></i>
+                    </span>
+                    <span class="menu-title">Charts</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="#">
+                          <span class="menu-title">Pie chart</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="#">
+                          <span class="menu-title">Line chart</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="#">
+                          <span class="menu-title">Bar chart</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li> -->
+
+
+
+              <li class="menu-header" style="padding-top: 20px"><span> EXTRA </span></li>
+              <li class="menu-item">
+                <a href="#">
+                  <span class="menu-icon">
+                    <i class="ri-book-2-fill"></i>
+                  </span>
+                  <span class="menu-title">Cooming Soon</span>
+
+                </a>
+              </li>
+
+
+            </ul>
+          </nav>
+        </div>
+        <!-- sidebar end -->
+      </div>
+    </aside>
+    <div id="overlay" class="overlay"></div>
+    <div class="layout">
+
+      <!-- Main content -->
+      {% block content %}
+
+      {% endblock %}
+      <div class="overlay"></div>
+    </div>
+  </div>
 </body>
+<script src="{% static 'main.js' %}"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/0e35ab6147.js" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1   /highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 
 </html>
