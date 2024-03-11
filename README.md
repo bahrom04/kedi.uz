@@ -6,4 +6,4 @@ python manage.py migrate
 python manage.py createsuperuser
 ``` 
 ## Examples
-![alt text](image.png)
+![alt text](static/image.png)
