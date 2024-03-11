@@ -8,15 +8,13 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path(
-        "ckeditor/upload/",
-        serve,
+    path("ckeditor/upload/",serve,
         {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
     ),
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("common/", include("apps.common.urls", namespace="common")),
-    path("accounts/", include("apps.users.urls", namespace="users")),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("accounts/", include("apps.users.urls", namespace="users")),
     path("", TemplateView.as_view(template_name="home.html"), name="home")
 ]
 
