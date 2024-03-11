@@ -2,15 +2,16 @@ from datetime import datetime
 from typing import List
 from django.db import models
 from django.conf import settings
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.template.defaultfilters import slugify
 
 from django.contrib.auth.models import UserManager as DjangoUserManager
 from django.core.exceptions import ValidationError
 from ckeditor_uploader.fields import RichTextUploadingField
 from location_field.models.plain import PlainLocationField
 from ckeditor_uploader.fields import RichTextUploadingField
-
 
 
 class BaseModel(models.Model):
@@ -41,8 +42,6 @@ class Media(BaseModel):
     class Meta:
         verbose_name = _("Media")
         verbose_name_plural = _("Media")
-
-
 
 
 class Region(models.Model):
@@ -79,21 +78,47 @@ class Region(models.Model):
         verbose_name_plural = _("Regions")
 
 
-class Blog(BaseModel):
-    title = models.CharField(_("Title"), max_length=255)
-    thumbnail = models.ForeignKey(
-        Media,
-        on_delete=models.CASCADE,
-        related_name="blogs",
-        verbose_name=_("Thumbnail image"),
+class Tag(models.Model):
+    title = models.CharField(max_length=128)
+
+    def tag_name(self):
+        return self.title
+
+    def __str__(self):
+        return self.title
+
+
+class Post(models.Model):
+    image = models.ImageField(upload_to="images/", blank=True)
+    title = models.CharField(
+        max_length=256,
     )
-    description = RichTextUploadingField(_("Description"))
+    short_description = models.CharField(
+        max_length=256,
+    )
+    content = RichTextUploadingField()
+    tag = models.ManyToManyField(Tag, related_name='posts', blank=True)
+
+    slug = models.SlugField(max_length=256, blank=True)
+    views = models.IntegerField(default=0)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = "Blog"
-        verbose_name = _("Blog")
-        verbose_name_plural = _("Blogs")
-        ordering = ("title",)
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse_lazy("post", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.title)
+
+        super(Post, self).save(*args, **kwargs)
 
 
 class Event(BaseModel):

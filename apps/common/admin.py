@@ -13,8 +13,12 @@ class RegionAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(models.Blog)
-class BlogAdmin(admin.ModelAdmin):
+@admin.register(models.Post)
+class PostAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(models.Tag)
+class TagAdmin(admin.ModelAdmin):
     pass
 
 

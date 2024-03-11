@@ -1,4 +1,3 @@
-from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -50,8 +49,6 @@ CUSTOM_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "rest_framework",
-    "rest_framework_simplejwt",
     "rest_framework_swagger",
     "drf_yasg",
     "corsheaders",
@@ -66,7 +63,6 @@ INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -153,7 +149,7 @@ FRONTEND_REG_CONFIRM_URL = os.getenv("FRONTEND_REG_CONFIRM_URL", "")
 
 STATIC_URL = "/static/"
 STATIC_BASE_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"

@@ -1,72 +1,83 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} 
-    Bahrom
+{% block title %}
+Bahrom
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+<form action="{% url 'logout' %}" method="post">
+  {% csrf_token %}
+  <button type="submit">Log Out</button>
+</form>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
 
 <main class="content" style=" max-width: 800px; margin: 0 10px ;  padding: 0 10px;">
-    <div>
-      <a id="btn-toggle" href="#" class="sidebar-toggler break-point-lg">
-        <i class="ri-menu-line ri-xl"></i>
-      </a>
+  <div>
+    <a id="btn-toggle" href="#" class="sidebar-toggler break-point-lg">
+      <i class="ri-menu-line ri-xl"></i>
+    </a>
 
-      <br>
-      <h2 class="name font-weight-bold mb-1" style="font-size: 40px; font-weight: bold;">Resent Posts</h2>
-    </div>
     <br>
+    <h2 class="name font-weight-bold mb-1" style="font-size: 40px; font-weight: bold;">Resent Posts</h2>
+  </div>
+  <br>
 
-<!-- cards -->
-<div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for post in posts %}
+  <!-- cards -->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for post in posts %}
     <div class="col">
-        <div class="card">
-            {% if post.image %}
-                <img src="{{ post.image.url }}" class="card-img-top" alt="...">
-            {% endif %}
+      <div class="card">
+        {% if post.image %}
+        <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+        {% endif %}
         <div class="card-body">
-            <h4 class="card-title">{{ post.title }}</h4>
-            <span class="badge text-bg-info">{{ post.created_at }}</span>
-            <span> <i class="fa-solid fa-eye"></i></i>{{ post.views }}</span>
+          <h4 class="card-title">{{ post.title }}</h4>
+          <span class="badge text-bg-info">{{ post.created_at }}</span>
+          <span> <i class="fa-solid fa-eye"></i></i>{{ post.views }}</span>
 
-            {% for tag in tags %}
-                <span class="badge rounded-pill text-bg-dark">{{ tag }}</span>
-            {% endfor %}
-            <br><br>
-            {% if post.short_description %}
-                <p class="card-text">{{ post.short_description }}</p>
-            {% endif %}
-            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read more</a>
+          {% for tag in tags %}
+          <span class="badge rounded-pill text-bg-dark">{{ tag }}</span>
+          {% endfor %}
+          <br><br>
+          {% if post.short_description %}
+          <p class="card-text">{{ post.short_description }}</p>
+          {% endif %}
+          <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read more</a>
 
         </div>
-        </div>
+      </div>
     </div>
     {% endfor %}
+  </div>
+  <!-- cards end -->
+
+
+
+  <footer class="footer">
+    <small style="margin-bottom: 20px; display: inline-block">
+      © 2023
+      <a target="_blank" href="https://bahrombek.uz"> bahrombek.uz</a>
+    </small>
+    <br />
+
+    <div class="social-links">
+      <a href="https://github.com/bahrom04" target="_blank">
+        <i class="ri-github-fill ri-xl"></i>
+      </a>
+
+      <a href="https://www.linkedin.com/in/bahrom-bek-6b8a49212/" target="_blank">
+        <i class="ri-linkedin-box-fill ri-xl"></i>
+      </a>
     </div>
-<!-- cards end -->
+    <br>
+  </footer>
 
-    
-   
-    <footer class="footer">
-      <small style="margin-bottom: 20px; display: inline-block">
-        © 2023
-        <a target="_blank" href="https://bahrombek.uz"> bahrombek.uz</a>
-      </small>
-      <br />
-
-      <div class="social-links">
-        <a href="https://github.com/bahrom04" target="_blank">
-          <i class="ri-github-fill ri-xl"></i>
-        </a>
-        
-        <a href="https://www.linkedin.com/in/bahrom-bek-6b8a49212/" target="_blank">
-          <i class="ri-linkedin-box-fill ri-xl"></i>
-        </a>
-      </div>
-      <br>
-    </footer>
-
-  </main>
+</main>
 
 {% endblock %}
