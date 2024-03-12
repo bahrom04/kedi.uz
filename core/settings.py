@@ -20,17 +20,6 @@ DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3080",
-    "http://127.0.0.1:3000",
-]
-CORS_ALLOW_CREDENTIALS = True
-
-# CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOW_HEADERS = ["*"]
-# Application definition
 
 # Application definition
 DJANGO_APPS = [
@@ -149,7 +138,7 @@ FRONTEND_REG_CONFIRM_URL = os.getenv("FRONTEND_REG_CONFIRM_URL", "")
 
 STATIC_URL = "/static/"
 STATIC_BASE_DIRS = [os.path.join(BASE_DIR, "static")]
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
