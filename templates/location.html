@@ -1,30 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Document</title>
 
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+{% block style %} 
+<style>
+     #map {
+          height: 600px;
+          width: 100%;
+     }
+</style>
+{% endblock %}
+
+{% block link_and_scripts %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+{% endblock %}
 
-     <style>
-          #map {
-               height: 600px;
-               width: 1200px;
-          }
-     </style>
-</head>
+{% block content %}
+<div id="map"></div>
 
-<body>
-     <div id="map"></div>
      {{ positions|json_script:"stations_json" }}
 
      <p>ho</p>
      
+     <br>
+     <a href="{% url 'home' %}" class="btn btn-primary">Back</a>
 
      <script>
           var map = L.map('map').setView([41.34232315482164, 69.21032774291236], 13);
@@ -40,6 +42,4 @@
                L.marker([station.latitude, station.longitude]).addTo(map);
           })
      </script>
-</body>
-
-</html>
+{% endblock %}

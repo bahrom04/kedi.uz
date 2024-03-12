@@ -16,7 +16,7 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles      /default.min.css">
-
+  {% block link_and_scripts %} {% endblock %}
   <!-- Title -->
   <title> {% block title%} Pro Sidebar {% endblock %} </title>
   {% block style %} {% endblock %}
@@ -61,6 +61,15 @@
                     <i class="ri-book-2-fill"></i>
                   </span>
                   <span class="menu-title">About</span>
+                </a>
+              </li>
+
+              <li class="menu-item">
+                <a href="{% url 'location' %}">
+                  <span class="menu-icon">
+                    <i class="ri-book-2-fill"></i>
+                  </span>
+                  <span class="menu-title">Location</span>
                 </a>
               </li>
 

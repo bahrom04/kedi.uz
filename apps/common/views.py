@@ -1,17 +1,11 @@
+import json
+from typing import Any
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
-from django.http import HttpResponse
+from django.core.serializers.json import DjangoJSONEncoder
 from apps.common.models import Position
 from apps.common.models import Post
-
-
-# def index(request):
-#     posotions = list(
-#         Position.objects.filter(event__title="Hashar").values("latitude", "longitude")
-#     )
-#     print(posotions)
-#     context = {}
-#     return render(request, "index.html", context={"positions": posotions})
 
 
 class HomeView(generic.ListView):
@@ -53,3 +47,17 @@ class PostList(generic.ListView):
             post.save()
 
         return context
+
+
+class LocationsView(generic.ListView):
+    model = Position
+    template_name = "location.html"
+    context_object_name = "positions"
+
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
+        posotions = list(
+            Position.objects.filter(event__title="Hashar").values(
+                "latitude", "longitude"
+            )
+        )
+        return render(request, "location.html", context={"positions": posotions})
