@@ -20,3 +20,4 @@ pipwin
 Pillow==10.2.0
 djangorestframework
 django-cors-headers
+gunicorn
