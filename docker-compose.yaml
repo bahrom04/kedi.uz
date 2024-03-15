@@ -18,8 +18,8 @@ services:
     command: bash -c "python3 manage.py migrate && gunicorn core.wsgi:application --bind 0.0.0.0:8004"
     volumes:
       - .:/code
-      # - ./static:/code/staticfiles
-      # - ./media:/code/media
+      - ./static:/code/staticfiles
+      - ./media:/code/media
     ports:
       - '8004:8004'
     env_file:
