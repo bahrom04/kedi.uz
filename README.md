@@ -7,3 +7,4 @@ python manage.py createsuperuser
 ``` 
 ## Examples
 ![alt text](static/image.png)
+#
