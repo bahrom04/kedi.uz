@@ -11,5 +11,5 @@ urlpatterns = [
     path("about/", views.AboutView.as_view(), name="about"),
     path("post/<slug:slug>", views.PostList.as_view(), name="post"),
     path("location/", views.LocationsView.as_view(), name="location"),
-    # path("location/", views.position_, name="location"),
+    path("event/", views.EventListView.as_view(), name="event"),
 ]

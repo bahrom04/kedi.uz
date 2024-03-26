@@ -1,10 +1,11 @@
 import json
 from typing import Any
+from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.core.serializers.json import DjangoJSONEncoder
-from apps.common.models import Position
+from apps.common.models import Position, Event
 from apps.common.models import Post
 
 
@@ -61,3 +62,12 @@ class LocationsView(generic.ListView):
             )
         )
         return render(request, "location.html", context={"positions": posotions})
+
+
+class EventListView(generic.ListView):
+    model = Event
+    template_name = "event.html"
+
+    def get_queryset(self):
+        queryset = Event.objects.all()
+        return queryset

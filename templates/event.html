@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<ul class="tags">
+    {% if object_list %}
+        {% for event in object_list %}
+            <li>{{ event.title }}</li>
+        {% endfor %}
+    {% else %}
+        <li>No events found</li>
+    {% endif %}
+
+</ul>
+{% endblock %}
