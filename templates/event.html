@@ -6,7 +6,7 @@
 <ul class="tags">
     {% if object_list %}
         {% for event in object_list %}
-            <li>{{ event.title }}</li>
+            <li><a href="{% url 'common:location' event.id %}">{{ event.title }}</a></li>
         {% endfor %}
     {% else %}
         <li>No events found</li>

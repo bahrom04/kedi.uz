@@ -97,7 +97,7 @@ class Post(models.Model):
         max_length=256,
     )
     content = RichTextUploadingField()
-    tag = models.ManyToManyField(Tag, related_name='posts', blank=True)
+    tag = models.ManyToManyField(Tag, related_name="posts", blank=True)
 
     slug = models.SlugField(max_length=256, blank=True)
     views = models.IntegerField(default=0)
@@ -162,6 +162,9 @@ class Position(BaseModel):
             self.latitude, self.longitude = self.location.split(",")
 
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse_lazy("location", kwargs={"id": self.id})
 
     class Meta:
         verbose_name = _("Position")

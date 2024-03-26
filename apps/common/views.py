@@ -55,9 +55,14 @@ class LocationsView(generic.ListView):
     template_name = "location.html"
     context_object_name = "positions"
 
+    def get_queryset(self):
+        event_id = self.kwargs["id"]
+        return Position.objects.get(event_id=event_id)
+    
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
+        event_id = self.kwargs["id"]
         posotions = list(
-            Position.objects.filter(event__title="Hashar").values(
+            Position.objects.filter(event_id=event_id).values(
                 "latitude", "longitude"
             )
         )
