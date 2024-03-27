@@ -57,14 +57,17 @@
 
      stations.forEach(station => {
           var marker = L.marker([station.latitude, station.longitude]).addTo(map);
-          marker.on('click', function() {
+          marker.on('click', function () {
+               var popupContent = "<strong>" + station.title + "</strong><br>" +
+                                  "Description: " + station.description + "<br>" +
+                                  "<a href='" + "https://www.youtube.com/watch?v=dQw4w9WgXcQ" + "' target='_blank'>Read More</a>";
                var popup = L.popup()
                     .setLatLng([station.latitude, station.longitude])
-                    .setContent(station.title) // Assuming 'title' is the attribute containing the position title
+                    .setContent(popupContent) // Assuming 'title' is the attribute containing the position title
                     .openOn(map);
           });
      })
 
-    
+
 </script>
 {% endblock %}
