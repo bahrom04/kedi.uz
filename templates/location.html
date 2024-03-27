@@ -19,15 +19,32 @@
 {% endblock %}
 
 {% block content %}
-<div id="map"></div>
+<div class="container">
+     <div class="row">
+          <div class="col-3">
+               <p style="background-color: #C5C5C5">Get up to date where {{event_title}} took place around the city
+                    asdad <br> asdasdas
+               </p>
+          </div>
+          <div class="col-9">
+               <p style="background-color: #C5C5C5">Positions of {{event_title}}</p>
+               <div id="map"></div>
+          </div>
+     </div>
+     <div class="row">
+          <div class="col">
+               <a href="{% url 'common:event' %}" class="btn btn-primary">Back</a>
+
+          </div>
+     </div>
+</div>
 
 {{ positions|json_script:"stations_json" }}
 
-<p>ho</p>
 
 <br>
-<a href="{% url 'common:home' %}" class="btn btn-primary">Back</a>
-<p>{{positions}}</p>
+
+
 <script>
      var map = L.map('map').setView([41.34232315482164, 69.21032774291236], 13);
 

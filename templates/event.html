@@ -2,15 +2,26 @@
 {% load static %}
 
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <ul class="tags">
+                {% if object_list %}
+                {% for event in object_list %}
+                <li><a href="{% url 'common:location' event.id %}">{{ event.title }}</a></li>
+                {% endfor %}
+                {% else %}
+                <li>No events found</li>
+                {% endif %}
 
-<ul class="tags">
-    {% if object_list %}
-        {% for event in object_list %}
-            <li><a href="{% url 'common:location' event.id %}">{{ event.title }}</a></li>
-        {% endfor %}
-    {% else %}
-        <li>No events found</li>
-    {% endif %}
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'common:home' %}" class="btn btn-primary">Back</a>
+        </div>
+    </div>
+</div>
 
-</ul>
 {% endblock %}

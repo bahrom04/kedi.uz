@@ -50,25 +50,6 @@ class PostList(generic.ListView):
         return context
 
 
-class LocationsView(generic.ListView):
-    model = Position
-    template_name = "location.html"
-    context_object_name = "positions"
-
-    def get_queryset(self):
-        event_id = self.kwargs["id"]
-        return Position.objects.get(event_id=event_id)
-    
-    def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
-        event_id = self.kwargs["id"]
-        posotions = list(
-            Position.objects.filter(event_id=event_id).values(
-                "latitude", "longitude"
-            )
-        )
-        return render(request, "location.html", context={"positions": posotions})
-
-
 class EventListView(generic.ListView):
     model = Event
     template_name = "event.html"
@@ -76,3 +57,21 @@ class EventListView(generic.ListView):
     def get_queryset(self):
         queryset = Event.objects.all()
         return queryset
+
+
+class LocationsView(generic.ListView):
+    model = Position
+    template_name = "location.html"
+    context_object_name = "positions"
+
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
+        event_id = self.kwargs["id"]
+        posotions = list(
+            Position.objects.filter(event_id=event_id).values("latitude", "longitude")
+        )
+        event_title = Event.objects.get(pk=event_id)
+        return render(
+            request,
+            "location.html",
+            context={"positions": posotions, "event_title": event_title},
+        )
