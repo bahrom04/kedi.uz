@@ -56,7 +56,15 @@
      let stations = JSON.parse(document.getElementById('stations_json').textContent);
 
      stations.forEach(station => {
-          L.marker([station.latitude, station.longitude]).addTo(map);
+          var marker = L.marker([station.latitude, station.longitude]).addTo(map);
+          marker.on('click', function() {
+               var popup = L.popup()
+                    .setLatLng([station.latitude, station.longitude])
+                    .setContent(station.title) // Assuming 'title' is the attribute containing the position title
+                    .openOn(map);
+          });
      })
+
+    
 </script>
 {% endblock %}

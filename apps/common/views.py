@@ -67,7 +67,7 @@ class LocationsView(generic.ListView):
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
         event_id = self.kwargs["id"]
         posotions = list(
-            Position.objects.filter(event_id=event_id).values("latitude", "longitude")
+            Position.objects.filter(event_id=event_id).values("latitude", "longitude","title")
         )
         event_title = Event.objects.get(pk=event_id)
         return render(
