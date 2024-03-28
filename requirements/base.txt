@@ -17,7 +17,6 @@ drf-yasg
 django-jazzmin
 django-map-widgets
 pipwin
-Pillow==10.2.0
-djangorestframework
+Pillow==7
 django-cors-headers
 gunicorn

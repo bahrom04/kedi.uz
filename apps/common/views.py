@@ -1,5 +1,6 @@
 import json
 from typing import Any
+from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
@@ -69,7 +70,7 @@ class LocationsView(generic.ListView):
         posotions = list(
             Position.objects.filter(event_id=event_id).values(
                 "id", "latitude", "longitude", "title", "description"
-            )
+            )[:100]
         )
         event_title = Event.objects.get(pk=event_id)
         return render(
@@ -84,11 +85,16 @@ class LocationDetailView(generic.DetailView):
     template_name = "location_detail.html"
     context_object_name = "position_detail"
 
-    def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
+    def get_object(self):
         position_id = self.kwargs["id"]
         posotion_detail = Position.objects.get(id=position_id)
-        return render(
-            request,
-            "location_detail.html",
-            context={"position_detail": posotion_detail},
-        )
+        return posotion_detail
+
+    # def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
+    #     position_id = self.kwargs["id"]
+    #     posotion_detail = Position.objects.get(id=position_id)
+    #     return render(
+    #         request,
+    #         "location_detail.html",
+    #         context={"position_detail": posotion_detail},
+    #     )
