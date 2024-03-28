@@ -9,6 +9,8 @@ urlpatterns = [
     # path("contact", views.contact, name="contact"),
     path("about/", views.AboutView.as_view(), name="about"),
     path("post/<slug:slug>", views.PostList.as_view(), name="post"),
-    path("location/<int:id>", views.LocationsView.as_view(), name="location"),
     path("event/", views.EventListView.as_view(), name="event"),
+    path("location/<int:id>", views.LocationsView.as_view(), name="location"),
+    path("location/detail/<int:id>", views.LocationDetailView.as_view(), name="location-detail"),
+
 ]

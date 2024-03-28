@@ -68,7 +68,7 @@ class LocationsView(generic.ListView):
         event_id = self.kwargs["id"]
         posotions = list(
             Position.objects.filter(event_id=event_id).values(
-                "latitude", "longitude", "title", "description"
+                "id", "latitude", "longitude", "title", "description"
             )
         )
         event_title = Event.objects.get(pk=event_id)
@@ -76,4 +76,19 @@ class LocationsView(generic.ListView):
             request,
             "location.html",
             context={"positions": posotions, "event_title": event_title},
+        )
+
+
+class LocationDetailView(generic.DetailView):
+    model = Position
+    template_name = "location_detail.html"
+    context_object_name = "position_detail"
+
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
+        position_id = self.kwargs["id"]
+        posotion_detail = Position.objects.get(id=position_id)
+        return render(
+            request,
+            "location_detail.html",
+            context={"position_detail": posotion_detail},
         )
