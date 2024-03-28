@@ -41,7 +41,7 @@
 
 {{ positions|json_script:"stations_json" }}
 
-
+<p>{{positions}}</p>
 <br>
 
 
@@ -59,8 +59,7 @@
           var marker = L.marker([station.latitude, station.longitude]).addTo(map);
           marker.on('click', function () {
                var popupContent = "<strong>" + station.title + "</strong><br>" +
-                                  "Description: " + station.description + "<br>" +
-                                  "<a href='" + "https://www.youtube.com/watch?v=dQw4w9WgXcQ" + "' target='_blank'>Read More</a>";
+                    `<a href=${window.location.origin}/location/detail/${station.id} %}` + "target='_blank'>Read More</a>";
                var popup = L.popup()
                     .setLatLng([station.latitude, station.longitude])
                     .setContent(popupContent) // Assuming 'title' is the attribute containing the position title
