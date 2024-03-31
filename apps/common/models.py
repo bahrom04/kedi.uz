@@ -1,14 +1,8 @@
-from datetime import datetime
-from typing import List
 from django.db import models
-from django.conf import settings
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.template.defaultfilters import slugify
 
-from django.contrib.auth.models import UserManager as DjangoUserManager
-from django.core.exceptions import ValidationError
 from ckeditor_uploader.fields import RichTextUploadingField
 from location_field.models.plain import PlainLocationField
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -91,12 +85,14 @@ class Tag(models.Model):
 class Post(models.Model):
     image = models.ImageField(upload_to="images/", blank=True)
     title = models.CharField(
+        _("Title"),
         max_length=256,
     )
     short_description = models.CharField(
+        _("Short Description"),
         max_length=256,
     )
-    content = RichTextUploadingField()
+    content = RichTextUploadingField(_("Content"))
     tag = models.ManyToManyField(Tag, related_name="posts", blank=True)
 
     slug = models.SlugField(max_length=256, blank=True)
@@ -107,6 +103,8 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+        verbose_name = _("Post")
+        verbose_name_plural = _("Posts")
 
     def __str__(self):
         return self.title
@@ -141,8 +139,8 @@ class Event(BaseModel):
 
 
 class Position(BaseModel):
-    title = models.CharField(max_length=255)
-    description = RichTextUploadingField()
+    title = models.CharField(_("Title"),max_length=255)
+    description = RichTextUploadingField(_("Description"))
 
     location = PlainLocationField(
         based_fields=["city"], zoom=10, default="41.311151,69.279737"

@@ -17,6 +17,12 @@ class HomeView(generic.ListView):
 
     def get_queryset(self):
         return Post.objects.all()
+    
+    def post(self, request, *args, **kwargs):
+        if 'language' in request.POST:
+            language = request.POST.get('language', 'en')
+            request.session['django_language'] = language
+        return self.get(request, *args, **kwargs)
 
 
 class AboutView(generic.ListView):
@@ -90,11 +96,4 @@ class LocationDetailView(generic.DetailView):
         posotion_detail = Position.objects.get(id=position_id)
         return posotion_detail
 
-    # def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
-    #     position_id = self.kwargs["id"]
-    #     posotion_detail = Position.objects.get(id=position_id)
-    #     return render(
-    #         request,
-    #         "location_detail.html",
-    #         context={"position_detail": posotion_detail},
-    #     )
+   
