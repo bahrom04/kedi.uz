@@ -1,34 +1,33 @@
 from django.contrib import admin
+from core.mixins import TabbedTranslationAdmin
 from apps.common import models
 
 
-# Register your models here.
 @admin.register(models.Media)
-class MediaAdmin(admin.ModelAdmin):
+class MediaAdmin(TabbedTranslationAdmin):
     pass
 
 
 @admin.register(models.Region)
-class RegionAdmin(admin.ModelAdmin):
-    pass
+class RegionAdmin(TabbedTranslationAdmin):
+    list_display = ("type",)
 
 
 @admin.register(models.Post)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(TabbedTranslationAdmin):
     pass
 
+
 @admin.register(models.Tag)
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(TabbedTranslationAdmin):
     pass
 
 
 @admin.register(models.Event)
-class EventAdmin(admin.ModelAdmin):
+class EventAdmin(TabbedTranslationAdmin):
     pass
 
+
 @admin.register(models.Position)
-class PositionAdmin(admin.ModelAdmin):
-    exclude = ('latitude', 'longitude')
-
-
-
+class PositionAdmin(TabbedTranslationAdmin):
+    exclude = ("latitude", "longitude")

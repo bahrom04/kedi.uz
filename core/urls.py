@@ -9,6 +9,7 @@ from .schema import swagger_urlpatterns
 urlpatterns = [
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("admin/", admin.site.urls),
+    path("i18n/", include("django.conf.urls.i18n")),
     path(
         "ckeditor/upload/",
         serve,
@@ -17,7 +18,6 @@ urlpatterns = [
     path("", include("apps.common.urls")),
     path("accounts/", include("apps.users.urls", namespace="users")),
     path("accounts/", include("django.contrib.auth.urls")),
-    # path("", TemplateView.as_view(template_name="home.html"), name="home")
 ]
 
 if settings.SWAGGER_ENABLED:

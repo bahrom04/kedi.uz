@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 
 
 {% block style %}
@@ -41,9 +40,6 @@
 
 {{ positions|json_script:"stations_json" }}
 
-<p>{{positions}}</p>
-<br>
-
 
 <script>
      var map = L.map('map').setView([41.34232315482164, 69.21032774291236], 13);
@@ -62,7 +58,7 @@
                     `<a href=${window.location.origin}/location/detail/${station.id} %}` + "target='_blank'>Read More</a>";
                var popup = L.popup()
                     .setLatLng([station.latitude, station.longitude])
-                    .setContent(popupContent) // Assuming 'title' is the attribute containing the position title
+                    .setContent(popupContent)
                     .openOn(map);
           });
      })

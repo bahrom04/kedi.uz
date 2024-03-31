@@ -34,6 +34,7 @@ CUSTOM_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "modeltranslation",
     "rest_framework_swagger",
     "drf_yasg",
     "corsheaders",
@@ -52,6 +53,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -114,12 +116,49 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
+LANGUAGES = (
+    ("en", "English"),
+    ("uz", "Uzbek"),
+    ("ru", "Russian"),
+)
 
 TIME_ZONE = "Asia/Tashkent"
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
+
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
+MODELTRANSLATION_LANGUAGES = (
+    "uz",
+    "ru",
+    "en",
+)
+MODELTRANSLATION_FALLBACK_LANGUAGES = {
+    "default": (
+        "uz",
+        "ru",
+        "en",
+    ),
+    "uz": (
+        "ru",
+        "en",
+    ),
+    "en": (
+        "uz",
+        "ru",
+    ),
+    "ru": (
+        "uz",
+        "en",
+    ),
+}
+
+MODELTRANSLATION_PREPOPULATE_LANGUAGE = "en"
+
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
+
 
 # auth
 AUTH_USER_MODEL = "users.User"
@@ -134,6 +173,7 @@ EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "")
 
 FRONTEND_REG_CONFIRM_URL = os.getenv("FRONTEND_REG_CONFIRM_URL", "")
 
+# STATIC
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
