@@ -3,7 +3,6 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.conf import settings
-from .schema import swagger_urlpatterns
 
 
 urlpatterns = [
@@ -20,8 +19,6 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
 ]
 
-if settings.SWAGGER_ENABLED:
-    urlpatterns += swagger_urlpatterns
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
