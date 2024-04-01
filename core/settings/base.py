@@ -6,7 +6,7 @@ import os
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -35,13 +35,9 @@ CUSTOM_APPS = [
 
 THIRD_PARTY_APPS = [
     "modeltranslation",
-    "rest_framework_swagger",
-    "drf_yasg",
-    "corsheaders",
     "ckeditor",
     "ckeditor_uploader",
     "location_field.apps.DefaultConfig",
-    # "modeltranslation",
     # "captcha",
 ]
 
@@ -66,7 +62,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [ BASE_DIR, "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -84,11 +80,14 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": os.getenv("DB_ENGINE", "django.db.backends.postgresql"),
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 
@@ -174,7 +173,6 @@ EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", "")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "")
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "")
 
-FRONTEND_REG_CONFIRM_URL = os.getenv("FRONTEND_REG_CONFIRM_URL", "")
 
 # STATIC
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -207,5 +205,3 @@ LOCATION_FIELD = {
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
-
-SWAGGER_ENABLED = True
