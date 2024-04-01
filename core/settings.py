@@ -130,6 +130,9 @@ USE_TZ = True
 
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
+
+gettext = lambda s: s
+
 MODELTRANSLATION_LANGUAGES = (
     "uz",
     "ru",
