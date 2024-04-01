@@ -19,4 +19,4 @@ django-map-widgets
 pipwin
 Pillow==7
 django-cors-headers
-gunicorn
+django-rosetta
