@@ -1483,3 +1483,11 @@ msgstr ""
 #: .\venv\Lib\site-packages\modeltranslation\widgets.py:24
 msgid "None"
 msgstr ""
+
+# .\event.html
+msgid "No events found"
+msgstr "События не найдены"
+
+# .\index.html
+msgid "Resent posts"
+msgstr "Недавние Посты"

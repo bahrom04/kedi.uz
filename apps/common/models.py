@@ -109,14 +109,14 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse_lazy("post", kwargs={"slug": self.slug})
-
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify(self.title)
-
+        # if not self.id:
+        #     self.slug = slugify(self.title)
+        self.slug = self.id
         super(Post, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse_lazy("post_detail", kwargs={"slug": self.slug})
 
 
 class Event(BaseModel):
@@ -139,7 +139,7 @@ class Event(BaseModel):
 
 
 class Position(BaseModel):
-    title = models.CharField(_("Title"),max_length=255)
+    title = models.CharField(_("Title"), max_length=255)
     description = RichTextUploadingField(_("Description"))
 
     location = PlainLocationField(
