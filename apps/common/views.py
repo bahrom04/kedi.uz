@@ -17,7 +17,7 @@ class HomeView(generic.ListView):
 
     def get_queryset(self):
         return Post.objects.all()
-    
+
     def post(self, request, *args, **kwargs):
         if 'language' in request.POST:
             language = request.POST.get('language', 'en')
@@ -34,7 +34,6 @@ class PostDetail(generic.DeleteView):
     model = Post
     template_name = "post_detail.html"
     context_object_name = "post"
-    
 
     def get_object(self):
         slug = self.kwargs["slug"]
@@ -96,5 +95,3 @@ class LocationDetailView(generic.DetailView):
         position_id = self.kwargs["id"]
         posotion_detail = Position.objects.get(id=position_id)
         return posotion_detail
-
-   

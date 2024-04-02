@@ -116,7 +116,7 @@ class Post(models.Model):
         super(Post, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse_lazy("post_detail", kwargs={"slug": self.slug})
+        return reverse_lazy("post", kwargs={"slug": self.slug})
 
 
 class Event(BaseModel):
