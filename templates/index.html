@@ -39,7 +39,7 @@ Bahrom
               {% if post.short_description %}
               <p class="card-text">{{ post.short_description }}</p>
               {% endif %}
-              <a href="{{ post_detail.get_absolute_url }}" class="btn btn-primary">Read more</a>
+              <a href="{% url 'common:post' post.id %}" class="btn btn-primary">Read more</a>
 
             </div>
           </div>
