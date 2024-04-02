@@ -30,12 +30,13 @@ class AboutView(generic.ListView):
     template_name = "about.html"
 
 
-class PostList(generic.ListView):
+class PostDetail(generic.DeleteView):
     model = Post
     template_name = "post_detail.html"
     context_object_name = "post"
+    
 
-    def get_queryset(self):
+    def get_object(self):
         slug = self.kwargs["slug"]
         return Post.objects.get(slug=slug)
 
