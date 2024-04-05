@@ -1,48 +1,27 @@
 version: '3.8'
 
 services:
-  # db:
-  #   image: postgres:14
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data/
-  #   environment:
-  #     - "POSTGRES_HOST_AUTH_METHOD=trust"
-  #   env_file:
-  #     - ./.env
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+    env_file:
+      - ./.env
 
-  # redis:
-  #   image: redis:7-alpine
 
   web:
     build: .
-    command: bash -c "python3 manage.py migrate && gunicorn core.wsgi:application --bind 0.0.0.0:8004"
+    command: bash -c "python3 manage.py migrate && gunicorn core.wsgi:application --bind 0.0.0.0:8001"
     volumes:
       - .:/code
       - ./static:/code/staticfiles
       - ./media:/code/media
     ports:
-      - '8004:8004'
+      - '8001:8001'
     env_file:
       - ./.env
-  # celery_worker:
-  #   build: .
-  #   command: bash -c "celery -A core worker -l INFO --concurrency=9"
-  #   volumes:
-  #     - .:/code
-  #   depends_on:
-  #     - redis
-  #   env_file:
-  #     - ./.env
 
-  # celery_beat:
-  #   build: .
-  #   command: bash -c "celery -A core beat -l INFO"
-  #   volumes:
-  #     - .:/code
-  #   depends_on:
-  #     - redis
-  #   env_file:
-  #     - ./.env
-
-  # volumes:
-  #   postgres_data: null
+volumes:
+  postgres_data: null
