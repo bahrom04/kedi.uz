@@ -5,6 +5,8 @@ from apps.common import views
 app_name = "common"
 
 urlpatterns = [
+
+    
     path("", views.HomeView.as_view(), name="home"),
     # path("contact", views.contact, name="contact"),
     path("about/", views.AboutView.as_view(), name="about"),
