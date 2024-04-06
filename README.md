@@ -16,9 +16,8 @@ python manage.py createsuperuser
 https://stackoverflow.com/questions/35101850/cant-find-msguniq-make-sure-you-have-gnu-gettext-tools-0-15-or-newer-installed
 ### For windows run this command in cmd .Othervise In Vscode will not work
 ```python
+sudo apt-get install -y gettext
 django-admin makemessages -l en
-django-admin makemessages -l ru
-django-admin makemessages -l uz
 python manage.py compilemessages
 ```
 ## Examples
