@@ -24,10 +24,7 @@ jobs:
           echo "DB_USER=$DB_USER" >> .env
           echo "DB_PASSWORD=$DB_PASSWORD" >> .env
           echo "DB_HOST=$DB_HOST" >> .env
-          echo "DB_PORT=$DB_PORT" >> .envREDIS_URL: ${{ secrets.REDIS_URL }}
-          CELERY_BROKER_URL: ${{ secrets.CELERY_BROKER_URL }}
-          API_URL: ${{ secrets.API_URL }}
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          echo "DB_PORT=$DB_PORT" >> .env
           
         env:
           DJANGO_SETTINGS_MODULE: ${{ secrets.DJANGO_SETTINGS_MODULE }}

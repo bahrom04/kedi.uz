@@ -24,4 +24,4 @@ services:
       - ./.env
 
 volumes:
-  postgres_data: null
+  postgres_data:
