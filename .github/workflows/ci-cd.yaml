@@ -33,6 +33,9 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_HOST: ${{ secrets.DB_HOST }}
-          
+      
+      - name: Pull latest changes
+        run: git pull
+        
       - name: Build the Docker image
         run: sudo docker-compose up --build -d
