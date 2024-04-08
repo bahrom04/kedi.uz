@@ -95,7 +95,6 @@ class Post(models.Model):
     content = RichTextUploadingField(_("Content"))
     tag = models.ManyToManyField(Tag, related_name="posts", blank=True)
 
-    slug = models.SlugField(max_length=256, blank=True)
     views = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -109,14 +108,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        # if not self.id:
-        #     self.slug = slugify(self.title)
-        self.slug = self.id
-        super(Post, self).save(*args, **kwargs)
-
     def get_absolute_url(self):
-        return reverse_lazy("post", kwargs={"slug": self.slug})
+        return reverse_lazy("post", kwargs={"id": self.id})
 
 
 class Event(BaseModel):

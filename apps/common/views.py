@@ -36,14 +36,14 @@ class PostDetail(generic.DeleteView):
     context_object_name = "post"
 
     def get_object(self):
-        slug = self.kwargs["slug"]
-        return Post.objects.get(slug=slug)
+        post_id = self.kwargs["id"]
+        return Post.objects.get(id=post_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        slug = self.kwargs["slug"]
-        post = get_object_or_404(Post, slug=slug)
+        post_id = self.kwargs["id"]
+        post = get_object_or_404(Post, id=post_id)
 
         context["post"] = post
 

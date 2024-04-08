@@ -20,5 +20,12 @@ sudo apt-get install -y gettext
 django-admin makemessages -l en
 python manage.py compilemessages
 ```
+
+## Incase permission denied to upload images
+```python
+sudo chown -R your_username:your_groupname /home/bahrom04/workplace/django/ekologiya/media
+sudo chmod -R 755 /home/bahrom04/workplace/django/ekologiya/media
+```
+
 ## Examples
 ![alt text](static/image.png)
