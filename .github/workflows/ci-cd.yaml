@@ -36,6 +36,7 @@ jobs:
       
       - name: Pull latest changes
         run: git pull
-        
+
       - name: Build the Docker image
         run: sudo docker-compose up --build -d
+        
