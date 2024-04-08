@@ -35,7 +35,7 @@ jobs:
           DB_HOST: ${{ secrets.DB_HOST }}
       
       - name: Pull latest changes
-        run: git pull
+        run: git pull origin master
 
       - name: Build the Docker image
         run: sudo docker-compose up --build -d
