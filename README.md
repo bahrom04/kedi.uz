@@ -26,6 +26,9 @@ python manage.py compilemessages
 sudo chown -R your_username:your_groupname /home/bahrom04/workplace/django/ekologiya/media
 sudo chmod -R 755 /home/bahrom04/workplace/django/ekologiya/media
 ```
-
+## Nginx
+```
+sudo systemctl status nginx
+```
 ## Examples
 ![alt text](static/image.png)
