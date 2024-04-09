@@ -30,5 +30,7 @@ sudo chmod -R 755 /home/bahrom04/workplace/django/ekologiya/media
 ```
 sudo systemctl status nginx
 ```
+## ufw configurations
+
 ## Examples
 ![alt text](static/image.png)
