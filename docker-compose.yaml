@@ -1,31 +1,43 @@
 version: '3.8'
 
 services:
+
   db:
     image: postgres:14
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - "POSTGRES_HOST_AUTH_METHOD=trust"
+      - POSTGRES_HOST_AUTH_METHOD=trust
     env_file:
       - ./.env
-
 
   web:
     build: .
-    command: bash -c "python3 manage.py migrate && gunicorn core.wsgi:application --bind 0.0.0.0:8001 --workers=4"
+    container_name: ekologiya
+    restart: unless-stopped
     volumes:
       - .:/code
-      - ./static:/code/staticfiles
-      - ./media:/code/media
-      - ./locale:/code/locale
-    ports:
-      - '8001:8001'
+      - ./gunicorn/logs:/gunicorn/logs
+      - staticfiles:/code/staticfiles
+      - media:/code/media
     env_file:
       - ./.env
 
+  nginx:
+    restart: always
+    build: ./nginx/
+    container_name: ekologiya_server
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d
+      - ./nginx/logs/:/code/logs
+      - staticfiles:/code/staticfiles
+      - media:/code/media
+    ports:
+      - "127.0.0.1:8006:80"
     depends_on:
-      - db
+      - web
 
 volumes:
+  media:
+  staticfiles:
   postgres_data:
