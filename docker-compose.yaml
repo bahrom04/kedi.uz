@@ -14,7 +14,7 @@ services:
   web:
     build: .
     container_name: ekologiya
-    # restart: unless-stopped
+    restart: always
     volumes:
       - .:/code
       - staticfiles:/code/staticfiles
