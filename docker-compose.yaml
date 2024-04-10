@@ -23,21 +23,7 @@ services:
     env_file:
       - ./.env
 
-  nginx:
-    restart: always
-    build: ./nginx/
-    container_name: ekologiya_server
-    volumes:
-      - ./nginx/:/etc/nginx/conf.d
-      - ./nginx/logs/:/code/logs
-      - staticfiles:/code/staticfiles
-      - media:/code/media
-    ports:
-      - "127.0.0.1:8006:80"
-    depends_on:
-      - web
+  
 
 volumes:
-  media:
-  staticfiles:
   postgres_data:
