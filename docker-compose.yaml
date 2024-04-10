@@ -26,4 +26,6 @@ services:
   
 
 volumes:
+  media:
+  staticfiles:
   postgres_data:
