@@ -15,3 +15,8 @@ RUN pip install --upgrade pip && \
     pip install -r production.txt
 
 COPY . /code/
+
+COPY entrypoint.sh /entrypoint.sh
+
+EXPOSE 8000
+ENTRYPOINT ["./entrypoint.sh"]
