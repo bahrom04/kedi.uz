@@ -14,10 +14,9 @@ services:
   web:
     build: .
     container_name: ekologiya
-    restart: unless-stopped
+    # restart: unless-stopped
     volumes:
       - .:/code
-      - ./gunicorn/logs:/gunicorn/logs
       - staticfiles:/code/staticfiles
       - media:/code/media
     ports:
