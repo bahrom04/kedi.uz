@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = ["164.92.110.55","bahrombek.uz","localhost","0.0.0.0"]
+ALLOWED_HOSTS = ["164.92.110.55","bahrombek.uz","localhost","0.0.0.0","127.0.0.1"]
 
 
 # Application definition
@@ -175,10 +175,10 @@ EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "")
 
 
 # STATIC
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    BASE_DIR / "design",
+    BASE_DIR / "static",
 ]
 
 MEDIA_URL = "media/"
