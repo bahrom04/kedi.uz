@@ -16,17 +16,20 @@ services:
     container_name: ekologiya
     restart: always
     volumes:
-      - .:/code
-      - staticfiles:/code/staticfiles
-      - media:/code/media
+      - ./:/app
+      - ./static:/home/app/web/static
+      - ./media:/home/app/web/media
     ports:
       - '8000:8000'
     env_file:
       - ./.env
+    depends_on:
+      - db
 
   
 
 volumes:
+  static:
   media:
   staticfiles:
   postgres_data:
