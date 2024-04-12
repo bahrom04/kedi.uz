@@ -21,65 +21,35 @@ Post
     position: relative;
     background: #EDEDED;
   }
+ 
+  
 </style>
 {% endblock %}
 
 {% block content %}
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col">
 
-<main class="content" style=" max-width: 800px; margin: 0 10px ;  padding: 0 10px;">
-  <div>
-    <a id="btn-toggle" href="#" class="sidebar-toggler break-point-lg">
-      <i class="ri-menu-line ri-xl"></i>
-    </a>
-    <br><br>
-    <h1 class="mb-3 font-weight-bold" style="margin-bottom: 0.5rem; font-size: 32px;">{{ post.title }}</h1>
-    <span class="" style="opacity: 0.6;">{{ post.created_at }}</span>
-    <br>
-    <span> <i class="fa-solid fa-eye"></i></i>{{ post.views }}</span>
-    <br>
-
-    {% if post.image %}
-    <img src="{{ post.image.url }}" class="card-img-top" alt="...">
-    {% endif %}
-
-
-    {{ post.content | safe }}
-
-
-
-
-    <!-- <h3>Tags:</h3>
-        {% for tag in tags %}
-            <a href="" class="btn btn-sm btn-outline-primary mb-1">{{ tag }}</a>
-        {% endfor %} -->
-
-    <br>
-    <a href="{% url 'common:home' %}" class="btn btn-primary">Back</a>
-
-  </div>
-  <br>
-
-
-
-
-
-  <footer class="footer">
-    <small style="margin-bottom: 20px; display: inline-block">
-      © 2023
-      <a target="_blank" href="https://bahrombek.uz"> bahrombek.uz</a>
-    </small>
-    <br />
-
-    <div class="social-links">
-      <a href="https://github.com/bahrom04" target="_blank">
-        <i class="ri-github-fill ri-xl"></i>
-      </a>
-
-      <a href="https://www.linkedin.com/in/bahrom-bek-6b8a49212/" target="_blank">
-        <i class="ri-linkedin-box-fill ri-xl"></i>
-      </a>
+        <h1 class="mb-3 font-weight-bold" style="margin-bottom: 0.5rem; font-size: 32px;">{{ post.title }}</h1>
+        <span class="" style="opacity: 0.6;">{{ post.created_at }}</span>
+        <br>
+        <span> <i class="fa-solid fa-eye"></i></i>{{ post.views }}</span>
+        <br>
+        
+        {% if post.image %}
+        <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+        {% endif %}
+        
+        
+        {{ post.content | safe }}
+        <a href="{% url 'common:home' %}" class="btn btn-primary">Back</a>
+      </div>
     </div>
-  </footer>
-</main>
+  </div>
+</section>
+
+
 
 {% endblock %}
