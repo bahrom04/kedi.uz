@@ -1,6 +1,28 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+{% block style %}
+<style>
+  blockquote {
+    font-size: 1.1em;
+    width: 90%;
+    margin: 30px auto;
+    font-family: Open Sans;
+    font-style: italic;
+    color: #555555;
+    padding: 1em 10px 1em 7px;
+    border-left: 8px solid #78C0A8;
+    line-height: 1.6;
+    position: relative;
+    background: #EDEDED;
+  }
+  img {
+    max-width: 100%;
+    height: auto !important;
+}
+  
+</style>
+{% endblock %}
 
 {% block content %}
 <div class="container">
