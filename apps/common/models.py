@@ -39,26 +39,9 @@ class Media(BaseModel):
 
 
 class Region(models.Model):
-    class RegionType(models.TextChoices):
-        TASHKENT_CITY = "Tashkent City", _("Tashkent City")
-        TASHKENT_REGION = "Tashkent Region", _("Tashkent Region")
-        ANDIJAN = "Andijan", _("Andijan Region")
-        NAMANGAN = "Namangan", _("Namangan Region")
-        FERGANA = "Fergana", _("Fergana Region")
-        SIRDARYA = "Sirdarya", _("Sirdarya Region")
-        JIZZAH = "Jizzah", _("Jizzah Region")
-        SAMARQAND = "Samarqand", _("Samarqand Region")
-        QASHQADARYA = "Qashqadarya", _("Qashqadarya Region")
-        SURKHANDARYA = "Surkhandarya", _("Surkhandarya Region")
-        BUKHARA = "Bukhara", _("Bukhara Region")
-        NAVOI = "Navoi", _("Navoi Region")
-        XORAZM = "Xorazm", _("Xorazm Region")
-        KARAQALPAK_REPUBLIC = "Karakalpak Republik", _("Karakalpak Republik")
-
+    
     type = models.CharField(
         _("Street name (Arentir)"),
-        choices=RegionType.choices,
-        default=RegionType.TASHKENT_CITY,
         max_length=255,
         unique=True,
     )
@@ -114,15 +97,10 @@ class Post(models.Model):
 
 
 class Event(BaseModel):
-    class EventType(models.TextChoices):
-        HASHAR = "Hashar", _("Hashar")
-        ANIMALS_FEEDING = "Animals Feeding", _("Animals Feeding")
-
+    
     is_active = models.BooleanField(_("Is active"), default=True)
     title = models.CharField(
         _("Event Type"),
-        choices=EventType.choices,
-        default=EventType.HASHAR,
         max_length=255,
         unique=True,
     )
