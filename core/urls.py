@@ -15,8 +15,8 @@ urlpatterns = [
         {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
     ),
     path("", include("apps.common.urls")),
-    path("accounts/", include("apps.users.urls", namespace="users")),
-    path("accounts/", include("django.contrib.auth.urls")),
+    # path("accounts/", include("apps.users.urls", namespace="users")),
+    # path("accounts/", include("django.contrib.auth.urls")),
 ]
 
 if settings.DEBUG:
