@@ -8,6 +8,11 @@ class MediaAdmin(TabbedTranslationAdmin):
     pass
 
 
+@admin.register(models.About)
+class AboutAdmin(TabbedTranslationAdmin):
+    pass
+
+
 @admin.register(models.Region)
 class RegionAdmin(TabbedTranslationAdmin):
     list_display = ("type",)

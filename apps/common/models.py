@@ -22,6 +22,16 @@ class BaseModel(models.Model):
             return str(self.id)
 
 
+class About(BaseModel):
+    image = models.ImageField(upload_to="images/", blank=True)
+    title = models.CharField(_("Title"), max_length=128)
+    content = RichTextUploadingField(_("Content"))
+
+    class Meta:
+        verbose_name = _("About")
+        verbose_name_plural = _("About")
+
+
 class Media(BaseModel):
     class MediaType(models.TextChoices):
         VIDEO = "video", _("Video")
@@ -39,7 +49,7 @@ class Media(BaseModel):
 
 
 class Region(models.Model):
-    
+
     type = models.CharField(
         _("Street name (Arentir)"),
         max_length=255,
@@ -56,7 +66,7 @@ class Region(models.Model):
 
 
 class Tag(models.Model):
-    title = models.CharField(max_length=128)
+    title = models.CharField(_("Title"), max_length=128)
 
     def tag_name(self):
         return self.title
@@ -83,7 +93,6 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
     class Meta:
         ordering = ["-created_at"]
         verbose_name = _("Post")
@@ -97,7 +106,7 @@ class Post(models.Model):
 
 
 class Event(BaseModel):
-    
+
     is_active = models.BooleanField(_("Is active"), default=True)
     title = models.CharField(
         _("Event Type"),
