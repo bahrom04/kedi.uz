@@ -1,12 +1,9 @@
-import json
 from typing import Any
 from django.db.models.base import Model as Model
-from django.db.models.query import QuerySet
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
-from django.core.serializers.json import DjangoJSONEncoder
-from apps.common.models import Position, Event
+from apps.common.models import Position, Event,About
 from apps.common.models import Post
 
 
@@ -28,6 +25,11 @@ class HomeView(generic.ListView):
 class AboutView(generic.ListView):
     model = Post
     template_name = "about.html"
+    context_object_name = "about"
+
+    def get_queryset(self):
+        queryset = About.objects.all()[0]
+        return queryset
 
 
 class PostDetail(generic.DeleteView):
