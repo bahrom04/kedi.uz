@@ -31,6 +31,12 @@ sudo chmod -R 755 /home/bahrom04/workplace/django/ekologiya/media
 sudo systemctl status nginx
 ```
 ## ufw configurations
+## Clear Docker Containers in development (django & postgres) Don't run it on production server
+```python
+docker-compose down --volumes --remove-orphans
+```
+If you run this command it will also delete postgres database and their volumes. So run this when you want to test new containers. See conversation below:
+https://chat.openai.com/share/f1c8d760-6062-4613-8a5b-2f88cfcfecc2
 
 ## Examples
 ![alt text](static/image.png)
