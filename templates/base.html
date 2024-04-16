@@ -43,10 +43,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'common:event' %}">{% trans 'Event' %}</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Secret</a>
-          </li>
-
+          
           <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
             <input name="next" type="hidden" value="{{ redirect_to }}">
             <select name="language">
