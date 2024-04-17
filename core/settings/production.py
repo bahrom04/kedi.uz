@@ -1,6 +1,6 @@
 from .base import *  # noqa
 
-DEBUG = True
+DEBUG = False
 
 CSRF_TRUSTED_ORIGINS = [
     "https://kedi.uz"
