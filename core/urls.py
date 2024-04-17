@@ -3,6 +3,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.conf import settings
+from django.views.generic.base import TemplateView  # new
 
 
 urlpatterns = [
@@ -15,6 +16,10 @@ urlpatterns = [
         {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
     ),
     path("", include("apps.common.urls")),
+    path(
+        "robots.txt",
+        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
+    ),
     # path("accounts/", include("apps.users.urls", namespace="users")),
     # path("accounts/", include("django.contrib.auth.urls")),
 ]
