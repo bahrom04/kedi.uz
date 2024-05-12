@@ -22,7 +22,7 @@ class LocaleMiddleware(MiddlewareMixin):
         elif request.COOKIES.get("django_language"):
             language = translation.get_language_from_request(request)
         else:
-            language = "de"
+            language = "uz"
         # language = translation.get_language_from_request(request)
         translation.activate(language)
         request.LANGUAGE_CODE = translation.get_language()
