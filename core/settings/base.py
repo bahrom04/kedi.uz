@@ -1,6 +1,7 @@
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+from django.utils.translation import gettext_lazy as _
 
 
 load_dotenv()
@@ -117,9 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "uz"
 LANGUAGES = (
-    ("en", "English"),
-    ("uz", "Uzbek"),
-    ("ru", "Russian"),
+    ("en", _("English")),
+    ("uz", _("Uzbek")),
+    ("ru", _("Russian")),
 )
 
 TIME_ZONE = "Asia/Tashkent"
@@ -129,7 +130,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
+MODELTRANSLATION_DEFAULT_LANGUAGE = "uz"
 
 gettext = lambda s: s
 
