@@ -86,7 +86,7 @@ class Post(models.Model):
         max_length=256,
     )
     content = RichTextUploadingField(_("Content"))
-    tag = models.ManyToManyField(Tag, related_name="posts", blank=True)
+    tag = models.ManyToManyField(Tag, related_name="tag", blank=True)
 
     views = models.IntegerField(default=0)
 

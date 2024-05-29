@@ -5,6 +5,10 @@ from django.views.static import serve
 from django.conf import settings
 from django.views.generic.base import TemplateView  # new
 
+from apps.common.api_endpoints.views import api as common
+
+
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -20,6 +24,7 @@ urlpatterns = [
         "robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
     ),
+    path("api/", common.urls),
     # path("accounts/", include("apps.users.urls", namespace="users")),
     # path("accounts/", include("django.contrib.auth.urls")),
 ]
