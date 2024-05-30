@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  blockquote {
+    @apply text-lg w-11/12 my-8 mx-auto font-sans italic text-gray-700 p-4 border-l-8 border-green-500 leading-relaxed bg-gray-200;
+  }
+  img {
+    @apply max-w-full h-auto;
+  }
+  h1, h2, h3, h4, p {
+    @apply opacity-75;
+  }
+}

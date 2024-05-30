@@ -32,6 +32,8 @@ DJANGO_APPS = [
 CUSTOM_APPS = [
     "apps.common.apps.CommonConfig",
     "apps.users.apps.UsersConfig",
+    "apps.book.apps.BookConfig",
+
 ]
 
 THIRD_PARTY_APPS = [

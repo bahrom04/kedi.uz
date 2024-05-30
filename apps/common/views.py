@@ -24,7 +24,7 @@ class HomeView(generic.ListView):
 
 class AboutView(generic.ListView):
     model = Post
-    template_name = "about.html"
+    template_name = "redesign/about.html"
     context_object_name = "about"
 
     def get_queryset(self):
@@ -97,3 +97,20 @@ class LocationDetailView(generic.DetailView):
         position_id = self.kwargs["id"]
         posotion_detail = Position.objects.get(id=position_id)
         return posotion_detail
+
+
+class NewHomeView(generic.ListView):
+    model = Post
+    template_name = "redesign/home.html"
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        return Post.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        if 'language' in request.POST:
+            language = request.POST.get('language', 'en')
+            request.session['django_language'] = language
+        return self.get(request, *args, **kwargs)
+    
+
