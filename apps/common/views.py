@@ -9,7 +9,7 @@ from apps.common.models import Post
 
 class HomeView(generic.ListView):
     model = Post
-    template_name = "index.html"
+    template_name = "redesign/home.html"
     context_object_name = "posts"
 
     def get_queryset(self):
@@ -61,7 +61,7 @@ class PostDetail(generic.DeleteView):
 
 class EventListView(generic.ListView):
     model = Event
-    template_name = "event.html"
+    template_name = "redesign/event.html"
 
     def get_queryset(self):
         queryset = Event.objects.all()
@@ -70,7 +70,6 @@ class EventListView(generic.ListView):
 
 class LocationsView(generic.ListView):
     model = Position
-    template_name = "location.html"
     context_object_name = "positions"
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
@@ -83,14 +82,14 @@ class LocationsView(generic.ListView):
         event_title = Event.objects.get(pk=event_id)
         return render(
             request,
-            "location.html",
+            "redesign/location.html",
             context={"positions": posotions, "event_title": event_title},
         )
 
 
 class LocationDetailView(generic.DetailView):
     model = Position
-    template_name = "location_detail.html"
+    template_name = "redesign/location_detail.html"
     context_object_name = "position_detail"
 
     def get_object(self):
@@ -99,18 +98,6 @@ class LocationDetailView(generic.DetailView):
         return posotion_detail
 
 
-class NewHomeView(generic.ListView):
-    model = Post
-    template_name = "redesign/home.html"
-    context_object_name = "posts"
 
-    def get_queryset(self):
-        return Post.objects.all()
-
-    def post(self, request, *args, **kwargs):
-        if 'language' in request.POST:
-            language = request.POST.get('language', 'en')
-            request.session['django_language'] = language
-        return self.get(request, *args, **kwargs)
     
 

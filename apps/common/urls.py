@@ -18,6 +18,5 @@ urlpatterns = [
         views.LocationDetailView.as_view(),
         name="location-detail",
     ),
-    path("new/", views.NewHomeView.as_view(), name="new-home"),
 
 ]
