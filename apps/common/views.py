@@ -34,7 +34,7 @@ class AboutView(generic.ListView):
 
 class PostDetail(generic.DeleteView):
     model = Post
-    template_name = "post_detail.html"
+    template_name = "redesign/post_detail.html"
     context_object_name = "post"
 
     def get_object(self):

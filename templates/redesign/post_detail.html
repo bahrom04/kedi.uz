@@ -1,40 +1,48 @@
-{% extends 'redesign/base.html' %}
+{% extends "redesign/base.html" %}
+{% load i18n %}
+
+{% block custom_css %}
+<!-- custom-css -->
+<style>
+    blockquote {
+      font-size: 1.1em;
+      width: 90%;
+      margin: 30px auto;
+      font-family: Open Sans;
+      font-style: italic;
+      color: #555555;
+      padding: 1em 10px 1em 7px;
+      border-left: 8px solid #78C0A8;
+      line-height: 1.6;
+      position: relative;
+      background: #EDEDED;
+    }
+    img {
+      max-width: 100%;
+      height: auto !important;
+  }
+    
+  </style>
+<!-- custom-css-end -->
+{% endblock %}
 
 {% block content %}
+
 <main class="grid grid-cols-4">
-    <div class="gap-10 col-span-3">
-        <div class="flex justify-between items-center">
-            <h1 class="font-bold text-3xl px-6">Yangiliklar</h1>
-            <i class="fa-solid fa-magnifying-glass mr-9"></i>
-        </div>
-
-        <!-- news -->
-        <div class="grid grid-cols-3 gap-6 p-6">
-            {% for post in posts %}
-                    <div class="overflow-hidden relative bg-zinc-900 rounded-md p-3">
-
-                        <a href="{% url 'common:post' post.id %}" class="btn btn-primary"> 
-                            <img src="{{ post.image.url }}" class="w-full sm:h-32 object-cover rounded-md" alt="img" />
-                        </a>
-                        
-                        <div>
-                            <p class="opacity-50 mt-2">{{post.created_at}}</p>
-                        </div>
-                        <div>
-                            <h3 class="mt-2 mb-2 leading-5 hover:text-blue-500"><a href="{% url 'common:post' post.id %}" class="btn btn-primary">{{post.title}}</a></h3>
-                            <h4 class="opacity-75 hover:text-blue-500"><a href="{% url 'common:post' post.id %}" class="btn btn-primary">{{post.short_description}}</a></h4>
-                        </div>
-                    </div>
-            {% endfor %}
-        </div>
+    <!-- event-start -->
+    <div class="gap-10 col-span-3 p-10">
+            <div class="overflow-hidden relative bg-zinc-900 rounded-md p-3">
+                
+            </div>
     </div>
-    <!-- news-end -->
-    
+    <!-- event-end -->
+
     <!-- top books -->
     <div class="pr-5">
         <div class="p-6 h-60 bg-blue-800 rounded-lg">
             <p>Yoshlar portali</p>
-            <h2 class="font-bold text-xl max-w-60 mt-4">Aynan
+            <h2 class="font-bold text-xl max-w-60 mt-4">
+                Aynan
                 <span class="text-yellow-300">siz</span>
                 uchun qanday
                 imtiyozlar borligini bilib oling
@@ -42,7 +50,8 @@
             <button type="button" class="mt-6 text-white hover:bg-blue-800 focus:ring-4 
   focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 
   py-2 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800
-  ml-auto">Batafsil
+  ml-auto">
+                Batafsil
                 <i class="fa-solid fa-door-open"></i>
             </button>
         </div>
@@ -51,7 +60,7 @@
             <div class="grid grid-cols-1 mt-3">
                 <div class="grid grid-cols-3 mt-2">
                     <div class="col-span-1">
-                        <img src="../asserts/books/chessbook1.png" alt="chessbook1" />
+                        <img src="../asserts/books/chessbook1.png" alt="chessbook1">
                     </div>
                     <div class="text-left col-span-2">
                         <h2 class="text-sm font-bold w-full">Shaxmatdagi qobiliyatingizga baho bering</h2>
@@ -60,7 +69,7 @@
                 </div>
                 <div class="grid grid-cols-3 mt-5">
                     <div class="col-span-1">
-                        <img src="../asserts/books/2.png" alt="2.png" />
+                        <img src="../asserts/books/2.png" alt="2.png">
                     </div>
                     <div class="text-left col-span-2">
                         <h2 class="text-sm font-bold w-full">Shaxmatdagi qobiliyatingizga baho bering</h2>
@@ -69,7 +78,7 @@
                 </div>
                 <div class="grid grid-cols-3 mt-5">
                     <div class="col-span-1">
-                        <img src="../asserts/books/3.png" alt="3.png" />
+                        <img src="../asserts/books/3.png" alt="3.png">
                     </div>
                     <div class="text-left col-span-2">
                         <h2 class="text-sm font-bold w-full">Shaxmatdagi qobiliyatingizga baho bering</h2>
@@ -78,7 +87,7 @@
                 </div>
                 <div class="grid grid-cols-3 mt-5">
                     <div class="col-span-1">
-                        <img src="../asserts/books/4.png" alt="b.Fishcher" />
+                        <img src="../asserts/books/4.png" alt="b.Fishcher">
                     </div>
                     <div class="text-left col-span-2">
                         <h2 class="text-sm font-bold w-full">Shaxmatdagi qobiliyatingizga baho bering</h2>
@@ -88,7 +97,6 @@
             </div>
         </div>
     </div>
-
 </main>
 
 {% endblock %}
