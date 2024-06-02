@@ -10,6 +10,3 @@ api = NinjaAPI()
 def posts(request):
     queryset = models.Post.objects.prefetch_related("tag").all()
     return queryset
-
-
-
