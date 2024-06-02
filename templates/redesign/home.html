@@ -47,44 +47,20 @@
             </button>
         </div>
         <div class="mt-6 p-4 h-auto bg-zinc-900  rounded-lg">
-            <h1 class="text-xl font-bold ">Top kitoblar</h1>
+            <h1 class="text-xl font-bold ">Top Jamoatlar</h1>
             <div class="grid grid-cols-1 mt-3">
+                <!-- top-community -->
+                {% for c in top_community %}
                 <div class="grid grid-cols-3 mt-2">
                     <div class="col-span-1">
-                        <img src="../asserts/books/chessbook1.png" alt="chessbook1" />
+                        <img src="{{c.image.url}}" alt="chessbook1" />
                     </div>
                     <div class="text-left col-span-2">
-                        <h2 class="text-sm font-bold w-full">Shaxmatdagi qobiliyatingizga baho bering</h2>
-                        <p class="mt-4 opacity-70 tex">John Doe</p>
+                        <h2 class="text-sm font-bold w-full">{{c.title}}</h2>
+                        <p class="mt-4 opacity-70 tex"><a href="{{c.telegram_link}}" target="_blank">Link</a></p>
                     </div>
                 </div>
-                <div class="grid grid-cols-3 mt-5">
-                    <div class="col-span-1">
-                        <img src="../asserts/books/2.png" alt="2.png" />
-                    </div>
-                    <div class="text-left col-span-2">
-                        <h2 class="text-sm font-bold w-full">Shaxmatdagi qobiliyatingizga baho bering</h2>
-                        <p class="mt-4 opacity-70 tex">A.Nimzonovich</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-3 mt-5">
-                    <div class="col-span-1">
-                        <img src="../asserts/books/3.png" alt="3.png" />
-                    </div>
-                    <div class="text-left col-span-2">
-                        <h2 class="text-sm font-bold w-full">Shaxmatdagi qobiliyatingizga baho bering</h2>
-                        <p class="mt-4 opacity-70 tex">D.Bronshtain</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-3 mt-5">
-                    <div class="col-span-1">
-                        <img src="../asserts/books/4.png" alt="b.Fishcher" />
-                    </div>
-                    <div class="text-left col-span-2">
-                        <h2 class="text-sm font-bold w-full">Shaxmatdagi qobiliyatingizga baho bering</h2>
-                        <p class="mt-4 opacity-70 tex">B.Fischer</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
