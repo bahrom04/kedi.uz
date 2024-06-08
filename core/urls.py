@@ -20,13 +20,12 @@ urlpatterns = [
         {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
     ),
     path("", include("apps.common.urls")),
+    path("accounts/", include("allauth.urls")),
     path(
         "robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
     ),
     path("api/", common.urls),
-    # path("accounts/", include("apps.users.urls", namespace="users")),
-    # path("accounts/", include("django.contrib.auth.urls")),
 ]
 
 if settings.DEBUG:

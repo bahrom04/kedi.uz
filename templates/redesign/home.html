@@ -1,4 +1,5 @@
 {% extends 'redesign/base.html' %}
+{% load i18n %}
 
 {% block content %}
 <main class="grid grid-cols-4">
@@ -27,6 +28,33 @@
                     </div>
             {% endfor %}
         </div>
+
+        {% if user.is_authenticated %}
+    <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+    <p>Email: {{user.email}}</p>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    {% url 'account_logout' as logout_url %}
+                        {% if logout_url %}
+                            <li>
+                                <a href="{{ logout_url }}">{% trans "Sign Out" %}</a>
+                            </li>
+                        {% endif %}
+    {% else %}
+        <p>Welcome, new user. Please log in.</p>
+        {% url 'account_login' as login_url %}
+                        {% if login_url %}
+                            <li>
+                                <a href="{{ login_url }}">{% trans "Sign In" %}</a>
+                            </li>
+                        {% endif %}
+                        {% url 'account_signup' as signup_url %}
+                        {% if signup_url %}
+                            <li>
+                                <a href="{{ signup_url }}">{% trans "Sign Up" %}</a>
+                            </li>
+                        {% endif %}
+    {% endif %}
     </div>
     <!-- news-end -->
     
