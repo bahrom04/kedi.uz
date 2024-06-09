@@ -40,3 +40,10 @@ https://chat.openai.com/share/f1c8d760-6062-4613-8a5b-2f88cfcfecc2
 
 ## Examples
 ![alt text](static/image.png)
+
+## TailwindCss
+```
+sudo npm install -g cross-env
+python manage.py tailwind install
+python manage.py tailwind start
+```
