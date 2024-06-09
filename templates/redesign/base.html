@@ -1,5 +1,4 @@
-{% load static %}
-{% load i18n %}
+{% load static i18n static tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    {% tailwind_css %}
+
     {% block custom_css %}
 
     {% endblock %}

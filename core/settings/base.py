@@ -37,13 +37,17 @@ CUSTOM_APPS = [
     "apps.common.apps.CommonConfig",
     "apps.users.apps.UsersConfig",
     "apps.book.apps.BookConfig",
+    "apps.theme",
 ]
 
 THIRD_PARTY_APPS = [
     "modeltranslation",
+    'tailwind',
+    'django_browser_reload',
     "ckeditor",
     "ckeditor_uploader",
     "location_field.apps.DefaultConfig",
+
     # "captcha",
 ]
 
@@ -78,6 +82,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -233,3 +238,10 @@ LOCATION_FIELD = {
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# TailwindCss
+TAILWIND_APP_NAME = 'apps.theme'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+NPM_BIN_PATH = os.getenv("NPM_BIN_PATH")
