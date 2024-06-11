@@ -14,7 +14,7 @@ ml-auto">Batafsil
             <i class="fa-solid fa-door-open"></i>
         </button>
     </div>
-    <div class="mt-6 p-4 h-auto bg-zinc-900  rounded-lg">
+    <div class="mt-6 mb-6 p-4  bg-zinc-900 rounded-lg">
         <h1 class="text-xl font-bold ">Top Jamoatlar</h1>
         <div class="grid grid-cols-1 mt-3">
             <!-- top-community -->
@@ -23,13 +23,14 @@ ml-auto">Batafsil
                 <div class="col-span-1 ">
                     <img src="{{c.image.url}}" alt="chessbook1" class="rounded-xl object-cover">
                 </div>
-                <div class="col-span-2 m-4">
-                    <h2 class="text-sm font-bold w-full">{{c.title}}</h2>
-                    <a href="{{c.telegram_link}}" target="_blank" class="mt-8 opacity-70 hover:text-blue-700">Link</a>
+                <div class="col-span-2 p-4">
+                    <h2 class="text-sm font-bold w-full mb-4">{{c.title}}</h2>
+                    <a href="{{c.telegram_link}}" target="_blank" class="opacity-70 hover:text-blue-700">Link</a>
                     
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
+    
 </div>
