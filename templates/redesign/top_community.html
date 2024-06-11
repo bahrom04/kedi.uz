@@ -19,13 +19,14 @@ ml-auto">Batafsil
         <div class="grid grid-cols-1 mt-3">
             <!-- top-community -->
             {% for c in top_community %}
-            <div class="grid grid-cols-3 mt-2">
-                <div class="col-span-1">
-                    <img src="{{c.image.url}}" alt="chessbook1" />
+            <div class="grid grid-cols-3 mt-4">
+                <div class="col-span-1 ">
+                    <img src="{{c.image.url}}" alt="chessbook1" class="rounded-xl object-cover">
                 </div>
-                <div class="text-left col-span-2">
+                <div class="col-span-2 m-4">
                     <h2 class="text-sm font-bold w-full">{{c.title}}</h2>
-                    <p class="mt-4 opacity-70 tex"><a href="{{c.telegram_link}}" target="_blank">Link</a></p>
+                    <a href="{{c.telegram_link}}" target="_blank" class="mt-8 opacity-70 hover:text-blue-700">Link</a>
+                    
                 </div>
             </div>
             {% endfor %}

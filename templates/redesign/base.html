@@ -25,7 +25,7 @@
     <nav class="bg-zinc-900 p-6 m-5 rounded-xl">
         <div class="flex flex-wrap items-center justify-between">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="" class="h-14" alt="Flowbite Logo" />
+                <img src="./static/kedi.jpg" class="h-14" alt="kedi Logo" />
                 
                 <form action="{% url 'set_language' %}" method="post" class="ml-3">
                     {% csrf_token %}
@@ -51,9 +51,22 @@
                     <i class="fa-solid fa-bell"></i>
                 </div>
                 
-                <button type="button" class="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-auto">
-                    Kirish <i class="fa-solid fa-door-open"></i>
-                </button>
+                {% if user.is_authenticated %}
+                  {% if socialaccount_obj %}
+                  {% for account in socialaccount_obj %}
+                      {% if account.provider == 'google' %}
+                          <img src="{{ account.extra_data.picture }}" alt="Profile Image">
+                      {% endif %}
+                  {% endfor %}
+          
+                  {% endif %}
+                  
+                  {% else %}
+                    <button type="button" class="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-auto">
+                      Kirish <i class="fa-solid fa-door-open"></i>
+                    </button>
+                  {% endif %}
+
             </div>
 
             <div class="hidden md:flex md:w-auto md:order-1" id="navbar-cta">
@@ -81,7 +94,7 @@
     <footer class="bg-zinc-900 grid grid-cols-1 pt-7 mt-auto">
     
         <div class="flex items-center justify-center">
-          <img class="justify-center items-end" src="./asserts/uzchessLogo.png" alt="logo" >
+          <img class="justify-center items-end" src="./kedi.jpg" alt="logo" >
       
         </div>
     

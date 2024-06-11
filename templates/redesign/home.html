@@ -8,58 +8,52 @@
             <h1 class="font-bold text-3xl px-6">Yangiliklar</h1>
             <i class="fa-solid fa-magnifying-glass mr-9"></i>
         </div>
-
         <!-- news -->
         <div class="grid grid-cols-3 gap-6 p-6">
             {% for post in posts %}
-                    <div class="overflow-hidden relative bg-zinc-900 rounded-md p-3">
-
-                        <a href="{% url 'common:post' post.id %}" class="btn btn-primary"> 
-                            <img src="{{ post.image.url }}" class="w-full sm:h-32 object-cover rounded-md" alt="img" />
-                        </a>
-                        
-                        <div>
-                            <p class="opacity-50 mt-2">{{post.created_at}}</p>
-                        </div>
-                        <div>
-                            <h3 class="mt-2 mb-2 leading-5 hover:text-blue-500"><a href="{% url 'common:post' post.id %}" class="btn btn-primary">{{post.title}}</a></h3>
-                            <h4 class="opacity-75 hover:text-blue-500"><a href="{% url 'common:post' post.id %}" class="btn btn-primary">{{post.short_description}}</a></h4>
-                        </div>
-                    </div>
+            <div class="overflow-hidden relative bg-zinc-900 rounded-md p-3">
+                <a href="{% url 'common:post' post.id %}" class="btn btn-primary">
+                    <img src="{{ post.image.url }}" class="w-full sm:h-32 object-cover rounded-md" alt="img">
+                </a>
+                <div>
+                    <p class="opacity-50 mt-2">{{post.created_at}}</p>
+                </div>
+                <div>
+                    <h3 class="mt-2 mb-2 leading-5 hover:text-blue-500">
+                        <a href="{% url 'common:post' post.id %}" class="btn btn-primary">{{post.title}}</a>
+                    </h3>
+                    <h4 class="opacity-75 hover:text-blue-500">
+                        <a href="{% url 'common:post' post.id %}" class="btn btn-primary">{{post.short_description}}</a>
+                    </h4>
+                </div>
+            </div>
             {% endfor %}
         </div>
-
+    
+        
         {% if user.is_authenticated %}
-    <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
-    <p>Email: {{user.email}}</p>
-    <p>First Name: {{ user.first_name }}</p>
-    <p>Last Name: {{ user.last_name }}</p>
-    {% url 'account_logout' as logout_url %}
-                        {% if logout_url %}
-                            <li>
-                                <a href="{{ logout_url }}">{% trans "Sign Out" %}</a>
-                            </li>
-                        {% endif %}
+        <p>Welcome, {{ user.get_username }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>First Name: {{ user.first_name }}</p>
+        <p>Last Name: {{ user.last_name }}</p>
+        {% url 'account_logout' as logout_url %}
+        <li>
+            <a href="{{ logout_url }}">{% trans "Sign Out" %}</a>
+        </li>
     {% else %}
         <p>Welcome, new user. Please log in.</p>
         {% url 'account_login' as login_url %}
-                        {% if login_url %}
-                            <li>
-                                <a href="{{ login_url }}">{% trans "Sign In" %}</a>
-                            </li>
-                        {% endif %}
-                        {% url 'account_signup' as signup_url %}
-                        {% if signup_url %}
-                            <li>
-                                <a href="{{ signup_url }}">{% trans "Sign Up" %}</a>
-                            </li>
-                        {% endif %}
+        <li>
+            <a href="{{ login_url }}">{% trans "Sign In" %}</a>
+        </li>
+        {% url 'account_signup' as signup_url %}
+        <li>
+            <a href="{{ signup_url }}">{% trans "Sign Up" %}</a>
+        </li>
     {% endif %}
+    
     </div>
     <!-- news-end -->
-    
     {% include 'redesign/top_community.html' %}
-
 </main>
-
 {% endblock %}

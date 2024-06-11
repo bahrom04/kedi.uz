@@ -1,11 +1,13 @@
 {% extends "account/base_entrance.html" %}
-{% load i18n %}
-{% load allauth account %}
+{% load i18n allauth account static tailwind_tags%}
+
+
 {% block head_title %}
     {% trans "Sign In" %}
 {% endblock head_title %}
-{% block content %}
 
+{% block content %}
+    
     {% element h1 %}
         {% trans "Sign In" %}
     {% endelement %}
