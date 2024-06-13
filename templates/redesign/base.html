@@ -25,7 +25,7 @@
     <nav class="bg-zinc-900 p-6 m-5 rounded-xl">
         <div class="flex flex-wrap items-center justify-between">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="./static/kedi.jpg" class="h-14" alt="kedi Logo" />
+                <img src="{% static 'kedi.jpg' %}" style="border-radius: 100%;" class="h-14" alt="kedi Logo" />
                 
                 <form action="{% url 'set_language' %}" method="post" class="ml-3">
                     {% csrf_token %}
@@ -55,7 +55,13 @@
                   {% if socialaccount_obj %}
                   {% for account in socialaccount_obj %}
                       {% if account.provider == 'google' %}
-                          <img src="{{ account.extra_data.picture }}" style="border-radius: 100%; width: 55px;" alt="Profile Image">
+                      <div class="flex gap-4 items-center">
+                        {% url 'account_logout' as logout_url %}
+                        <a class="mr-4" href="{{ logout_url }}">{% trans "Sign Out" %}</a>
+                        <p class="mr-4">{{user.username}}</p>
+                        <img src="{{ account.extra_data.picture }}" style="border-radius: 100%; width: 55px;" alt="Profile Image">
+                      </div>
+                          
                       {% endif %}
                   {% endfor %}
           
@@ -63,10 +69,11 @@
                   
                   {% else %}
                     {% url 'account_login' as login_url %}
-
-                    <button type="button" class="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-auto">
-                      <a href="{{ login_url }}">Kirish</a> <i class="fa-solid fa-door-open"></i>
-                    </button>
+                    <a href="{{ login_url }}">
+                      <button type="button" class="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-auto">
+                      Kirish
+                      </button>
+                    </a>
                   {% endif %}
 
             </div>
@@ -96,7 +103,7 @@
     <footer class="bg-zinc-900 grid grid-cols-1 pt-7 mt-auto">
     
         <div class="flex items-center justify-center">
-          <img class="justify-center items-end" src="./kedi.jpg" alt="logo" >
+          <img class="justify-center items-end h-14" style="border-radius: 100%;" src="{% static 'kedi.jpg' %}" alt="logo" >
       
         </div>
     

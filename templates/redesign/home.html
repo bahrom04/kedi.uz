@@ -30,28 +30,6 @@
             {% endfor %}
         </div>
     
-        
-        {% if user.is_authenticated %}
-        <p>Welcome, {{ user.get_username }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>First Name: {{ user.first_name }}</p>
-        <p>Last Name: {{ user.last_name }}</p>
-        {% url 'account_logout' as logout_url %}
-        <li>
-            <a href="{{ logout_url }}">{% trans "Sign Out" %}</a>
-        </li>
-    {% else %}
-        <p>Welcome, new user. Please log in.</p>
-        {% url 'account_login' as login_url %}
-        <li>
-            <a href="{{ login_url }}">{% trans "Sign In" %}</a>
-        </li>
-        {% url 'account_signup' as signup_url %}
-        <li>
-            <a href="{{ signup_url }}">{% trans "Sign Up" %}</a>
-        </li>
-    {% endif %}
-    
     </div>
     <!-- news-end -->
     {% include 'redesign/top_community.html' %}
