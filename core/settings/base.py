@@ -123,7 +123,7 @@ DATABASES = {
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": os.getenv("DB_HOST"),
-        # "PORT": os.getenv("DB_PORT"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 
@@ -208,11 +208,10 @@ EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "")
 
 
 # STATIC
-STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATICFILES_DIRS = (BASE_DIR / "staticfiles",)
+STATIC_ROOT = BASE_DIR / "static"
+
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"

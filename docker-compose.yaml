@@ -1,34 +1,42 @@
-version: '3.8'
+version: "3.8"
 
 services:
-
   db:
+    container_name: abkk_db
     image: postgres:14
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
-    env_file:
-      - ./.env
-
-  web:
-    build: .
-    container_name: ekologiya
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PORT=${DB_PORT}
     restart: always
+
+  django:
+    container_name: kediuz
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: gunicorn -c gunicorn_conf.py core.wsgi:application
+    security_opt:
+      - seccomp:unconfined
     volumes:
-      - .:/code
-      - ./staticfiles:/code/staticfiles
-      - ./media:/code/media
-      - ./locale:/code/locale
-    ports:
-      - '8000:8000'
+      - ./:/app
+      - ./media:/home/app/web/media
+      - ./static:/home/app/web/static
+      - ./locale:/home/app/web/locale
+      - ./logs:/home/app/web/logs
     env_file:
-      - ./.env
+      - .env
+    environment:
+      - TZ=Asia/Tashkent
+    ports:
+      - ${DJANGO_WEB_PORT}:${DJANGO_WEB_PORT}
     depends_on:
       - db
 
 volumes:
-  locale:
-  staticfiles:
-  media:
   postgres_data:
