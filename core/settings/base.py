@@ -42,12 +42,11 @@ CUSTOM_APPS = [
 
 THIRD_PARTY_APPS = [
     "modeltranslation",
-    'tailwind',
-    'django_browser_reload',
+    "tailwind",
+    "django_browser_reload",
     "ckeditor",
     "ckeditor_uploader",
     "location_field.apps.DefaultConfig",
-
     # "captcha",
 ]
 
@@ -81,8 +80,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # customs
     "allauth.account.middleware.AccountMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+    "core.middleware.ErrorHandlerMiddleware",
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -239,8 +240,12 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 # TailwindCss
-TAILWIND_APP_NAME = 'apps.theme'
+TAILWIND_APP_NAME = "apps.theme"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
 NPM_BIN_PATH = os.getenv("NPM_BIN_PATH")
+
+
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
