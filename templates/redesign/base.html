@@ -1,4 +1,4 @@
-{% load static i18n static tailwind_tags%}
+{% load static i18n tailwind_tags%}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,25 +24,32 @@
     <!-- nav -->
     <nav class="bg-zinc-900 p-6 m-5 rounded-xl">
         <div class="flex flex-wrap items-center justify-between">
-            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <div class="flex items-center space-x-3 rtl:space-x-reverse">
+              <a href="{% url 'common:home' %}">
                 <img src="{% static 'kedi.jpg' %}" style="border-radius: 100%;" class="h-14" alt="kedi Logo" />
+              </a>
                 
-                <form action="{% url 'set_language' %}" method="post" class="ml-3">
-                    {% csrf_token %}
-                    <input name="next" type="hidden" value="{{ redirect_to }}">
-                    <select name="language" class="bg-black text-white border-none">
-                        {% get_current_language as LANGUAGE_CODE %}
-                        {% get_available_languages as LANGUAGES %}
-                        {% get_language_info_list for LANGUAGES as languages %}
-                        {% for language in languages %}
-                        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                            {{ language.name_local }} ({{ language.code }})
+                
+
+                <form action="{% url 'set_language' %}" method="post">
+                  {% csrf_token %}
+            
+                  <div class="w-full bg-black">
+                    <select name="language" onchange="this.form.submit()" class="bg-black text-white border-none block py-3 w-32 cursor-pointer focus:border-zinc-900 border-zinc-900 appearance-none focus:ring-0 rounded-sm">
+                      {% get_current_language as LANGUAGE_CODE %}
+                      {% get_available_languages as LANGUAGES %}
+            
+                      {% for lang in LANGUAGES %}
+                        <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                          {{ lang.1 }}
                         </option>
-                        {% endfor %}
+                      {% endfor %}
                     </select>
-                    <input type="submit" value="Go" class="ml-2 bg-blue-500 text-white p-1 rounded">
+            
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                  </div>
                 </form>
-            </a>
+              </div>
 
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
                 <div class="flex items-center space-x-7 mr-4">
