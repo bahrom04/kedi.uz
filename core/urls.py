@@ -22,7 +22,6 @@ urlpatterns = [
         {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
     ),
     path("accounts/", include("allauth.urls")),
-    path("", include("apps.common.urls")),
     path(
         "robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
