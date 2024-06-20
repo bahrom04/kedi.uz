@@ -49,3 +49,8 @@ sudo npm install -g cross-env
 python manage.py tailwind install
 python manage.py tailwind start
 ```
+
+## Ownership issues with git
+```
+git config --global --add safe.directory /home/web/kedi.uz
+```
