@@ -47,7 +47,7 @@ THIRD_PARTY_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     "location_field.apps.DefaultConfig",
-    # "captcha",
+    "captcha",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
@@ -241,3 +241,9 @@ NPM_BIN_PATH = os.getenv("NPM_BIN_PATH")
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+# captcha
+# RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY")
+# RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_PUBLIC_KEY="6LcI1f4pAAAAAAVmzAmm9tVB2LeeVuhtW0sm7qa8"
+RECAPTCHA_PRIVATE_KEY="6LcI1f4pAAAAAJ6_YE-0wJrQgPxIXxHIeGUyYIwW"

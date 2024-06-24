@@ -7,9 +7,24 @@ from django.conf.urls.i18n import set_language
 from django.conf.urls.i18n import i18n_patterns
 from django.views.generic.base import TemplateView  # new
 
+# captcha
+from django.contrib.auth.forms import AuthenticationForm
+from captcha import fields
+
 from apps.common.api_endpoints.views import api as common
 
+class LoginForm(AuthenticationForm):
+    captcha = fields.ReCaptchaField()
 
+    def clean(self):
+        captcha = self.cleaned_data.get("captcha")
+        if not captcha:
+            return
+        return super().clean()
+
+
+admin.site.login_form = LoginForm
+admin.site.login_template = "login.html"
 
 
 urlpatterns = [
