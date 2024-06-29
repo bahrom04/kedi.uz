@@ -15,12 +15,11 @@
                 <h1 class="h1-text-tc">
                     {{ item.title }}
                 </h1>
-                <div class="p-text-tc">
-                    <span class="span-tc"><a href="{{ item.telegram_link }}">link</a></span>
+                <!-- <div class="p-text-tc">
                     <span class="span-tc">寿司職人コース</span>
-                </div>
+                </div> -->
             </div>
-            <img class="img-tc" src="{% static 'img-teacher.png' %}" alt="photo">
+            <img class="img-tc" src="{{item.image.url}}" alt="photo">
         </button>
         {% endfor %}
     {% else %}
@@ -35,7 +34,7 @@
         <div class="box-with-button">
             <div class="mt-main-box">
                 <div class="img-box-mt">
-                    <img class="img-mt" src="{% static 'img-teacher.png' %}" alt="photo">
+                    <img class="img-mt" src="{{ item.image.url }}" alt="photo">
                     <p class="p-under-img">{{ item.title }}</p>
                     <div class="under-text-img">
                         <h1 class="h1-text-mt">小林　正規</h1>
@@ -45,19 +44,11 @@
                 <div class="texts-box-mt">
                     <div class="texts-mt">
                         <h2 class="h2-text-mt">{{ item.telegram_link }}</h2>
-                        <p class="p-text-mt">授業では、仕込みなどの基本から丁寧に教えます。寿司は、魚の質だけが味を決めるわけではありません。捌き方やシャリも味を大きく左右するポイントです。飲食塾を卒業後、塾生が自信をもって寿司を握れるよう、しっかりサポートしていきます。</p>
-                    </div>
-                    <div class="texts-mt">
-                        <h2 class="h2-text-mt">飲食塾でコースを受け持つにあたり大切にすること</h2>
-                        <p class="p-text-mt">授業では、仕込みなどの基本から丁寧に教えます。寿司は、魚の質だけが味を決めるわけではありません。捌き方やシャリも味を大きく左右するポイントです。飲食塾を卒業後、塾生が自信をもって寿司を握れるよう、しっかりサポートしていきます。</p>
-                    </div>
-                    <div class="texts-mt">
-                        <h2 class="h2-text-mt">飲食塾でコースを受け持つにあたり大切にすること</h2>
-                        <p class="p-text-mt">授業では、仕込みなどの基本から丁寧に教えます。寿司は、魚の質だけが味を決めるわけではありません。捌き方やシャリも味を大きく左右するポイントです。飲食塾を卒業後、塾生が自信をもって寿司を握れるよう、しっかりサポートしていきます。</p>
+                        <p class="p-text-mt">{{ item.description|safe }}</p>
                     </div>
                 </div>
             </div>
-            <span class="close-modal">閉じる</span>
+            <span class="close-modal">Ortga</span>
         </div>
     </div>
     {% endfor %}

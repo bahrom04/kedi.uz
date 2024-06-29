@@ -16,11 +16,12 @@
 }
 
 .tc-card {
-    margin: 2.885% 0  ;
-    display: flex;
-    max-width: 47%;
+    margin: 2.885% 0;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
     align-items: flex-start;
-    background: #000;
+    background-color: rgb(24 24 27 / var(--tw-bg-opacity)); /* #18181b */
     border-radius: 8px;
 }
 
@@ -55,8 +56,8 @@
 }
 
 .img-tc {
-    max-width: 70.4%;
-    max-height: 380px;
+    
+    max-width: 250px;
     flex-shrink: 0;
     margin: 0 0 0 -59px;
 }
@@ -104,6 +105,8 @@
         margin: 10px 0  ;
         max-width: 100%;
         gap: 20px;
+        border: 2px solid white;
+        
     }
     .img-tc {
         max-width: 50%;
@@ -170,7 +173,8 @@
 }
 
 .img-mt {
-    width: 100%;
+    max-width: 250px;
+    
 }
 
 .p-under-img {
@@ -247,7 +251,7 @@
     gap: 10px;
     border-radius: 8px;
     border: 1px solid var(--grey, #908F8F);
-    background: var(--white, #FFF);
+    background: var(--white, #262171);
 
     color: var(--grey, #908F8F);
     text-align: center;  

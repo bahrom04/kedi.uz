@@ -5,4 +5,4 @@ from apps.book import models
 
 @register(models.Community)
 class CommunityTranslationOption(TranslationOptions):
-    fields = ("title",)
+    fields = ("title","description")

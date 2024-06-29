@@ -5,7 +5,6 @@ from django.template.defaultfilters import slugify
 
 from ckeditor_uploader.fields import RichTextUploadingField
 from location_field.models.plain import PlainLocationField
-from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class BaseModel(models.Model):
