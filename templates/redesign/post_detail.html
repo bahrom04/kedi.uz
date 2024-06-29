@@ -17,10 +17,14 @@
       position: relative;
       background: #EDEDED;
     }
-    img {
-      max-width: 100%;
-      height: auto !important;
-  }
+    .card-img-top{
+        width: 50%;
+    }
+    @media (max-width:700px){
+        .card-img-top{
+            width: 100%;
+        }
+    }
 </style>
 <!-- custom-css-end -->
 {% endblock %}
@@ -40,7 +44,7 @@
         </span>
         <br>
         {% if post.image %}
-        <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+        <img src="{{ post.image.url }}" class="card-img-top" alt="image">
         {% endif %}
         
         
