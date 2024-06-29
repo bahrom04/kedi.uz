@@ -40,7 +40,7 @@ class AboutView(generic.ListView):
         return queryset
 
 
-class PostDetail(generic.DeleteView):
+class PostDetail(generic.DetailView):
     model = Post
     template_name = "redesign/post_detail.html"
     context_object_name = "post"

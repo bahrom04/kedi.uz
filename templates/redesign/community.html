@@ -1,0 +1,18 @@
+{% extends 'redesign/base.html' %}
+
+
+{% block content %}
+<main class="grid lg:grid-cols-4">
+
+    {% if object_list %}
+        {% for item in object_list %}
+            <div>
+                {{item.title}}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div>no community fount</div>
+    {% endif %}
+</main>
+
+{% endblock %}
