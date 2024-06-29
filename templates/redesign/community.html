@@ -1,18 +1,92 @@
 {% extends 'redesign/base.html' %}
+{% load static%}
 
+{% block link_and_scripts %}
+<link rel="stylesheet" href="{% static 'community.css' %}">
+{% endblock %}
 
 {% block content %}
-<main class="grid lg:grid-cols-4">
-
+<!-- Teacher card start  -->
+<section class="tc-main-box">
     {% if object_list %}
         {% for item in object_list %}
-            <div>
-                {{item.title}}
+        <button class="tc-card ">
+            <div class="texts-box-tc">
+                <h1 class="h1-text-tc">
+                    {{ item.title }}
+                </h1>
+                <div class="p-text-tc">
+                    <span class="span-tc"><a href="{{ item.telegram_link }}">link</a></span>
+                    <span class="span-tc">寿司職人コース</span>
+                </div>
             </div>
+            <img class="img-tc" src="{% static 'img-teacher.png' %}" alt="photo">
+        </button>
         {% endfor %}
     {% else %}
-        <div>no community fount</div>
+    <div>no community fount</div>
     {% endif %}
-</main>
+</section>
+<!--  Teacher card end  -->
+<!-- model teacher start  -->
+{% if object_list %}
+    {% for item in object_list %}
+    <div class="box-with-button1">
+        <div class="box-with-button">
+            <div class="mt-main-box">
+                <div class="img-box-mt">
+                    <img class="img-mt" src="{% static 'img-teacher.png' %}" alt="photo">
+                    <p class="p-under-img">{{ item.title }}</p>
+                    <div class="under-text-img">
+                        <h1 class="h1-text-mt">小林　正規</h1>
+                        <p class="p-text-mt">（こばやし　まさき）</p>
+                    </div>
+                </div>
+                <div class="texts-box-mt">
+                    <div class="texts-mt">
+                        <h2 class="h2-text-mt">{{ item.telegram_link }}</h2>
+                        <p class="p-text-mt">授業では、仕込みなどの基本から丁寧に教えます。寿司は、魚の質だけが味を決めるわけではありません。捌き方やシャリも味を大きく左右するポイントです。飲食塾を卒業後、塾生が自信をもって寿司を握れるよう、しっかりサポートしていきます。</p>
+                    </div>
+                    <div class="texts-mt">
+                        <h2 class="h2-text-mt">飲食塾でコースを受け持つにあたり大切にすること</h2>
+                        <p class="p-text-mt">授業では、仕込みなどの基本から丁寧に教えます。寿司は、魚の質だけが味を決めるわけではありません。捌き方やシャリも味を大きく左右するポイントです。飲食塾を卒業後、塾生が自信をもって寿司を握れるよう、しっかりサポートしていきます。</p>
+                    </div>
+                    <div class="texts-mt">
+                        <h2 class="h2-text-mt">飲食塾でコースを受け持つにあたり大切にすること</h2>
+                        <p class="p-text-mt">授業では、仕込みなどの基本から丁寧に教えます。寿司は、魚の質だけが味を決めるわけではありません。捌き方やシャリも味を大きく左右するポイントです。飲食塾を卒業後、塾生が自信をもって寿司を握れるよう、しっかりサポートしていきます。</p>
+                    </div>
+                </div>
+            </div>
+            <span class="close-modal">閉じる</span>
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
+<!--  model teacher end  -->
+<script>
+    let modals = document.getElementsByClassName("box-with-button1");
+    let btns = document.getElementsByClassName("tc-card");
+    let spans = document.getElementsByClassName("close-modal");
 
+    for(let i = 0; i < btns.length; i++) {
+        btns[i].onclick = function(){
+            modals[i].style.display = "block";
+        }
+    }
+
+    for(let i = 0; i < spans.length; i++){
+        spans[i].onclick = function(){
+            modals[i].style.display = "none";
+        }
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        for (let i = 0; i < modals.length; i++) {
+          if (event.target == modals[i]) {
+            modals[i].style.display = "none";
+          }
+        }
+      }
+</script>
 {% endblock %}

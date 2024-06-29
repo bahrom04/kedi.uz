@@ -1,0 +1,378 @@
+/* Teacher card style start  */
+
+.tc-main-box button {
+    padding: 0;
+    border: none;
+}
+
+.tc-main-box {
+    display: flex;
+    max-width: 1040px;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.tc-card {
+    margin: 2.885% 0  ;
+    display: flex;
+    max-width: 47%;
+    align-items: flex-start;
+    background: #000;
+    border-radius: 8px;
+}
+
+.texts-box-tc {
+    margin: 20px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.h1-text-tc {
+    margin: 0%;
+    color: var(--white, #FFF);
+    font-size: 22px;
+    font-weight: 700;
+    text-align: left;
+}
+.p-text-tc {
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.span-tc {
+    color: var(--white, #FFF);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.img-tc {
+    max-width: 70.4%;
+    max-height: 380px;
+    flex-shrink: 0;
+    margin: 0 0 0 -59px;
+}
+
+@media  (max-width: 920px) {
+    .img-tc {
+        max-width: 60%;
+        margin: 0 0 0 -40px;
+    }
+
+    .h1-text-tc {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .span-tc {
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+}
+
+@media  (max-width: 768px) {
+    .img-tc {
+        max-width: 50%;
+        margin: 0 0 0 -35px;
+    }
+
+    .h1-text-tc {
+        font-size: 14px;
+        font-weight: 550;
+    }
+    .span-tc {
+        font-size: 10px;
+        font-weight: 400;
+    }
+
+}
+
+@media  (max-width: 600px) {
+    .tc-main-box {
+        flex-direction: column;
+        width: 100%;
+    }
+    .tc-card {
+        margin: 10px 0  ;
+        max-width: 100%;
+        gap: 20px;
+    }
+    .img-tc {
+        max-width: 50%;
+    }
+    .h1-text-tc {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .span-tc {
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+}
+
+/*  Teacher card style end  */
+
+/* model teacher style start  */
+.box-with-button1 {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding: 5% 0; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow-y:scroll;
+    background: rgba(255, 255, 255, 0.80);
+  }
+  
+
+.box-with-button {
+    max-width: 1114px;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    padding-bottom: 20px;
+    /* justify-content: center; */
+    /* align-items: center; */
+    gap: 10px;
+    border-radius: 4px;
+    background-color: #000;
+}
+
+.mt-main-box {
+    border-radius: 4px;
+    display: flex;
+    padding: 20px 40px 20px 60px;
+    justify-content: center;
+    align-items: center;
+    gap: 55px;
+    align-self: stretch;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.img-box-mt {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.img-mt {
+    width: 100%;
+}
+
+.p-under-img {
+    border-radius: 4px;
+    margin: -4px 0 0 0 ;
+    display: flex;
+    padding: 4px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border: 1px solid var(--black, #000);
+    background: var(--grey, #908F8F);
+
+    color: var(--white, #FFF);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+.under-text-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.texts-box-mt {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.texts-mt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.h1-text-mt {
+    margin: 0%;
+    color: var(--white, #FFF);
+    font-size: 22px;
+    font-weight: 700;
+}
+.h2-text-mt {
+    margin: 0%;
+    color: var(--white, #FFF);
+    text-align: left;
+    font-size: 20px;
+    font-weight: 700;
+}
+.p-text-mt {
+    text-align: left;
+    margin: 0%;
+    color: var(--white, #FFF);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.close-modal {
+    display: inline-block;
+    margin: 0 auto;
+    width: 200px;
+    padding: 10px 22px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--grey, #908F8F);
+    background: var(--white, #FFF);
+
+    color: var(--grey, #908F8F);
+    text-align: center;  
+    font-size: 14px;
+    font-weight: 700;
+}
+@media  (max-width: 1276px) {
+    .mt-main-box {
+        width: 88%;
+    }
+    .box-with-button{
+        width: 88%;
+    }
+}
+@media  (max-width: 1080px) {
+    .mt-main-box {
+        padding: 0 30px 15px 40px; 
+        gap: 40px;
+        
+    }
+    .texts-box-mt {
+        gap: 15px;
+    }
+    .texts-mt {
+        gap: 8px;
+    }
+    .p-under-img {
+        padding: 4px 8px;
+        gap: 10px;
+        font-size: 13px;
+        font-weight: 700;
+    }
+    .h1-text-mt {
+        font-size: 17.6px;
+        font-weight: 700;
+    }
+    .h2-text-mt {
+        font-size: 16px;
+        font-weight: 700;
+    }
+    .p-text-mt {
+        font-size: 12.8px;
+        font-weight: 400;
+    }
+    .close-modal {
+        width: 180px;
+        padding: 9px 22px;
+        font-size: 12.5px;
+        font-weight: 700;
+    }
+}
+@media  (max-width: 800px) {
+    
+    .texts-box-mt {
+        gap: 10px;
+    }
+    .texts-mt {
+        gap: 6px;
+    }
+    .p-under-img {
+        font-size: 10px;
+        font-weight: 600;
+    }
+
+    .h1-text-mt {
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .h2-text-mt {
+        font-size: 12.5px;
+        font-weight: 700;
+    }
+    .p-text-mt {
+        font-size: 10px;
+        font-weight: 400;
+    }
+    .close-modal {
+        width: 150px;
+        padding: 8px 22px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+}
+@media  (max-width: 650px) {
+    .mt-main-box {
+        flex-direction: column;
+        width: 75%;
+        gap: 20px;        
+    }
+    
+    .img-box-mt {
+        width:80%;
+    }
+    
+    .img-mt {
+        width: 100%;
+    }
+    .p-under-img {
+        padding: 4px 8px;
+        gap: 10px;
+        font-size: 13px;
+        font-weight: 700;
+    }
+    .h1-text-mt {
+        font-size: 17.6px;
+        font-weight: 700;
+    }
+    .h2-text-mt {
+        font-size: 16px;
+        font-weight: 700;
+    }
+    .p-text-mt {
+        font-size: 12.8px;
+        font-weight: 400;
+    }
+    .close-modal {
+        width: 150px;
+        padding: 8px 22px;
+        font-size: 11px;
+        font-weight: 700;
+        margin-bottom: 10%;
+    }
+}
+
+
+  
+
+/*  model teacher style end  */
