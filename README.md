@@ -54,3 +54,5 @@ python manage.py tailwind start
 ```
 git config --global --add safe.directory /home/web/kedi.uz
 ```
+
+## Nginx
