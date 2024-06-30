@@ -6,7 +6,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Community(common.BaseModel):
-    title = models.CharField(_("Title"), max_length=255)
+    title = models.CharField(_("Title"), max_length=128)
     image = models.ImageField(upload_to="community/")
 
     description = RichTextUploadingField(_("Description"))
