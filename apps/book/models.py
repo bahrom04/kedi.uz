@@ -9,6 +9,7 @@ class Community(common.BaseModel):
     title = models.CharField(_("Title"), max_length=128)
     image = models.ImageField(upload_to="community/")
 
-    description = RichTextUploadingField(_("Description"))
+    description = models.TextField(_("Description"), blank=True, null=True)  # Add this line
+
 
     telegram_link = models.URLField()
