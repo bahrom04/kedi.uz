@@ -17,19 +17,23 @@ ml-auto">Batafsil
     <div class="mt-6 mb-6 p-4  bg-zinc-900 rounded-lg">
         <h1 class="text-xl font-bold ">Top Jamoatlar</h1>
         <div class="grid grid-cols-1 mt-3">
-            <!-- top-community -->
-            {% for c in top_community %}
-            <div class="grid grid-cols-3 mt-4">
-                <div class="col-span-1 ">
-                    <img src="{{c.image.url}}" alt="chessbook1" class="rounded-xl object-cover">
+            {% if top_community %}
+                <!-- top-community -->
+                {% for c in top_community %}
+                <div class="grid grid-cols-3 mt-4">
+                    <div class="col-span-1 ">
+                        <img src="{{c.image.url}}" alt="chessbook1" class="rounded-xl object-cover">
+                    </div>
+                    <div class="col-span-2 p-4">
+                        <h2 class="text-sm font-bold w-full mb-4">{{c.title}}</h2>
+                        <a href="{{c.telegram_link}}" target="_blank" class="opacity-70 hover:text-blue-700">Link</a>
+                        
+                    </div>
                 </div>
-                <div class="col-span-2 p-4">
-                    <h2 class="text-sm font-bold w-full mb-4">{{c.title}}</h2>
-                    <a href="{{c.telegram_link}}" target="_blank" class="opacity-70 hover:text-blue-700">Link</a>
-                    
-                </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <h1>No Community found</h1>
+            {% endif %}
         </div>
     </div>
     
