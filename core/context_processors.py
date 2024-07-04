@@ -1,4 +1,4 @@
-from .models import Community
+from apps.book.models import Community
 from allauth.socialaccount.models import SocialAccount
 
 def top_communities(request):
