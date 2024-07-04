@@ -5,7 +5,6 @@ from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from apps.common.models import Position, Event, About
 from apps.common.models import Post
-from apps.book.models import Community
 
 from allauth.socialaccount.models import SocialAccount
 
@@ -13,16 +12,8 @@ from allauth.socialaccount.models import SocialAccount
 class HomeView(generic.ListView):
     template_name = "redesign/home.html"
 
-    def post(self, request, *args, **kwargs):
-        if "language" in request.POST:
-            language = request.POST.get("language", "en")
-            request.session["django_language"] = language
-        return self.get(request, *args, **kwargs)
-
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
-
         posts = Post.objects.all()
-
         return render(
             request,
             "redesign/home.html",
