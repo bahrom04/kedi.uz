@@ -13,159 +13,31 @@
 
   {% block meta %} {% endblock %}
   
-    <title>kedi.uz</title>
+  <title>kedi.uz</title>
 
-    {% tailwind_css %}
+  {% tailwind_css %}
 
-    {% block custom_css %}
+  {% block custom_css %} {% endblock %}
 
-    {% endblock %}
-
-    {% block link_and_scripts %}
-
-    {% endblock %}
+  {% block link_and_scripts %} {% endblock %}
 
     
 </head>
 
 <body class="bg-black text-white">
-    <!-- nav -->
-    <nav class="bg-zinc-900 p-6 m-5 rounded-xl">
-        <div class="flex flex-wrap items-center justify-between">
-            <div class="flex items-center space-x-3 rtl:space-x-reverse">
-              <a href="{% url 'common:home' %}">
-                <img src="{% static 'opasi.jpg' %}" style="border-radius: 100%;" class="h-14" alt="kedi Logo" />
-              </a>
-                
-                
-
-                <form action="{% url 'set_language' %}" method="post">
-                  {% csrf_token %}
-            
-                  <div class="w-full bg-black">
-                    <select name="language" onchange="this.form.submit()" class="bg-black text-white border-none block py-3 w-32 cursor-pointer focus:border-zinc-900 border-zinc-900 appearance-none focus:ring-0 rounded-sm">
-                      {% get_current_language as LANGUAGE_CODE %}
-                      {% get_available_languages as LANGUAGES %}
-            
-                      {% for lang in LANGUAGES %}
-                        <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
-                          {{ lang.1 }}
-                        </option>
-                      {% endfor %}
-                    </select>
-            
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                  </div>
-                </form>
-              </div>
-
-            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
-                <div class="flex items-center space-x-7 mr-4">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <i class="fa-solid fa-bell"></i>
-                </div>
-                
-                {% if user.is_authenticated %}
-                  {% if socialaccount_obj %}
-                  {% for account in socialaccount_obj %}
-                      {% if account.provider == 'google' %}
-                      <div class="flex gap-4 items-center">
-                        {% url 'account_logout' as logout_url %}
-                        <a class="mr-4" href="{{ logout_url }}">{% trans "Sign Out" %}</a>
-                        <p class="mr-4">{{user.username}}</p>
-                        <img src="{{ account.extra_data.picture }}" style="border-radius: 100%; width: 55px;" alt="Profile Image">
-                      </div>
-                          
-                      {% endif %}
-                  {% endfor %}
-          
-                  {% endif %}
-                  
-                  {% else %}
-                    {% url 'account_login' as login_url %}
-                    <a href="{{ login_url }}">
-                      <button type="button" class="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-auto">
-                      Kirish
-                      </button>
-                    </a>
-                  {% endif %}
-
-            </div>
-
-            <div class="flex-col md:flex md:w-auto md:order-1" id="navbar-cta">
-                <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
-                    <li class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent opacity-50">
-                        <a class="nav-link active" aria-current="page" href="{% url 'common:home' %}">{% trans 'Home' %}</a>
-                    </li>
-                    <li class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent opacity-50">
-                        <a class="nav-link" href="{% url 'common:about' %}">{% trans 'About' %}</a>
-                    </li>
-                    <li class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent opacity-50">
-                        <a class="nav-link" href="{% url 'common:event' %}">{% trans 'Event' %}</a>
-                    </li>
-                    <li class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent opacity-50">
-                        <a class="nav-link" href="{% url 'book:community' %}">Community</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- nav-end -->
-
-    {% block content %}
-
-    {% endblock %}
-
-    <!-- footer -->
-    <footer class="bg-zinc-900 grid grid-cols-1 pt-7 mt-auto">
     
-        <div class="flex items-center justify-center">
-          <img class="justify-center items-end h-14" style="border-radius: 100%;" src="{% static 'opasi.jpg' %}" alt="logo" >
-      
-        </div>
-    
-        <div class="mt-3">
-          <ul
-              class="flex flex-col justify-center font-medium p-4 md:p-0 mt-4 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-              <li>
-                <a href="{% url 'common:about' %}" class="block py-2 px-3 md:p-0 text-white rounded md:bg-transparent hover:text-blue-700
-                  opacity-50">{% trans 'About' %}</a>
-              </li>
-              <li>
-                <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700
-                opacity-50">Cookie fayllari siyosati</a>
-              </li>
-              <li>
-                <a href="#" class="block py-2 px-3 md:p-0 text-gray-900  hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700
-                  opacity-50">Foydalanish qoidalari</a>
-              </li>
-              <li>
-                <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700
-                  opacity-50">Brend resurslari</a>
-              </li>
-              <li>
-                <a href="#" class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700
-                opacity-50">Cookie fayllari siyosati</a>
-              </li>
-            </ul>
-        </div>
-    
-        <div class="flex justify-center space-x-5 md:mt-4">
-          <i class="fa-brands fa-instagram"></i>
-          <i class="fa-brands fa-telegram"></i>
-          <i class="fa-brands fa-youtube"></i>
-          <i class="fa-brands fa-twitter"></i>
-          <i class="fa-brands fa-facebook"></i>
-        </div>
-      
-        <div class="border-3 border-black mt-2 p-3 mx-3 justify-between flex">
-          <p class="">@ kedi.uz. All rights reserved</p>
-    
-        </div>
-      </footer>
+  <!-- header start -->
+    {% include "layout/header.html" %}
+  <!-- header end -->
 
-    <!-- footer-end -->
+  {% block content %}
+
+  {% endblock %}
+
+  <!-- footer -->
+  {% include "layout/footer.html" %}
+  <!-- footer-end -->
+
 </body>
   <script src="https://kit.fontawesome.com/0e35ab6147.js" crossorigin="anonymous"></script>
 

@@ -1,0 +1,85 @@
+{% load static i18n tailwind_tags %}
+
+<!-- nav -->
+<nav class="bg-zinc-900 p-6 m-5 rounded-xl">
+    <div class="flex flex-wrap items-center justify-between">
+        <div class="flex items-center space-x-3 rtl:space-x-reverse">
+          <a href="{% url 'common:home' %}">
+            <img src="{% static 'opasi.jpg' %}" style="border-radius: 100%;" class="h-14" alt="kedi Logo" />
+          </a>
+            
+            
+
+            <form action="{% url 'set_language' %}" method="post">
+              {% csrf_token %}
+        
+              <div class="w-full bg-black">
+                <select name="language" onchange="this.form.submit()" class="bg-black text-white border-none block py-3 w-32 cursor-pointer focus:border-zinc-900 border-zinc-900 appearance-none focus:ring-0 rounded-sm">
+                  {% get_current_language as LANGUAGE_CODE %}
+                  {% get_available_languages as LANGUAGES %}
+        
+                  {% for lang in LANGUAGES %}
+                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                      {{ lang.1 }}
+                    </option>
+                  {% endfor %}
+                </select>
+        
+                <input type="hidden" name="next" value="{{ request.path }}">
+              </div>
+            </form>
+          </div>
+
+        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
+            <div class="flex items-center space-x-7 mr-4">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-solid fa-bell"></i>
+            </div>
+            
+            {% if user.is_authenticated %}
+              {% if socialaccount_obj %}
+              {% for account in socialaccount_obj %}
+                  {% if account.provider == 'google' %}
+                  <div class="flex gap-4 items-center">
+                    {% url 'account_logout' as logout_url %}
+                    <a class="mr-4" href="{{ logout_url }}">{% trans "Sign Out" %}</a>
+                    <p class="mr-4">{{user.username}}</p>
+                    <img src="{{ account.extra_data.picture }}" style="border-radius: 100%; width: 55px;" alt="Profile Image">
+                  </div>
+                      
+                  {% endif %}
+              {% endfor %}
+      
+              {% endif %}
+              
+              {% else %}
+                {% url 'account_login' as login_url %}
+                <a href="{{ login_url }}">
+                  <button type="button" class="text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-auto">
+                  Kirish
+                  </button>
+                </a>
+              {% endif %}
+
+        </div>
+
+        <div class="flex-col md:flex md:w-auto md:order-1" id="navbar-cta">
+            <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
+                <li class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent opacity-50">
+                    <a class="nav-link active" aria-current="page" href="{% url 'common:home' %}">{% trans 'Home' %}</a>
+                </li>
+                <li class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent opacity-50">
+                    <a class="nav-link" href="{% url 'common:about' %}">{% trans 'About' %}</a>
+                </li>
+                <li class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent opacity-50">
+                    <a class="nav-link" href="{% url 'common:event' %}">{% trans 'Event' %}</a>
+                </li>
+                <li class="block py-2 px-3 md:p-0 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent opacity-50">
+                    <a class="nav-link" href="{% url 'book:community' %}">Community</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- nav-end -->
