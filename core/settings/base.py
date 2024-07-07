@@ -52,6 +52,10 @@ THIRD_PARTY_APPS = [
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
 SITE_ID = 4
 
 SOCIALACCOUNT_PROVIDERS = {
