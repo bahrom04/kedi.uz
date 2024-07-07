@@ -27,6 +27,10 @@ admin.site.login_form = LoginForm
 admin.site.login_template = "login.html"
 
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("ckeditor/", include("ckeditor_uploader.urls")),
@@ -36,6 +40,7 @@ urlpatterns = [
         serve,
         {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
     ),
+    path('sentry-debug/', trigger_error),
     path("accounts/", include("allauth.urls")),
     path(
         "robots.txt",

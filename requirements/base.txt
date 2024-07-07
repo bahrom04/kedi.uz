@@ -51,3 +51,6 @@ urllib3==2.2.1
 
 # recaptcha
 django-recaptcha==3.0.0
+
+# sentry
+sentry-sdk[django]

@@ -251,7 +251,23 @@ RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY")
 
 
 # Security settings
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
-SESSION_COOKIE_SECURE = True  # Use secure cookies
-CSRF_COOKIE_SECURE = True  # Use secure CSRF cookies
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = False # Redirect all HTTP requests to HTTPS
+SESSION_COOKIE_SECURE = False  # Use secure cookies
+CSRF_COOKIE_SECURE = False # Use secure CSRF cookies
+
+
+import sentry_sdk
+
+sentry_key = os.getenv("sentry_key")
+
+sentry_sdk.init(
+    dsn=f"https://{sentry_key}.ingest.us.sentry.io/4507560080900096",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)
