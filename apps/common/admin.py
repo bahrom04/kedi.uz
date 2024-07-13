@@ -36,3 +36,6 @@ class EventAdmin(TabbedTranslationAdmin):
 @admin.register(models.Position)
 class PositionAdmin(TabbedTranslationAdmin):
     exclude = ("latitude", "longitude")
+
+
+admin.site.register(models.UserSavedPosition)

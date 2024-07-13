@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify
+from django.conf import settings
 
 from ckeditor_uploader.fields import RichTextUploadingField
 from location_field.models.plain import PlainLocationField
@@ -147,3 +148,14 @@ class Position(BaseModel):
     class Meta:
         verbose_name = _("Position")
         verbose_name_plural = _("Position")
+
+
+class UserSavedPosition(BaseModel):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'position')
+
+    def __str__(self):
+        return f"{self.user}' saved position: {self.position.title}"

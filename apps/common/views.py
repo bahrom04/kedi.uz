@@ -1,12 +1,12 @@
 from typing import Any
+from django.http import HttpRequest, JsonResponse, HttpResponseForbidden
 from django.db.models.base import Model as Model
-from django.http import HttpRequest
-from django.shortcuts import get_object_or_404, render
 from django.views import generic
-from apps.common.models import Position, Event, About
-from apps.common.models import Post
+from django.shortcuts import get_object_or_404, render
 
-from allauth.socialaccount.models import SocialAccount
+from django.contrib.auth.decorators import login_required
+
+from apps.common.models import Event, About, Post, Position, UserSavedPosition
 
 
 class HomeView(generic.ListView):
@@ -78,11 +78,26 @@ class LocationsView(generic.ListView):
                 "id", "latitude", "longitude", "title", "description"
             )[:100]
         )
+
+        user_saved_positions = []
+
+        if request.user.is_authenticated:
+            user_saved_positions = list(
+                UserSavedPosition.objects.filter(user=request.user).values_list(
+                    "position_id", flat=True
+                )
+            )
+
         event_title = Event.objects.get(pk=event_id)
+
         return render(
             request,
             "redesign/location.html",
-            context={"positions": posotions, "event_title": event_title},
+            context={
+                "positions": posotions,
+                "user_saved_positions": user_saved_positions,
+                "event_title": event_title,
+            },
         )
 
 
@@ -95,3 +110,29 @@ class LocationDetailView(generic.DetailView):
         position_id = self.kwargs["id"]
         posotion_detail = Position.objects.get(id=position_id)
         return posotion_detail
+
+
+def save_position(request, position_id):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden({"status": "fuck you"})
+    else:
+        position = Position.objects.get(id=position_id)
+        saved_position, created = UserSavedPosition.objects.get_or_create(
+            user=request.user, position=position
+        )
+        if created:
+            return JsonResponse({"status": "saved"})
+    return JsonResponse({"status": "already_saved"})
+
+
+def unsave_position(request, position_id):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden({"status": "fuck you"})
+    try:
+        saved_position = UserSavedPosition.objects.get(
+            user=request.user, position_id=position_id
+        )
+        saved_position.delete()
+        return JsonResponse({"status": "unsaved"})
+    except UserSavedPosition.DoesNotExist:
+        return JsonResponse({"status": "not_saved"})

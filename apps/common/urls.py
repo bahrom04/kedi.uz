@@ -18,5 +18,7 @@ urlpatterns = [
         views.LocationDetailView.as_view(),
         name="location-detail",
     ),
+    path('save_position/<int:position_id>/', views.save_position, name='save_position'),
+    path('unsave_position/<int:position_id>/', views.unsave_position, name='unsave_position'),
 
 ]
