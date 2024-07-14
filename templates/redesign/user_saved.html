@@ -1,0 +1,15 @@
+{% extends 'redesign/base.html' %}
+{% load static i18n %}
+
+{% block content %}
+
+    {% for item in user_saved %}
+        <div>
+            <a class="hover:text-blue-700" href="{% url 'common:location-detail' item.position.id %}">{{ item.position.title }}</a>
+            <p>Category: {{ item.position.event.title }}</p>
+        </div>
+    {% empty %}
+        <div>No saved positions found.</div>
+    {% endfor %}
+
+{% endblock %}

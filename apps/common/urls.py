@@ -20,5 +20,6 @@ urlpatterns = [
     ),
     path('save_position/<int:position_id>/', views.save_position, name='save_position'),
     path('unsave_position/<int:position_id>/', views.unsave_position, name='unsave_position'),
+    path("saved/", views.UserSavedView.as_view(), name="user_saved"),
 
 ]

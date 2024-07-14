@@ -1,10 +1,12 @@
 from typing import Any
-from django.http import HttpRequest, JsonResponse, HttpResponseForbidden
+from django.db.models.query import QuerySet
+from django.http import HttpRequest, HttpResponse, JsonResponse, HttpResponseForbidden
 from django.db.models.base import Model as Model
 from django.views import generic
 from django.shortcuts import get_object_or_404, render
 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from apps.common.models import Event, About, Post, Position, UserSavedPosition
 
@@ -136,3 +138,19 @@ def unsave_position(request, position_id):
         return JsonResponse({"status": "unsaved"})
     except UserSavedPosition.DoesNotExist:
         return JsonResponse({"status": "not_saved"})
+
+
+class UserSavedView(LoginRequiredMixin, generic.ListView):
+    model = UserSavedPosition
+    context_object_name = "user_saved"
+
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
+        user_saved = list(UserSavedPosition.objects.filter(
+            user=self.request.user
+        ).select_related("position"))
+
+        return render(
+            request,
+            template_name="redesign/user_saved.html",
+            context={"user_saved": user_saved},
+        )
