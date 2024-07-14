@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+#!/usr/bin/env python
 
 """Django's command-line utility for administrative tasks."""
 
@@ -9,7 +9,7 @@ import environ
 def main():
     """Run administrative tasks."""
 
-    environ.Env().read_env(".env")
+    environ.Env.read_env(".env")  # load env variables
 
     try:
         from django.core.management import execute_from_command_line
