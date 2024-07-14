@@ -200,13 +200,3 @@ SOCIALACCOUNT_PROVIDERS = {
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
-
-# import sentry_sdk
-
-# sentry_key = env.str("SENTRY_KEY")
-
-# sentry_sdk.init(
-#     dsn=f"https://{sentry_key}.ingest.us.sentry.io/4507560080900096",
-#     traces_sample_rate=1.0,
-#     profiles_sample_rate=1.0,
-# )
