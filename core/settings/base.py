@@ -1,24 +1,14 @@
+import environ
+
 from pathlib import Path
-from dotenv import load_dotenv
-import os
 from django.utils.translation import gettext_lazy as _
 
+env = environ.Env()
 
-load_dotenv()
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+SECRET_KEY = env.str("DJANGO_SECRET_KEY")
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG")
-
-ALLOWED_HOSTS = ["kedi.uz", "localhost", "0.0.0.0", "127.0.0.1"]
-
-
-# Application definition
 DJANGO_APPS = [
     "jazzmin",
     "django.contrib.admin",
@@ -27,54 +17,33 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+]
+
+CUSTOM_APPS = [
+    "apps.book",
+    "apps.users",
+    "apps.theme",
+    "apps.common",
+]
+
+THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
-]
-
-CUSTOM_APPS = [
-    "apps.common.apps.CommonConfig",
-    "apps.users.apps.UsersConfig",
-    "apps.book.apps.BookConfig",
-    "apps.theme",
-]
-
-THIRD_PARTY_APPS = [
-    "modeltranslation",
     "tailwind",
     "django_browser_reload",
     "ckeditor",
     "ckeditor_uploader",
-    "location_field.apps.DefaultConfig",
+    "location_field",
+    "modeltranslation",
     "captcha",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 
-
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-
-SITE_ID = 4
-
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "SCOPE": ["profile", "email"],
-        "AUTH_PARAMS": {"access_type": "online"},
-        "APP": {
-            "client_id": os.getenv("CLIENT_ID"),
-            "secret": os.getenv("SECRET"),
-            "key": "",  # Leave key blank for Google
-        },
-    },
-    # Add configurations for other social providers as needed
-}
-
-CKEDITOR_UPLOAD_PATH = "uploads/"
-# CKEDITOR_BASEPATH = "/static/ckeditor/"
-
 MIDDLEWARE = [
+    # django middlewares
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
@@ -83,9 +52,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # customs
+    # third party middlewares
     "allauth.account.middleware.AccountMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+    # custom middlewares
     "core.middleware.ErrorHandlerMiddleware",
 ]
 
@@ -108,32 +78,7 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    "django.contrib.auth.backends.ModelBackend",
-    # `allauth` specific authentication methods, such as login by email
-    "allauth.account.auth_backends.AuthenticationBackend",
-]
-
-
 WSGI_APPLICATION = "core.wsgi.application"
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-DATABASES = {
-    "default": {
-        "ENGINE": os.getenv("DB_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
-    }
-}
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -150,24 +95,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-LANGUAGE_CODE = "uz"
-LANGUAGES = (
-    ("en", _("English")),
-    ("uz", _("Uzbek")),
-    ("ru", _("Russian")),
-)
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 TIME_ZONE = "Asia/Tashkent"
 
-USE_I18N = True
 USE_L10N = True
+USE_I18N = True
 USE_TZ = True
 
-
-MODELTRANSLATION_DEFAULT_LANGUAGE = "uz"
-
-gettext = lambda s: s
+LANGUAGE_CODE = "en"
+LANGUAGES = (
+    ("en", _("English")),
+    ("ru", _("Russian")),
+    ("uz", _("Uzbek")),
+)
+LOCALE_PATHS = (BASE_DIR / "locales/",)
 
 MODELTRANSLATION_LANGUAGES = (
     "uz",
@@ -193,30 +135,17 @@ MODELTRANSLATION_FALLBACK_LANGUAGES = {
         "en",
     ),
 }
-
+MODELTRANSLATION_DEFAULT_LANGUAGE = "uz"
 MODELTRANSLATION_PREPOPULATE_LANGUAGE = "en"
 
-LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
-
-
-# auth
-AUTH_USER_MODEL = "users.User"
-
-
-# STATIC
-STATIC_URL = "static/"
 STATICFILES_DIRS = (BASE_DIR / "staticfiles",)
-STATIC_ROOT = BASE_DIR / "static"
 
+STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-CKEDITOR_IMAGE_BACKEND = "pillow"
-CKEDITOR_THUMBNAIL_SIZE = (450, 300)
-CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
 CKEDITOR_CONFIGS = {
     "default": {
         "config.versionCheck": False,
@@ -225,6 +154,9 @@ CKEDITOR_CONFIGS = {
         "width": 700,
     }
 }
+CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
+CKEDITOR_THUMBNAIL_SIZE = (450, 300)
+CKEDITOR_IMAGE_BACKEND = "pillow"
 
 LOCATION_FIELD = {
     "map.provider": "openstreetmap",
@@ -234,40 +166,52 @@ LOCATION_FIELD = {
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-# TailwindCss
 TAILWIND_APP_NAME = "apps.theme"
-INTERNAL_IPS = [
-    "127.0.0.1",
+NPM_BIN_PATH = env.str("TAILWIND_NPM_PATH")
+INTERNAL_IPS = ("127.0.0.1",)
+
+RECAPTCHA_PUBLIC_KEY = env.str("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = env.str("RECAPTCHA_PRIVATE_KEY")
+
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+
+SITE_ID = 4
+
+AUTH_USER_MODEL = "users.User"
+
+AUTHENTICATION_BACKENDS = [
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
-NPM_BIN_PATH = os.getenv("NPM_BIN_PATH")
 
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": ["profile", "email"],
+        "AUTH_PARAMS": {"access_type": "online"},
+        "APP": {
+            "client_id": env.str("GOOGLE_CLIEND_ID"),
+            "secret": env.str("GOOGLE_SECRET"),
+            "key": "",
+        },
+    },
+}
 
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# captcha
-RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY")
-RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY")
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
+# import sentry_sdk
 
-# Security settings
-# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-SECURE_SSL_REDIRECT = False # Redirect all HTTP requests to HTTPS
-SESSION_COOKIE_SECURE = False  # Use secure cookies
-CSRF_COOKIE_SECURE = False # Use secure CSRF cookies
+# sentry_key = env.str("SENTRY_KEY")
 
-
-import sentry_sdk
-
-sentry_key = os.getenv("sentry_key")
-
-sentry_sdk.init(
-    dsn=f"https://{sentry_key}.ingest.us.sentry.io/4507560080900096",
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    traces_sample_rate=1.0,
-    # Set profiles_sample_rate to 1.0 to profile 100%
-    # of sampled transactions.
-    # We recommend adjusting this value in production.
-    profiles_sample_rate=1.0,
-)
+# sentry_sdk.init(
+#     dsn=f"https://{sentry_key}.ingest.us.sentry.io/4507560080900096",
+#     # Set traces_sample_rate to 1.0 to capture 100%
+#     # of transactions for performance monitoring.
+#     traces_sample_rate=1.0,
+#     # Set profiles_sample_rate to 1.0 to profile 100%
+#     # of sampled transactions.
+#     # We recommend adjusting this value in production.
+#     profiles_sample_rate=1.0,
+# )
