@@ -107,12 +107,14 @@ class Post(models.Model):
 
 class Event(BaseModel):
 
-    is_active = models.BooleanField(_("Is active"), default=True)
     title = models.CharField(
         _("Event Type"),
         max_length=255,
         unique=True,
     )
+    is_active = models.BooleanField(_("Is active"), default=True)
+
+    image = models.ImageField(upload_to="event/", blank=True)
 
     class Meta:
         verbose_name = _("Event")
@@ -155,7 +157,7 @@ class UserSavedPosition(BaseModel):
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ('user', 'position')
+        unique_together = ("user", "position")
 
     def __str__(self):
         return f"{self.user}' saved position: {self.position.title}"

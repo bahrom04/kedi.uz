@@ -5,56 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SVG Background Change</title>
     <style>
-        .c-card{
-            margin: 0 auto;
-            justify-content: center;
-            width: 600px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .svg-container {
-            display: inline-block;
-            cursor: pointer;
-        }
-        .svg-container img {
-            width: 30px;
-        }
+        
 
     </style>
 </head>
 <body>
 
-    <section class="c-card">
-        <div>as</div>
-
-        <div>
-            <p>asd</p>
-
-            <div class="svg-container" id="saveButton" aria-label="save">
-                <img id="image" src="../staticfiles/bookmark-regular.svg" alt="image">
-            </div>
-        </div>
+    <section class="">
+        <img src="../staticfiles/opasi.jpg" alt="event">
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sed obcae
+            cati, magni eaque quid nihil voluptates s!</div>
     </section>
+    
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const saveIcon = document.getElementById('saveButton');
-            const image = document.getElementById("image");
-
-            saveIcon.addEventListener("click", function(){
-
-                if(image.src.includes("bookmark-regular.svg")){
-                    image.src = "../staticfiles/bookmark-solid.svg";
-                    image.id = "unSaveButton";
-                }
-                else{
-                    image.src = "../staticfiles/bookmark-regular.svg";
-                    image.id = "saveButton";
-                }
-            })
-        })
-        
     </script>
 </body>
 </html>
