@@ -15,7 +15,7 @@ class HomeView(generic.ListView):
     template_name = "redesign/home.html"
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
-        posts = Post.objects.all()
+        posts = Post.objects.all().prefetch_related("tag")
         return render(
             request,
             "redesign/home.html",
@@ -76,8 +76,9 @@ class LocationsView(generic.ListView):
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
         event_id = self.kwargs["id"]
         posotions = list(
-            Position.objects.filter(event_id=event_id).values(
-                "id", "latitude", "longitude", "title", "description"
+            Position.objects.filter(event_id=event_id)
+            .values(
+                "id", "latitude", "longitude", "title"
             )[:100]
         )
 
@@ -85,7 +86,9 @@ class LocationsView(generic.ListView):
 
         if request.user.is_authenticated:
             user_saved_positions = list(
-                UserSavedPosition.objects.filter(user=request.user).values_list(
+                UserSavedPosition.objects.filter(user=request.user)
+                .select_related("user", "position")
+                .values_list(
                     "position_id", flat=True
                 )
             )
@@ -147,8 +150,8 @@ class UserSavedView(LoginRequiredMixin, generic.ListView):
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
         user_saved = list(UserSavedPosition.objects.filter(
             user=self.request.user
-        ).select_related("position"))
-
+        ).select_related("user", "position"))
+        
         return render(
             request,
             template_name="redesign/user_saved.html",

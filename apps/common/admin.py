@@ -10,7 +10,7 @@ class MediaAdmin(TabbedTranslationAdmin):
 
 @admin.register(models.About)
 class AboutAdmin(TabbedTranslationAdmin):
-    pass
+    list_display = ("title", "created_at", "updated_at", )
 
 
 @admin.register(models.Region)
@@ -20,7 +20,7 @@ class RegionAdmin(TabbedTranslationAdmin):
 
 @admin.register(models.Post)
 class PostAdmin(TabbedTranslationAdmin):
-    pass
+    list_display = ("title", "created_at", "views", )
 
 
 @admin.register(models.Tag)
@@ -30,12 +30,17 @@ class TagAdmin(TabbedTranslationAdmin):
 
 @admin.register(models.Event)
 class EventAdmin(TabbedTranslationAdmin):
-    pass
+    list_display = ("title", "created_at", "updated_at", "is_active",)
 
 
 @admin.register(models.Position)
 class PositionAdmin(TabbedTranslationAdmin):
+    list_display = ("title", "region", "event", "created_at", "updated_at",)
+    list_select_related = ("region", "event",)
     exclude = ("latitude", "longitude")
 
 
-admin.site.register(models.UserSavedPosition)
+@admin.register(models.UserSavedPosition)
+class UserSavedPositionAdmin(admin.ModelAdmin):
+    list_display = ("user", "position",)
+    list_select_related = ("user", "position",)
