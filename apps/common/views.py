@@ -1,6 +1,6 @@
 from typing import Any
-from django.db.models.query import QuerySet
-from django.http import HttpRequest, HttpResponse, JsonResponse, HttpResponseForbidden
+from django.core.cache import cache
+from django.http import HttpRequest, JsonResponse, HttpResponseForbidden
 from django.db.models.base import Model as Model
 from django.views import generic
 from django.shortcuts import get_object_or_404, render
@@ -75,12 +75,18 @@ class LocationsView(generic.ListView):
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
         event_id = self.kwargs["id"]
-        posotions = list(
-            Position.objects.filter(event_id=event_id)
-            .values(
-                "id", "latitude", "longitude", "title"
-            )[:100]
-        )
+
+        event_cache_key = f"positions_event_{event_id}"
+        posotions = cache.get(event_cache_key)
+
+        if not posotions:
+            posotions = list(
+                Position.objects.filter(event_id=event_id)
+                .values(
+                    "id", "latitude", "longitude", "title", "thumbnail"
+                )[:100]
+            )
+            cache.set(event_cache_key, posotions, 60 * 5)
 
         user_saved_positions = []
 

@@ -124,6 +124,7 @@ class Event(BaseModel):
 class Position(BaseModel):
     title = models.CharField(_("Title"), max_length=255)
     description = RichTextUploadingField(_("Description"))
+    thumbnail = models.ImageField(upload_to="position", null=True, blank=True)
 
     location = PlainLocationField(
         based_fields=["city"], zoom=10, default="41.311151,69.279737"

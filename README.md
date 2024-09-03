@@ -55,4 +55,12 @@ python manage.py tailwind start
 git config --global --add safe.directory /home/web/kedi.uz
 ```
 
-## Nginx
+## Redis
+```
+redis-server
+
+sudo systemctl start redis
+sudo systemctl enable redis
+
+sudo systemctl status redis-server
+```

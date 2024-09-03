@@ -53,3 +53,7 @@ django-recaptcha==3.0.0
 
 # sentry
 sentry-sdk[django]
+
+# redis
+django-redis
+

@@ -145,7 +145,7 @@
                             var popupContent = `
                                 <strong>${station.title}</strong><br>
                                 <a href="${window.location.origin}/location/detail/${station.id}" target="_blank">Read More</a>
-                                <img src="{% static 'opasi.jpg' %}" alt="detail-image">
+                                <img src="${window.location.origin}/media/${station.thumbnail}" alt="detail-image">
                                 <div class="parent-container">
                                     <div class="svg-container" id="saveButton" aria-label="save" data-position-id="${station.id}">
                                         <img src="${saveIcon}" alt="image">

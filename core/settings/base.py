@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG")
+# DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = ["kedi.uz", "localhost", "0.0.0.0", "127.0.0.1"]
 
@@ -256,4 +256,11 @@ SECURE_SSL_REDIRECT = False # Redirect all HTTP requests to HTTPS
 SESSION_COOKIE_SECURE = False  # Use secure cookies
 CSRF_COOKIE_SECURE = False # Use secure CSRF cookies
 
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/0', 
+    }
+}
 
