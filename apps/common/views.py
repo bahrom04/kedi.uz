@@ -15,7 +15,13 @@ class HomeView(generic.ListView):
     template_name = "redesign/home.html"
 
     def get(self, request: HttpRequest, *args: Any, **kwargs: Any):
-        posts = Post.objects.all().prefetch_related("tag")
+        home_posts_cache_key = f"home_posts_cache_key"
+        posts = cache.get(home_posts_cache_key)
+
+        if not posts:
+            posts = list(Post.objects.all().prefetch_related("tag").values("id", "image", "short_description", "created_at", "title", "tag__title"))
+            cache.set(home_posts_cache_key, posts, 60 * 5)
+
         return render(
             request,
             "redesign/home.html",

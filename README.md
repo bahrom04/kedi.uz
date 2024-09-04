@@ -63,4 +63,8 @@ sudo systemctl start redis
 sudo systemctl enable redis
 
 sudo systemctl status redis-server
+
+keys '*'
+get <key_name>
+
 ```
