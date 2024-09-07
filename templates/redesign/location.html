@@ -31,13 +31,13 @@
 {% endblock %}
 
 {% block link_and_scripts %}
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -57,7 +57,7 @@
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     let userSavedPositions = JSON.parse(document.getElementById('user_saved_position_json').textContent);
-
+                
                     function updateUserSavedPositions(positionId, action) {
                         if (action === 'save') {
                             if (!userSavedPositions.includes(positionId)) {
@@ -66,20 +66,20 @@
                         } else if (action === 'unsave') {
                             userSavedPositions = userSavedPositions.filter(id => id !== positionId);
                         }
-
+                
                         // Update all visible popup icons based on current saved positions
                         document.querySelectorAll('.svg-container img').forEach(img => {
                             const posId = img.closest('.svg-container').dataset.positionId;
                             img.src = userSavedPositions.includes(parseInt(posId)) ? "{% static 'bookmark-solid.svg' %}" : "{% static 'bookmark-regular.svg' %}";
                         });
                     }
-
+                
                     document.body.addEventListener("click", function(event) {
                         if (event.target.closest('.svg-container')) {
                             const saveIcon = event.target.closest('.svg-container');
                             const image = saveIcon.querySelector("img");
                             const positionId = saveIcon.dataset.positionId;
-
+                
                             if (image.src.includes("bookmark-regular.svg")) {
                                 fetch(`/save_position/${positionId}/`, {
                                     method: 'GET',
@@ -95,7 +95,6 @@
                                     }
                                     return response.json();
                                 })
-
                                 .then(data => {
                                     if (data.status === 'saved' || data.status === 'already_saved') {
                                         image.src = "{% static 'bookmark-solid.svg' %}";
@@ -126,22 +125,32 @@
                             }
                         }
                     });
-
+                
                     var map = L.map('map').setView([41.320622708288376, 69.25399303436281], 11);
-
+                
                     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                     }).addTo(map);
-
+                
+                    // Create a new marker cluster group
+                    var markers = L.markerClusterGroup({
+                        maxClusterRadius: 40, // Decrease radius for earlier splitting
+                        disableClusteringAtZoom: 24, // Disable clustering at zoom level 14 and higher
+                        zoomToBoundsOnClick: true // Zoom to bounds when clicking a cluster
+                    });
+                
                     let stations = JSON.parse(document.getElementById('stations_json').textContent);
-
+                
                     stations.forEach(station => {
-                        var marker = L.marker([station.latitude, station.longitude]).addTo(map);
+                        // Create a marker, but do not add it directly to the map
+                        var marker = L.marker([station.latitude, station.longitude]);
+                
+                        // Add click event for each marker
                         marker.on('click', function () {
                             var isSaved = userSavedPositions.includes(station.id);
                             var saveIcon = isSaved ? "{% static 'bookmark-solid.svg' %}" : "{% static 'bookmark-regular.svg' %}";
-
+                
                             var popupContent = `
                                 <strong>${station.title}</strong><br>
                                 <a href="${window.location.origin}/location/detail/${station.id}" target="_blank">Read More</a>
@@ -152,14 +161,21 @@
                                     </div>
                                 </div>
                             `;
-
+                
                             var popup = L.popup()
                                 .setLatLng([station.latitude, station.longitude])
                                 .setContent(popupContent)
                                 .openOn(map);
                         });
+                
+                        // Add the marker to the cluster group
+                        markers.addLayer(marker);
                     });
+                
+                    // Add the cluster group to the map
+                    map.addLayer(markers);
                 });
+                
             </script>
 
 
