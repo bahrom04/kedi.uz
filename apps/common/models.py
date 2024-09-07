@@ -76,7 +76,7 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
-    image = models.ImageField(upload_to="images/", blank=True)
+    image = models.ImageField(upload_to="posts/", blank=True)
     title = models.CharField(
         _("Title"),
         max_length=256,

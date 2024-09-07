@@ -1,11 +1,10 @@
 from typing import Any
 from django.core.cache import cache
 from django.http import HttpRequest, JsonResponse, HttpResponseForbidden
-from django.db.models.base import Model as Model
 from django.views import generic
 from django.shortcuts import get_object_or_404, render
-
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.base import Model as Model
 
 
 from apps.common.models import Event, About, Post, Position, UserSavedPosition
@@ -19,7 +18,7 @@ class HomeView(generic.ListView):
         posts = cache.get(home_posts_cache_key)
 
         if not posts:
-            posts = list(Post.objects.all().prefetch_related("tag").values("id", "image", "short_description", "created_at", "title", "tag__title"))
+            posts = list(Post.objects.all().prefetch_related("tag"))
             cache.set(home_posts_cache_key, posts, 60 * 5)
 
         return render(

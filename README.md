@@ -59,6 +59,10 @@ git config --global --add safe.directory /home/web/kedi.uz
 ```
 redis-server
 
+# mac 
+brew services start redis  # start
+brew services stop redis  # stop
+
 sudo systemctl start redis
 sudo systemctl enable redis
 
