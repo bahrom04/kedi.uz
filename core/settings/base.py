@@ -217,12 +217,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_THUMBNAIL_SIZE = (450, 300)
 CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
+
 CKEDITOR_CONFIGS = {
     "default": {
         "config.versionCheck": False,
         "toolbar": "full",
         "height": 300,
         "width": 700,
+        'enterMode': 2,  
+        'shiftEnterMode': 1,  
+        'autoParagraph': False, 
+        'removePlugins': 'elementspath', 
+        'resize_enabled': False,  
     }
 }
 
