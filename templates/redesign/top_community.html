@@ -1,39 +1,38 @@
-<!-- top books -->
-<div class="p-6">
-    <div class="p-6 h-60 bg-blue-800 rounded-lg">
+<!-- Right sticky sidebar starts -->
+<div class="lg:col-span-1 mt-4 lg:sticky top-0 self-start h-auto">
+    <div class="p-6 bg-blue-800 rounded-lg">
         <p>Bizni kuzatib boring</p>
-        <h2 class="font-bold text-xl max-w-60 mt-4">Bizning
-            <span class="text-yellow-300">Telegram</span>
-            kanalga a'zo bo'ling
+        <h2 class="font-bold text-xl max-w-60 mt-4">
+            Bizning <span class="text-yellow-300">Telegram</span> kanalga a'zo bo'ling
         </h2>
         <button type="button" class="mt-6 text-white hover:bg-blue-800 focus:ring-4 
-focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 
-py-2 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800
-ml-auto"><a href="https://t.me/kedi_uz">Qo'shilish</a>
+            focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 
+            py-2 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <a href="https://t.me/kedi_uz">Qo'shilish</a>
             <i class="fa-solid fa-door-open"></i>
         </button>
     </div>
-    <div class="mt-6 mb-6 p-4  bg-zinc-900 rounded-lg">
-        <h1 class="text-xl font-bold ">Top Jamoatlar</h1>
+
+    <div class="mt-6 mb-6 p-4 bg-zinc-900 rounded-lg">
+        <h1 class="text-xl font-bold">Top Jamoatlar</h1>
         <div class="grid grid-cols-1 mt-3">
             {% if top_community %}
                 <!-- top-community -->
                 {% for c in top_community %}
-                <div class="grid grid-cols-3 mt-4">
-                    <div class="col-span-1 ">
-                        <img src="{{c.image.url}}" alt="chessbook1" class="rounded-xl object-cover">
+                    <div class="grid grid-cols-3 mt-4">
+                        <div class="col-span-1">
+                            <img src="{{c.image.url}}" alt="chessbook1" class="rounded-xl object-cover">
+                        </div>
+                        <div class="col-span-2 p-4">
+                            <h2 class="text-sm font-bold w-full mb-4">{{c.title}}</h2>
+                            <a href="{{c.telegram_link}}" target="_blank" class="opacity-70 hover:text-blue-700">Link</a>
+                        </div>
                     </div>
-                    <div class="col-span-2 p-4">
-                        <h2 class="text-sm font-bold w-full mb-4">{{c.title}}</h2>
-                        <a href="{{c.telegram_link}}" target="_blank" class="opacity-70 hover:text-blue-700">Link</a>
-                        
-                    </div>
-                </div>
                 {% endfor %}
             {% else %}
                 <h1>No Community found</h1>
             {% endif %}
         </div>
     </div>
-    
 </div>
+<!-- Right sticky sidebar ends -->

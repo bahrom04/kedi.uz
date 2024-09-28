@@ -5,27 +5,19 @@
 <!-- custom-css -->
 <style>
     blockquote {
-      font-size: 1.1em;
-      width: 90%;
-      margin: 30px auto;
-      font-family: Open Sans;
-      font-style: italic;
-      color: #555555;
-      padding: 1em 10px 1em 7px;
-      border-left: 8px solid #78C0A8;
-      line-height: 1.6;
-      position: relative;
-      background: #EDEDED;
+        font-size: 1.1em;
+        width: 90%;
+        margin: 30px auto;
+        font-family: Open Sans;
+        font-style: italic;
+        color: #555555;
+        padding: 1em 10px 1em 7px;
+        border-left: 8px solid #78C0A8;
+        line-height: 1.6;
+        position: relative;
+        background: #EDEDED;
     }
-    .card-img-top{
-        width: 50%;
-    }
-    @media (max-width:700px){
-        .card-img-top{
-            width: 100%;
-        }
-    }
-    h1{
+    h1 {
         font-size: 32px;
     }
 </style>
@@ -33,32 +25,31 @@
 {% endblock %}
 
 {% block content %}
-<main class="grid lg:grid-cols-4">
-    <!-- event-start -->
-    <div class="gap-10 lg:col-span-3 p-6">
-        <div class="overflow-hidden relative bg-zinc-900 rounded-md p-3">
-            <h1 class="mb-3 font-weight-bold" style="margin-bottom: 0.5rem; font-size: 32px;">{{ post.title }}</h1>
-            <span class="" style="opacity: 0.6;">{{ post.created_at }}</span>
+<main class="grid lg:grid-cols-4 max-w-screen-xl mx-auto gap-6">
+    <!-- Left main content starts -->
+    <div class="lg:col-span-3 p-4">
+        <div class="bg-zinc-900 rounded-md p-3">
+            <h1 class="mb-3 font-weight-bold" style="margin-bottom: 0.5rem; font-size: 32px;">
+                {{ post.title }}
+            </h1>
+            <span class="opacity-60">{{ post.created_at }}</span>
             <br>
             <span>
                 <i class="fa-solid fa-eye"></i>
-            </i>
-            {{ post.views }}
-        </span>
-        <br>
-        {% if post.image %}
-        <img src="{{ post.image.url }}" class="card-img-top" alt="image">
-        {% endif %}
-        
-        
-        {{ post.content | safe }}
-        <a href="{% url 'common:home' %}" class="btn btn-primary">Back</a>
+                {{ post.views }}
+            </span>
+            <br>
+            {% if post.image %}
+                <img src="{{ post.image.url }}" class="card-img-top w-full object-cover h-64" alt="image">
+            {% endif %}
+            {{ post.content | safe }}
+            <a href="{% url 'common:home' %}" class="btn btn-primary">Back</a>
+        </div>
     </div>
-</div>
-<!-- event-end -->
-
-<!-- top-community -->
-{% include 'redesign/top_community.html' %}
-
+    <!-- Left main content ends -->
+    
+    <!-- Right sticky sidebar ends -->
+    {% include 'redesign/top_community.html'%}
+    
 </main>
 {% endblock %}
