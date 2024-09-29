@@ -9,7 +9,7 @@
         </a>
       <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
 
-        <form action="{% url 'set_language' %}" method="post">
+        <form action="{% url 'set_language' %}" method="post" class="mr-2">
           {% csrf_token %}
           
           <!-- Language Dropdown -->
@@ -52,6 +52,11 @@
                   <li>
                     <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Settings</a>
                   </li>
+                  {% if request.user.is_authenticated %}
+                  <li>
+                    <a href="{% url 'common:user_saved' %}" class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Saved</a>
+                  </li>
+                  {% endif %}
                   <li>
                     <a href="{% url 'account_logout' %}" class="block px-4 py-2 text-sm hover:bg-gray-600 text-gray-200 hover:text-white">Sign Out</a>
                   </li>
