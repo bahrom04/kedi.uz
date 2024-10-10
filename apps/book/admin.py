@@ -5,3 +5,7 @@ from apps.book import models
 @admin.register(models.Community)
 class CommunityAdmin(TabbedTranslationAdmin):
     pass
+
+@admin.register(models.LostPet)
+class LostPetAdmin(TabbedTranslationAdmin):
+    pass
