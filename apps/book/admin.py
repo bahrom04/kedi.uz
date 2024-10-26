@@ -6,6 +6,13 @@ from apps.book import models
 class CommunityAdmin(TabbedTranslationAdmin):
     pass
 
-@admin.register(models.LostPet)
+@admin.register(models.AnimalType)
+class AnimalTypeAdmin(TabbedTranslationAdmin):
+    pass
+@admin.register(models.GenderType)
+class GenderTypeAdmin(TabbedTranslationAdmin):
+    pass
+
+@admin.register(models.LostAnimal)
 class LostPetAdmin(TabbedTranslationAdmin):
     pass

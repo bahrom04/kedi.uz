@@ -1,0 +1,182 @@
+{% extends 'redesign/base.html' %}
+{% block custom_css %}
+<!-- custom-css -->
+<style>
+#map {
+    height: 400px; /* Adjust height as needed */
+    width: 100%; /* Full width */
+    z-index: 1;
+}
+
+.parent-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.svg-container {
+    cursor: pointer;
+    margin-top: 6px;
+    width: 20px;
+}
+
+.svg-container img {
+    width: 100%;
+}
+</style>
+{% endblock %}
+
+{% block link_and_scripts %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="//unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" type="text/css">
+<script src="//unpkg.com/leaflet-gesture-handling"></script>
+{% endblock %}
+
+{% block content %}
+<main class="grid lg:grid-cols-4 max-w-screen-xl items-center mx-auto">
+    <div class="gap-10 lg:col-span-3 h-full">
+        <div class="grid grid-cols-1 gap-6 p-6">
+            <div class="bg-zinc-900 rounded-md p-3">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                        <!-- Title Field -->
+                        <div class="mb-4">
+                            <label for="id_title" class="block mb-2 text-sm font-medium text-white">Animal name</label>
+                            <input type="text" name="title" id="id_title" class="border text-sm rounded-lg block w-full p-2.5  bg-gray-900 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" value="{{ form.title.value|default:'' }}" placeholder="Mosh" required>
+                            {% if form.title.errors %}
+                                <p class="text-red-500 text-sm">{{ form.title.errors }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Date lost Field -->
+                        <div class="mb-4 relative dark">
+                            <label for="datepicker-actions" class="block mb-2 text-sm font-medium text-white">Date lost</label>
+                            <input id="datepicker-actions" type="text" name="date_lost"
+                                   class="border text-sm rounded-lg block w-full p-2.5 bg-gray-900 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500 text-white" 
+                                   placeholder="Select date" 
+                                   datepicker datepicker-buttons datepicker-autoselect-today
+                                   value="{{ form.date_lost.value|default:'' }}">
+                            {% if form.date_lost.errors %}
+                                <p class="text-red-500 text-sm">{{ form.date_lost.errors }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                        <!-- Animal Type Field -->
+                        <div class="mb-4">
+                            <label for="id_animal_type" class="block mb-2 text-sm font-medium text-white">Animal Type</label>
+                            <select name="animal_type" id="id_animal_type" class="border text-sm rounded-lg block w-full p-2.5 bg-gray-900 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500 text-white">
+                                {% for choice in form.animal_type.field.queryset %}
+                                    <option value="{{ choice.id }}" {% if choice.id == form.animal_type.value %}selected{% endif %}>
+                                        {{ choice.title }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            {% if form.animal_type.errors %}
+                                <p class="text-red-500 text-sm">{{ form.animal_type.errors }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Gender Type Field -->
+                        <div class="mb-4">
+                            <label for="id_gender_type" class="block mb-2 text-sm font-medium text-white">Gender Type</label>
+                            <select name="gender_type" id="id_gender_type" class="border text-sm rounded-lg block w-full p-2.5 bg-gray-900 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500 text-white">
+                                {% for choice in form.gender_type.field.queryset %}
+                                    <option value="{{ choice.id }}" {% if choice.id == form.gender_type.value %}selected{% endif %}>
+                                        {{ choice.title }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            {% if form.gender_type.errors %}
+                                <p class="text-red-500 text-sm">{{ form.gender_type.errors }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+  
+                    <!-- Description Field -->
+                    <div class="mb-4">
+                        <label for="id_description" class="block mb-2 text-sm font-medium text-white">Description</label>
+                        <textarea name="description" id="id_description" class="border text-sm rounded-lg block w-full p-6  h-40  bg-gray-900 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500 text-white">{{ form.description.value|default:'' }}</textarea>
+                        {% if form.description.errors %}
+                            <p class="text-red-500 text-sm">{{ form.description.errors }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Location Field -->
+                    <div class="mb-4">
+                        <label for="id_location" class="block mb-2 text-sm font-medium text-white">Location</label>
+                        <input type="text" name="location" id="id_location" class="border mb-4 text-sm rounded-lg block w-full p-2.5 bg-gray-900 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500 text-white" value="{{ form.location.value|default:'' }}" placeholder="Approximate location">
+                        <input type="hidden" id="latitude" name="latitude" value="{{ form.latitude.value|default:'' }}">
+                        <input type="hidden" id="longitude" name="longitude" value="{{ form.longitude.value|default:'' }}">
+                        {% if form.location.errors %}
+                            <p class="text-red-500 text-sm">{{ form.location.errors }}</p>
+                        {% endif %}
+                        <!-- Map Container -->
+                        <!-- Add a tooltip overlay for map instructions -->
+                        <div id="map"></div>
+                        
+                    </div>
+
+                    <!-- Phone Number Field -->
+                    <div class="mb-4">
+                        <label for="id_phone_number" class="block mb-2 text-sm font-medium text-white">Phone Number</label>
+                        <input type="tel" name="phone_number" id="id_phone_number" 
+                            class="border text-sm rounded-lg block w-full bg-gray-900 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500 text-white" 
+                            value="{{ form.phone_number.value|default:'' }}" placeholder="e.g. +1234567890">
+                        {% if form.phone_number.errors %}
+                            <p class="text-red-500 text-sm">{{ form.phone_number.errors }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Photo Field -->
+                    <div class="mb-4">
+                        <label for="id_photo" class="block text-sm font-medium text-white">Upload Photo</label>
+                        <input type="file" name="photo" id="id_photo" class="border text-sm rounded-lg block w-full  bg-gray-900 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500 text-white">
+                        {% if form.photo.errors %}
+                            <p class="text-red-500 text-sm">{{ form.photo.errors }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var map = L.map('map', {
+            gestureHandling: true
+        }).setView([41.320622708288376, 69.25399303436281], 11);
+    
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    
+        // Marker initialization
+        var marker = L.marker([41.320622708288376, 69.25399303436281]).addTo(map);
+    
+
+        // Event listener for map clicks to set latitude and longitude
+        map.on('click', function(e) {
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+            marker.setLatLng([lat, lng]);
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
+        });
+    });
+    
+</script>
+{% endblock %}

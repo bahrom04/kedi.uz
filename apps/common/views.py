@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.base import Model as Model
 
-
 from apps.common.models import Event, About, Post, Position, UserSavedPosition
 
 
@@ -68,6 +67,14 @@ class PostDetail(generic.DetailView):
 class EventListView(generic.ListView):
     model = Event
     template_name = "redesign/event.html"
+
+    def get_queryset(self):
+        queryset = Event.objects.all()
+        return queryset
+    
+class TestListView(generic.ListView):
+    model = Event
+    template_name = "redesign/test.html"
 
     def get_queryset(self):
         queryset = Event.objects.all()
