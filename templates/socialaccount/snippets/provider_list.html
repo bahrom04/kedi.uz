@@ -1,0 +1,47 @@
+{% load allauth socialaccount %}
+{% get_providers as socialaccount_providers %}
+{% if socialaccount_providers %}
+    <div class="provider-list">
+        {% for provider in socialaccount_providers %}
+            {% if provider.id == "openid" %}
+                {% for brand in provider.get_brands %}
+                    {% provider_login_url provider openid=brand.openid_url process=process as href %}
+                    <a href="{{ href }}" class="provider-button" provider-id="{{ provider.id }}">
+                        {{ brand.name }}
+                    </a>
+                {% endfor %}
+            {% endif %}
+            {% provider_login_url provider process=process scope=scope auth_params=auth_params as href %}
+            <a href="{{ href }}" class="provider-button" provider-id="{{ provider.id }}">
+                {{ provider.name }}
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<style>
+    .provider-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the buttons */
+        gap: 10px; /* Spacing between buttons */
+        margin-top: 20px; /* Space above the provider list */
+    }
+
+    .provider-button {
+        background-color: #1e90ff; /* Blue background */
+        color: #ffffff; /* White text */
+        padding: 12px 20px; /* Padding for button */
+        border-radius: 5px; /* Rounded corners */
+        text-align: center; /* Center text */
+        text-decoration: none; /* Remove underline from links */
+        transition: background-color 0.3s; /* Smooth transition for hover effect */
+        width: 100%; /* Full width for buttons */
+        max-width: 300px; /* Maximum width for buttons */
+    }
+
+    .provider-button:hover {
+        background-color: #1c86ee; /* Darker blue on hover */
+    }
+</style>
+

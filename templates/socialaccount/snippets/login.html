@@ -1,0 +1,87 @@
+{% load i18n %}
+{% load allauth %}
+{% load socialaccount %}
+{% get_providers as socialaccount_providers %}
+<style>
+    .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    
+    .login-card {
+        background-color: #18181b;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px; /* Fixed width for the card */
+        text-align: center;
+    }
+    
+    .login-title {
+        font-size: 24px; /* Title font size */
+        color: #ffffff; /* Darker text color */
+        margin-bottom: 10px;
+    }
+    
+    .login-subtitle {
+        color: #ffffff; /* Subtitle color */
+        margin-bottom: 20px;
+    }
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+    }
+    
+    .divider hr {
+        flex: 1; /* Take up remaining space */
+        border: 1px solid #ccc; /* Light border */
+    }
+    
+    .divider span {
+        margin: 0 10px;
+        color: #ffffff; /* Light color for the text */
+    }
+    
+    .provider-list {
+        margin-top: 10px;
+    }
+    
+    .error-message {
+        color: red; /* Error message color */
+        margin-top: 10px;
+    }
+    
+</style>
+<div class="login-container">
+    <div class="login-card">
+        <h1 class="login-title">
+            {% trans "Sign In with Google" %}
+        </h1>
+        <p class="login-subtitle">
+            {% trans "Use your Google account to access all features." %}
+        </p>
+
+        {% if socialaccount_providers %}
+            {% if not SOCIALACCOUNT_ONLY %}
+                <div class="divider">
+                    <hr>
+                    <span>{% translate "Or use a third-party" %}</span>
+                    <hr>
+                </div>
+            {% endif %}
+
+            <div class="provider-list">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                <!-- {% include "socialaccount/snippets/login_extra.html" %} -->
+            </div>
+        {% else %}
+            <p class="error-message">
+                {% trans "Social login is not enabled. Please enable it in settings." %}
+            </p>
+        {% endif %}
+    </div>
+</div>
