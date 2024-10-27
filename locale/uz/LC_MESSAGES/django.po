@@ -1489,3 +1489,63 @@ msgstr "Hodisalar topilmadi"
 # .\index.html
 msgid "Resent posts"
 msgstr "Oxirgi xabarlar"
+
+# .\layout\header.html
+msgid "Nature team"
+msgstr "Tabiat jamoati"
+
+# .\layout\header.html
+msgid "News"
+msgstr "Yangiliklar"
+
+# .\layout\header.html
+msgid "Lost pet"
+msgstr "Yoqolgan hayvonlar"
+
+# .\layout\header.html
+msgid "Report lost pet"
+msgstr "Yo'qolgan uy hayvonlari haqida xabar bering"
+
+# .\redesign\lost_animal_form.html
+msgid "Animal name"
+msgstr "Yoqolgan hayvon ismi"
+
+# .\redesign\lost_animal_form.html
+msgid "Date lost"
+msgstr "Yoqolgan sanasi"
+
+# .\redesign\lost_animal_form.html
+msgid "Animal type"
+msgstr "Hayvon turi"
+
+# .\redesign\lost_animal_form.html
+msgid "Animal gender"
+msgstr "Hayvon jinsi"
+
+# .\redesign\lost_animal_form.html
+msgid "Contact phone number"
+msgstr "Aloqa telefon raqami"
+
+# .\redesign\lost_animal_form.html
+msgid "Description of pet"
+msgstr "Tavsif"
+
+# .\redesign\lost_animal_form.html
+msgid "Where you lost"
+msgstr "Qayerda yoqotib qo'ydingiz"
+
+# .\redesign\lost_animal_form.html
+msgid "Where you lost on map"
+msgstr "Xaritani qayerida yoqotib qo'ydingiz (xaritani ustida bosing)"
+
+# .\redesign\lost_animal_form.html
+msgid "Upload photo"
+msgstr "Hayvon rasmini joylang"
+
+# .\redesign\lost_animal_form.html
+msgid "work blya"
+msgstr "ishlasenchi birodar befarq bo'lmang"
+
+# .\redesign\lost_animal_form.html
+msgid "Submit report"
+msgstr "Xabar jo'natish"

@@ -151,7 +151,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = "uz"
+LANGUAGE_CODE = "en"
 LANGUAGES = (
     ("en", _("English")),
     ("uz", _("Uzbek")),
@@ -159,6 +159,11 @@ LANGUAGES = (
 )
 
 TIME_ZONE = "Asia/Tashkent"
+DATE_INPUT_FORMATS = [
+    '%Y-%m-%d',  # Django default format
+    '%d.%m.%Y',  # Russian/Uzbek format
+    '%m/%d/%Y',  # English format
+]
 
 USE_I18N = True
 USE_L10N = True

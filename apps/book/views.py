@@ -26,6 +26,10 @@ class LostAnimalListView(generic.ListView):
 @login_required
 def post_lost_animal(request):
     if request.method == 'POST':
+        print("POST data:", request.POST)
+        print("Title:", request.POST.get('title'))
+        print("Date Lost:", request.POST.get('date_lost'))
+
         form = LostAnimalForm(request.POST, request.FILES)
         if form.is_valid():
             lost_animal = form.save(commit=False)

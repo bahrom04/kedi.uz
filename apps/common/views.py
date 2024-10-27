@@ -72,15 +72,6 @@ class EventListView(generic.ListView):
         queryset = Event.objects.all()
         return queryset
     
-class TestListView(generic.ListView):
-    model = Event
-    template_name = "redesign/test.html"
-
-    def get_queryset(self):
-        queryset = Event.objects.all()
-        return queryset
-
-
 class LocationsView(generic.ListView):
     model = Position
     context_object_name = "positions"

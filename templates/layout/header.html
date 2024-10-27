@@ -4,7 +4,7 @@
   <nav class="border-gray-200 ">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="{% url 'common:home' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="{% static 'opasi.jpg' %}" style="border-radius: 100%;" class="h-10" alt="Flowbite Logo" />
+          <img src="{% static 'opasi.jpg' %}" style="border-radius: 100%;" class="h-10" alt="Logo" />
         </a>
       <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
 
@@ -94,16 +94,14 @@
             <a href="{% url 'common:event' %}" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white">{% trans 'Event' %}</a>
           </li>
           <li>
-            <a href="{% url 'book:community' %}" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white">Community</a>
+            <a href="{% url 'book:community' %}" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white">{% trans 'Nature team'%}</a>
           </li>
           <li>
-            <a href="{% url 'book:lost-animal-list' %}" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white">Lost Pet list</a>
+            <a href="{% url 'book:lost-animal-list' %}" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white">{% trans 'Lost pet' %}</a>
           </li>
           <li>
-            <a href="{% url 'book:lost-animal' %}" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white">Lost Pet</a>
-          </li>
-          <li>
-            <a href="{% url 'common:test' %}" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white">test</a>
+            <a href="{% url 'book:lost-animal' %}" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white">{% trans 'Report lost pet' %}
+            </a>
           </li>
         </ul>
       </div>

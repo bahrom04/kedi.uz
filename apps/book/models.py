@@ -34,4 +34,8 @@ class LostAnimal(common.BaseModel):
     phone_number = models.CharField(max_length=32) 
     posted_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+   
+
+    
+
     

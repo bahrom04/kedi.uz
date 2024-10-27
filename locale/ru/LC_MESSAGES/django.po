@@ -1491,3 +1491,59 @@ msgstr "События не найдены"
 # .\index.html
 msgid "Resent posts"
 msgstr "Недавние Посты"
+
+# .\layout\header.html
+msgid "Nature team"
+msgstr "Команда природы"
+
+# .\layout\header.html
+msgid "News"
+msgstr "Новости"
+
+# .\layout\header.html
+msgid "Lost pet"
+msgstr "Потерянное домашнее животное"
+
+# .\layout\header.html
+msgid "Report lost pet"
+msgstr "Сообщить о пропаже питомца"
+
+# .\redesign\lost_animal_form.html
+msgid "Animal name"
+msgstr "Имя животного"
+
+# .\redesign\lost_animal_form.html
+msgid "Date lost"
+msgstr "Дата утеряна"
+
+# .\redesign\lost_animal_form.html
+msgid "Animal type"
+msgstr "Тип животного"
+
+# .\redesign\lost_animal_form.html
+msgid "Animal gender"
+msgstr "Пол животного"
+
+# .\redesign\lost_animal_form.html
+msgid "Contact phone number"
+msgstr "Контактный телефон"
+
+# .\redesign\lost_animal_form.html
+msgid "Description of pet"
+msgstr "Описание"
+
+# .\redesign\lost_animal_form.html
+msgid "Where you lost"
+msgstr "Где вы потеряли"
+
+# .\redesign\lost_animal_form.html
+msgid "Where you lost on map"
+msgstr "Где вы потеряли на карте"
+
+# .\redesign\lost_animal_form.html
+msgid "Upload photo"
+msgstr "Загрузить фото"
+
+# .\redesign\lost_animal_form.html
+msgid "Submit report"
+msgstr "Отправлять"

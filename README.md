@@ -19,6 +19,7 @@ https://stackoverflow.com/questions/35101850/cant-find-msguniq-make-sure-you-hav
 sudo apt-get install -y gettext
 django-admin makemessages -l en
 python manage.py compilemessages
+python manage.py compilemessages -l uz                                                                                               
 ```
 
 ## Incase permission denied to upload images
