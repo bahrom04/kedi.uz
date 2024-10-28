@@ -9,23 +9,6 @@
     width: 100%; 
     z-index: 1;
 }
-
-.parent-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-}
-
-.svg-container {
-    cursor: pointer;
-    margin-top: 6px;
-    width: 20px;
-}
-
-.svg-container img {
-    width: 100%;
-}
 </style>
 {% endblock %}
 
@@ -50,7 +33,10 @@
                         <!-- Title Field -->
                         <div class="mb-4">
                             <label for="id_title" class="block mb-2 text-sm font-medium text-white">{% trans 'Animal name' %}</label>
-                            <input type="text" name="title" id="id_title" class="block border text-sm rounded-lg w-full p-2.5  bg-gray-900 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" value="{{ form.title.value|default:'' }}" placeholder="Mosh" required>
+                            <input type="text" name="title" id="id_title" class="border mb-4 text-sm rounded-lg block w-full p-2.5 
+                                bg-gray-100 border-gray-300 placeholder-gray-500 text-gray-900
+                                dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                                focus:ring-blue-500 focus:border-blue-500" value="{{ form.title.value|default:'' }}" placeholder="Mosh" required>
                             {% if form.title.errors %}
                                 <p class="text-red-500 text-sm">{{ form.title.errors }}</p>
                             {% endif %}
@@ -62,7 +48,7 @@
                             <input id="datepicker-actions" 
                                    type="text" 
                                    name="date_lost"
-                                   class=" border text-sm rounded-lg block w-full p-2.5 bg-gray-900 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 text-white" 
+                                   class="border text-sm rounded-lg block w-full p-2.5 bg-gray-900 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500 text-white" 
                                    placeholder="Select date" 
                                    value="{{ form.date_lost.value|date:'Y-m-d' }}"
                             >
