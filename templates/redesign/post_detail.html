@@ -26,8 +26,11 @@
 
 {% block content %}
 <main class="grid lg:grid-cols-4 max-w-screen-xl mx-auto gap-6">
+
+    <!-- Right sticky sidebar ends -->
+    {% include 'redesign/top_community.html'%}
     <!-- Left main content starts -->
-    <div class="lg:col-span-3 p-4">
+    <div class="lg:col-span-2 p-4">
         <div class="bg-zinc-900 rounded-md p-3">
             <h1 class="mb-3 font-weight-bold" style="margin-bottom: 0.5rem; font-size: 32px;">
                 {{ post.title }}
