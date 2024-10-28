@@ -54,6 +54,14 @@
                             {% endif %}
                         </div>
 
+                        <!-- Description Field -->
+                        <div class="mb-4">
+                            <label for="id_title" class="block mb-2 text-sm font-medium text-white">{% trans 'Animal name' %}</label>
+                            <input type="text" name="title" id="id_title" class="block border text-sm rounded-lg w-full p-2.5 !bg-gray-900 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" value="{{ form.title.value|default:'' }}" placeholder="Mosh" required>
+                            {% if form.description.errors %}
+                                <p class="text-red-500 text-sm">{{ form.description.errors }}</p>
+                            {% endif %}
+                        </div>
                     </div>
 
                     <div class="grid gap-6 mb-6 md:grid-cols-3">
@@ -99,15 +107,7 @@
                         </div>
                     </div>
   
-                    <!-- Description Field -->
-                    <div class="mb-4">
-                        <label for="id_description" class="block mb-2 text-sm font-medium text-white">{% trans 'Description of pet' %}</label>
-                        <textarea name="description" id="id_description" class="border text-sm rounded-lg block w-full p-6  h-40  bg-gray-900 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500 text-white">{{ form.description.value|default:'' }}</textarea>
-                        {% if form.description.errors %}
-                            <p class="text-red-500 text-sm">{{ form.description.errors }}</p>
-                        {% endif %}
-                    </div>
-                    
+
                     <!-- Description Field -->
                     <div class="mb-4">
                         <label for="id_description" class="block mb-2 text-sm font-medium text-white">{% trans 'Description of pet' %}</label>
