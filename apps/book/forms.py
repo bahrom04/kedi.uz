@@ -1,6 +1,7 @@
-from django.utils import timezone
 from django import forms
+from django.utils import timezone
 from django.utils.formats import get_format
+from django.core.exceptions import ValidationError
 from django.conf import settings
 
 from .models import LostAnimal
@@ -38,3 +39,18 @@ class LostAnimalForm(forms.ModelForm):
         if date_lost and date_lost > timezone.now().date():
             raise forms.ValidationError("Date cannot be in the future")
         return date_lost
+    
+    def clean_photo(self):
+        photo = self.cleaned_data.get('photo')
+
+        allowed_extensions = ['.jpg', '.jpeg', '.png']
+
+        if not photo:
+            raise ValidationError('No file uploaded.')
+
+        ext = photo.name.split('.')[-1].lower()
+
+        if f".{ext}" not in allowed_extensions:
+            raise ValidationError('Only JPEG and PNG files are allowed.')
+
+        return photo
