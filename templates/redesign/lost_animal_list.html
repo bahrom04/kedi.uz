@@ -42,7 +42,7 @@ h1,h2{
     <div class="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {% for post in posts %}
         <div class="overflow-hidden relative bg-zinc-900 rounded-md p-3">
-            <a href="{% url 'common:post' post.id %}" class="btn btn-primary">
+            <a href="{% url 'book:lost-animal-detail' post.id %}" class="btn btn-primary">
                 <img src="{{ post.photo.url }}" class="w-full sm:h-32 object-cover rounded-md" alt="img">
             </a>
             <div>
@@ -50,10 +50,10 @@ h1,h2{
             </div>
             <div>
                 <h3 class="mt-2 mb-2 leading-5 hover:text-blue-500">
-                    <a href="{% url 'common:post' post.id %}" class="btn btn-primary">{{post.title}}</a>
+                    <a href="{% url 'book:lost-animal-detail' post.id %}" class="btn btn-primary">{{post.title}}</a>
                 </h3>
                 <h4 class="opacity-75 hover:text-blue-500">
-                    <a href="{% url 'common:post' post.id %}" class="btn btn-primary">{{post.description}}</a>
+                    <a href="{% url 'book:lost-animal-detail' post.id %}" class="btn btn-primary">{{post.description}}</a>
                 </h4>
             </div>
         </div>

@@ -39,13 +39,11 @@
             </h1>
             <span class="opacity-60">{{ post.created_at }}</span>
             <br>
-            <span>
-                <i class="fa-solid fa-eye"></i>
-                {{ post.views }}
-            </span>
+            <span class="opacity-60">updated at: {{ post.updated_at }}</span>
+            
             <br>
-            {% if post.image %}
-                <img src="{{ post.image.url }}" class="card-img-top w-full object-cover h-64" alt="image">
+            {% if post.photo %}
+                <img src="{{ post.photo.url }}" class="card-img-top w-full object-cover h-64" alt="image">
             {% endif %}
             {{ post.content | safe }}
             <a href="{% url 'common:home' %}" class="btn btn-primary">Back</a>

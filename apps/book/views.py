@@ -3,6 +3,8 @@ from apps.book import models
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, render
+
 from .forms import LostAnimalForm
 
 class CommunityListView(generic.ListView):
@@ -15,7 +17,7 @@ class LostAnimalListView(generic.ListView):
     template_name = "redesign/lost_animal_list.html"
 
     def get(self, request: HttpRequest):
-        posts = list(models.LostAnimal.objects.all())
+        posts = list(models.LostAnimal.objects.order_by("-created_at"))
 
         return render(
             request,
@@ -23,19 +25,34 @@ class LostAnimalListView(generic.ListView):
             context={"posts": posts},
         )
 
+class LostAnimalDetail(generic.DetailView):
+    model = models.LostAnimal
+    template_name = "redesign/lost_animal_detail.html"
+    context_object_name = "post"
+
+    def get_object(self):
+        post_id = self.kwargs["id"]
+        return models.LostAnimal.objects.get(id=post_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        post_id = self.kwargs["id"]
+        post = get_object_or_404(models.LostAnimal, id=post_id)
+
+        context["post"] = post
+
+        return context
+
 @login_required
 def post_lost_animal(request):
     if request.method == 'POST':
-        print("POST data:", request.POST)
-        print("Title:", request.POST.get('title'))
-        print("Date Lost:", request.POST.get('date_lost'))
-
         form = LostAnimalForm(request.POST, request.FILES)
         if form.is_valid():
             lost_animal = form.save(commit=False)
             lost_animal.posted_by = request.user
             lost_animal.save()
-            return redirect('/')  # Redirect after successful post
+            return redirect('/lost-animal-list/')
     else:
         form = LostAnimalForm()
     return render(request, 'redesign/lost_animal_form.html', {'form': form})

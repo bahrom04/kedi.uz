@@ -1,5 +1,5 @@
 {% extends 'redesign/base.html' %}
-{% load static i18n l10n tailwind_tags %}
+{% load static i18n l10n %}
 
 {% block custom_css %}
 <!-- custom-css -->
@@ -33,7 +33,7 @@
                         <!-- Title Field -->
                         <div class="mb-4">
                             <label for="id_title" class="block mb-2 text-sm font-medium text-white">{% trans 'Animal name' %}</label>
-                            <input type="text" name="title" id="id_title" class="block border text-sm rounded-lg w-full p-2.5 bg-slate-600 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" value="{{ form.title.value|default:'' }}" placeholder="Mosh" required>
+                            <input type="text" name="title" id="id_title" class="block border text-sm rounded-lg w-full p-2.5 bg-gray-900 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" value="{{ form.title.value|default:'' }}" placeholder="Mosh" required>
                             {% if form.title.errors %}
                                 <p class="text-red-500 text-sm">{{ form.title.errors }}</p>
                             {% endif %}

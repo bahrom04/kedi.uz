@@ -17,7 +17,7 @@ class HomeView(generic.ListView):
         posts = cache.get(home_posts_cache_key)
 
         if not posts:
-            posts = list(Post.objects.all().prefetch_related("tag"))
+            posts = list(Post.objects.order_by("-created_at").prefetch_related("tag"))
             cache.set(home_posts_cache_key, posts, 60 * 5)
 
         return render(
