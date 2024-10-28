@@ -39,7 +39,7 @@ h1,h2{
         <i class="fa-solid fa-magnifying-glass mr-9"></i>
     </div>
     <!-- news -->
-    <div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div class="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {% for post in posts %}
         <div class="overflow-hidden relative bg-zinc-900 rounded-md p-3">
             <a href="{% url 'common:post' post.id %}" class="btn btn-primary">

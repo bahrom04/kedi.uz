@@ -50,7 +50,7 @@
                         <!-- Title Field -->
                         <div class="mb-4">
                             <label for="id_title" class="block mb-2 text-sm font-medium text-white">{% trans 'Animal name' %}</label>
-                            <input type="text" name="title" id="id_title" class="border text-sm rounded-lg block w-full p-2.5  bg-gray-900 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" value="{{ form.title.value|default:'' }}" placeholder="Mosh" required>
+                            <input type="text" name="title" id="id_title" class="dark border text-sm rounded-lg block w-full p-2.5  bg-gray-900 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" value="{{ form.title.value|default:'' }}" placeholder="Mosh" required>
                             {% if form.title.errors %}
                                 <p class="text-red-500 text-sm">{{ form.title.errors }}</p>
                             {% endif %}
@@ -62,7 +62,7 @@
                             <input id="datepicker-actions" 
                                    type="text" 
                                    name="date_lost"
-                                   class="border text-sm rounded-lg block w-full p-2.5 bg-gray-900 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 text-white" 
+                                   class="dark border text-sm rounded-lg block w-full p-2.5 bg-gray-900 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 text-white" 
                                    placeholder="Select date" 
                                    value="{{ form.date_lost.value|date:'Y-m-d' }}"
                             >
@@ -76,7 +76,7 @@
                     <div class="grid gap-6 mb-6 md:grid-cols-3">
                         <!-- Animal Type Field -->
                         <div class="mb-4">
-                            <label for="id_animal_type" class="block mb-2 text-sm font-medium text-white">{% trans 'Animal type' %}</label>
+                            <label for="id_animal_type" class="dark block mb-2 text-sm font-medium text-white">{% trans 'Animal type' %}</label>
                             <select name="animal_type" id="id_animal_type" class="border text-sm rounded-lg block w-full p-2.5 bg-gray-900 border-gray-600 placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500 text-white">
                                 {% for choice in form.animal_type.field.queryset %}
                                     <option value="{{ choice.id }}" {% if choice.id == form.animal_type.value %}selected{% endif %}>
