@@ -1,9 +1,10 @@
 {% extends 'redesign/base.html' %}
-{% load static%}
+{% load static %}
 
-{% block link_and_scripts %}
+{% block custom_css %} 
 <link rel="stylesheet" href="{% static 'community.css' %}">
 {% endblock %}
+
 
 {% block content %}
 <!-- Teacher card start  -->
@@ -15,9 +16,6 @@
                 <h1 class="h1-text-tc">
                     {{ item.title }}
                 </h1>
-                <!-- <div class="p-text-tc">
-                    <span class="span-tc">寿司職人コース</span>
-                </div> -->
             </div>
             <img class="img-tc" src="{{item.image.url}}" alt="photo">
         </button>
