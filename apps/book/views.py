@@ -7,12 +7,22 @@ from django.shortcuts import get_object_or_404, render
 
 from .forms import LostAnimalForm
 
+from django.core import serializers
+from . import models
+
 class CommunityListView(generic.ListView):
     template_name = "redesign/community.html"
-
+    
     def get_queryset(self):
         return models.Community.objects.all()
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['json_data'] = serializers.serialize('json', context['object_list'], fields=('image', 'title', 'description', 'telegram_link'))
+        print(context)
+        return context
+    
+
 class LostAnimalListView(generic.ListView):
     template_name = "redesign/lost_animal_list.html"
 

@@ -6,7 +6,7 @@ from apps.common import models as common
 
 class Community(common.BaseModel):
     image = models.ImageField(upload_to="community/")
-    title = models.CharField(_("Title"), max_length=128)
+    title = models.CharField(_("Title"), max_length=64)
     description = models.TextField(_("Description"), blank=True, null=True)
 
     telegram_link = models.URLField()
