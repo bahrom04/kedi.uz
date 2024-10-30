@@ -19,7 +19,6 @@ class CommunityListView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['json_data'] = serializers.serialize('json', context['object_list'], fields=('image', 'title', 'description', 'telegram_link'))
-        print(context)
         return context
     
 
