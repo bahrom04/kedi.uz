@@ -37,7 +37,7 @@ CUSTOM_APPS = [
     "apps.common.apps.CommonConfig",
     "apps.users.apps.UsersConfig",
     "apps.book.apps.BookConfig",
-    "apps.theme",
+    "theme",
 ]
 
 THIRD_PARTY_APPS = [
@@ -246,7 +246,7 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 # TailwindCss
-TAILWIND_APP_NAME = "apps.theme"
+TAILWIND_APP_NAME = "theme"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]

@@ -18,16 +18,13 @@ module.exports = {
          * Main templates directory of the project (BASE_DIR/templates).
          * Adjust the following line to match your project structure.
          */
-        '../../../templates/**/*.html',
+        '../../templates/**/*.html',
 
         /*
          * Templates in other django apps (BASE_DIR/<any_app_name>/templates).
          * Adjust the following line to match your project structure.
          */
         '../../**/templates/**/*.html',
-        
-        // Specifically include the "redesign" folder and its base.html
-        '../../../templates/redesign/**/*.html',
 
         /**
          * JS: If you use Tailwind CSS in JavaScript, uncomment the following lines and make sure
@@ -46,13 +43,6 @@ module.exports = {
     ],
     theme: {
         extend: {},
-        screens: {
-            'sm': '640px',
-            'md': '768px',
-            'lg': '1024px',
-            'xl': '1280px',
-            '2xl': '1536px',
-          },
     },
     plugins: [
         /**
@@ -64,6 +54,4 @@ module.exports = {
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
     ],
-    // darkMode: 'class',
-    // darkMode: 'media',
 }
