@@ -61,10 +61,11 @@
         overflow-wrap: break-word; 
     }
 </style>
+
 <script>
     function communityAlmanac() {
         return {
-            communities: JSON.parse('{{ json_data|safe }}'),
+            communities: {{json_data|safe }},
             selectedCommunity: null,
             initializeDefault() {
                 if (this.communities && this.communities.length > 0) {
