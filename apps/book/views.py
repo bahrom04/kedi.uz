@@ -10,16 +10,33 @@ from .forms import LostAnimalForm
 from django.core import serializers
 from . import models
 
+from pydantic import BaseModel
+from django.core.serializers import serialize
+import json
+
+class CommunityModel(BaseModel):
+    pk: int
+    title: str
+    image: str
+    description: str = ""
+    telegram_link: str
+
+    @classmethod
+    def from_django(cls, instance):
+        instance_data = json.loads(serialize('json', [instance]))[0]['fields']
+        description = instance_data.get('description') or ""
+        instance_data['description'] = description.replace('\r', '').replace('\n', '<br>')
+        return cls(pk=instance.pk, **instance_data)
+    
+
 class CommunityListView(generic.ListView):
     template_name = "redesign/community.html"
     
-    def get_queryset(self):
-        return models.Community.objects.all()
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['json_data'] = serializers.serialize('json', context['object_list'], fields=('image', 'title', 'description', 'telegram_link'))
-        return context
+    def get(self, request, *args, **kwargs):
+        communities = models.Community.objects.all()
+        formatted_communities = [CommunityModel.from_django(community).dict() for community in communities]
+        print(formatted_communities)
+        return render(request, 'redesign/community.html', {'json_data': json.dumps(formatted_communities)})
     
 
 class LostAnimalListView(generic.ListView):

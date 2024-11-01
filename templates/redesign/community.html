@@ -17,13 +17,13 @@
                          :class="{'ring-2 ring-blue-500': selectedCommunity && selectedCommunity.pk === community.pk}"
                          class="cursor-pointer bg-zinc-900 rounded-md hover:bg-zinc-800 transition-colors duration-200 flex flex-col h-full">
                         <div class="relative pb-[75%] w-full">
-                            <img :src="getImageUrl(community.fields.image)" 
-                                 :alt="community.fields.title" 
+                            <img :src="getImageUrl(community.image)" 
+                                 :alt="community.title" 
                                  class="absolute inset-0 w-full h-full object-cover rounded-t-md">
                         </div>
                         <div class="p-3 flex-grow">
                             <p class="text-center text-sm sm:text-base font-semibold line-clamp-2" 
-                               x-text="community.fields.title"></p>
+                               x-text="community.title"></p>
                         </div>
                     </div>
                 </template>
@@ -36,13 +36,13 @@
                 <template x-if="selectedCommunity">
                     <div class="p-4">
                         <div class="relative pb-[75%] w-full mb-4">
-                            <img :src="getImageUrl(selectedCommunity.fields.image)" 
-                                 :alt="selectedCommunity.fields.title" 
+                            <img :src="getImageUrl(selectedCommunity.image)" 
+                                 :alt="selectedCommunity.title" 
                                  class="absolute inset-0 w-full h-full object-cover rounded-lg">
                         </div>
-                        <h2 class="text-xl sm:text-2xl font-bold mb-2" x-text="selectedCommunity.fields.title"></h2>
-                        <div class="mt-4 detail-content" x-html="selectedCommunity.fields.description"></div>
-                        <a :href="selectedCommunity.fields.telegram_link" 
+                        <h2 class="text-xl sm:text-2xl font-bold mb-2" x-text="selectedCommunity.title"></h2>
+                        <div class="mt-4 detail-content" x-html="selectedCommunity.description"></div>
+                        <a :href="selectedCommunity.telegram_link" 
                            class="mt-6 inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md transition-colors duration-200"
                            target="_blank">
                             Join Community
@@ -55,9 +55,9 @@
 </div>
 <style>
     .detail-content {
-        max-height: 500px; /* Adjust based on your layout */
+        max-height: 500px; 
         overflow-y: auto;
-        white-space: pre-wrap; /* This respects line breaks but prevents collapsing into blank space */
+        white-space: pre-wrap; 
         overflow-wrap: break-word; 
     }
 </style>
@@ -80,12 +80,7 @@
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             },
-            formatDescription(description) {
-                // Replace `\r\n` or `\n` with `<br>`
-                return description.replace(/\\r\\n|\\n/g, '<br>');
-            },
         }
     }
-    
 </script>
 {% endblock %}
