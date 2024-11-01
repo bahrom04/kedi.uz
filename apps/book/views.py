@@ -35,7 +35,7 @@ class CommunityListView(generic.ListView):
     def get(self, request, *args, **kwargs):
         communities = models.Community.objects.all()
         formatted_communities = [CommunityModel.from_django(community).dict() for community in communities]
-        print(formatted_communities)
+        # print(formatted_communities)
         return render(request, 'redesign/community.html', {'json_data': json.dumps(formatted_communities)})
     
 
