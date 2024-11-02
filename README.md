@@ -39,9 +39,6 @@ docker-compose down --volumes --remove-orphans
 If you run this command it will also delete postgres database and their volumes. So run this when you want to test new containers. See conversation below:
 https://chat.openai.com/share/f1c8d760-6062-4613-8a5b-2f88cfcfecc2
 
-## Examples
-![alt text](static/image.png)
-
 ## TailwindCss
 ```
 python -m pip install django-tailwind
