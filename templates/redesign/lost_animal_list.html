@@ -1,68 +1,75 @@
 {% extends 'redesign/base.html' %}
 
 {% block custom_css %}
-<!-- custom-css -->
 <style type="text/tailwindcss">
 @layer utilities {
     blockquote {
-font-size: 1.1em;
-width: 90%;
-margin: 30px auto;
-font-family: Open Sans;
-font-style: italic;
-color: #555555;
-padding: 1em 10px 1em 7px;
-border-left: 8px solid #78C0A8;
-line-height: 1.6;
-position: relative;
-background: #EDEDED;
-}
+        font-size: 1.1em;
+        width: 90%;
+        margin: 30px auto;
+        font-family: Open Sans;
+        font-style: italic;
+        color: #555555;
+        padding: 1em 10px 1em 7px;
+        border-left: 8px solid #78C0A8;
+        line-height: 1.6;
+        position: relative;
+        background: #EDEDED;
+    }
 
+    h1, h2, h3, h4, p {
+        opacity: 0.75;
+    }
 
-h1,h2,h3,h4,p {
-opacity: 0.75;
-}
-h1,h2{
-    font-size: 40px;
-}
-    
+    h1, h2 {
+        font-size: 40px;
+    }
 }
 </style>
-<!-- custom-css-end -->
 {% endblock %}
 
 {% block content %}
 <main class="grid lg:grid-cols-4 max-w-screen-xl items-center mx-auto">
-<div class="gap-10 lg:col-span-3 h-full">
-    <div class="flex justify-between items-center">
-        <h1 class="font-bold text-3xl px-6">Lost animals</h1>
-        <i class="fa-solid fa-magnifying-glass mr-9"></i>
-    </div>
-    <!-- news -->
-    <div class="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {% for post in posts %}
-        <div class="overflow-hidden relative bg-zinc-900 rounded-md p-3">
-            <a href="{% url 'book:lost-animal-detail' post.id %}" class="btn btn-primary">
-                <img src="{{ post.photo.url }}" class="w-full sm:h-32 object-cover rounded-md" alt="img">
-            </a>
-            <div>
-                <p class="opacity-50 mt-2">{{post.created_at}}</p>
-            </div>
-            <div>
-                <h3 class="mt-2 mb-2 leading-5 hover:text-blue-500">
-                    <a href="{% url 'book:lost-animal-detail' post.id %}" class="btn btn-primary">{{post.title}}</a>
-                </h3>
-                <h4 class="opacity-75 hover:text-blue-500">
-                    <a href="{% url 'book:lost-animal-detail' post.id %}" class="btn btn-primary">{{post.description}}</a>
-                </h4>
-            </div>
+    <div class="gap-10 lg:col-span-3 h-full">
+        <div class="flex justify-between items-center">
+            <h1 class="font-bold text-3xl px-6">Lost animals</h1>
+            <i class="fa-solid fa-magnifying-glass mr-9"></i>
         </div>
-        {% endfor %}
+        
+        <!-- news -->
+        <div class="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+            {% for post in posts %}
+            <div class="relative bg-zinc-900 rounded-md flex flex-col  p-3 items-center">
+                
+                <!-- Image Section -->
+                <a href="{% url 'book:lost-animal-detail' post.id %}" class="btn btn-primary flex-none w-1/2 md:w-1/3">
+                    <img src="{{ post.photo.url }}" class="w-full h-full object-cover rounded-md" alt="img">
+                </a>
+
+                <!-- Text Section -->
+                <div class="flex-1 p-3 text-white">
+                    <div class="grid grid-cols-2 gap-4 border-b border-gray-700 py-2">
+                        <span class="font-semibold text-gray-300">Name</span>
+                        <span class="text-gray-200">{{ post.title }}</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 border-b border-gray-700 py-2">
+                        <span class="font-semibold text-gray-300">Name</span>
+                        <span class="text-gray-200">{{ post.gender_type }} {{ post.animal_type }}</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 border-b border-gray-700 py-2">
+                        <span class="font-semibold text-gray-300">LOCATION</span>
+                        <span class="text-gray-200">{{ post.location }}</span>
+                    </div>
+                </div>
+                
+                
+            </div>
+            {% endfor %}
+        </div>
     </div>
-</div>
-<!-- news-end -->
 
-{% include 'redesign/top_community.html' %}
-
+    {% include 'redesign/top_community.html' %}
 </main>
 {% endblock %}
