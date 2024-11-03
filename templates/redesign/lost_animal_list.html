@@ -30,14 +30,14 @@
 
 {% block content %}
 <main class="grid lg:grid-cols-4 max-w-screen-xl items-center mx-auto">
-    <div class="gap-10 lg:col-span-3 h-full">
+    <div class="gap-10 lg:col-span-4 h-full">
         <div class="flex justify-between items-center">
             <h1 class="font-bold text-3xl px-6">Lost animals</h1>
-            <i class="fa-solid fa-magnifying-glass mr-9"></i>
+            <!-- <i class="fa-solid fa-magnifying-glass mr-9"></i> -->
         </div>
         
         <!-- news -->
-        <div class="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+        <div class="grid gap-6 p-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {% for post in posts %}
             <div class="relative bg-zinc-900 rounded-md flex flex-col  p-3 items-center">
                 
@@ -50,12 +50,14 @@
                 <div class="flex-1 p-3 text-white">
                     <div class="grid grid-cols-2 gap-4 border-b border-gray-700 py-2">
                         <span class="font-semibold text-gray-300">Name</span>
-                        <span class="text-gray-200">{{ post.title }}</span>
+                        <span class="text-gray-200">{{ post.title }} <span class=" text-blue-400 font-normal">{{ post.gender_type }} {{ post.animal_type }}</span>
+                    </span>
+
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 border-b border-gray-700 py-2">
-                        <span class="font-semibold text-gray-300">Name</span>
-                        <span class="text-gray-200">{{ post.gender_type }} {{ post.animal_type }}</span>
+                        <span class="font-semibold text-gray-300">REPORTED AT</span>
+                        <span class="text-gray-200">{{ post.created_at }}</span>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 border-b border-gray-700 py-2">
@@ -70,6 +72,5 @@
         </div>
     </div>
 
-    {% include 'redesign/top_community.html' %}
 </main>
 {% endblock %}
