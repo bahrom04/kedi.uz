@@ -1547,3 +1547,52 @@ msgstr "Загрузить фото"
 # .\redesign\lost_animal_form.html
 msgid "Submit report"
 msgstr "Отправлять"
+
+
+# .\redesign\lost_animal_list.html
+msgid "IS MISSING"
+msgstr "ПРОПАЛ"
+
+# .\redesign\lost_animal_list.html
+msgid "REPORTED AT"
+msgstr "ДАТА ОБЪЯВЛЕНИЯ"
+
+# .\redesign\lost_animal_list.html
+msgid "UPDATED AT"
+msgstr "ДАТА ОБНОВЛЕНИЯ"
+
+# .\redesign\lost_animal_list.html
+msgid "NAME"
+msgstr "ИМЯ"
+
+# .\redesign\lost_animal_list.html
+msgid "PHOTO"
+msgstr "ФОТО"
+
+# .\redesign\lost_animal_list.html
+msgid "DESCRIPTION"
+msgstr "ОПИСАНИЕ"
+
+# .\redesign\lost_animal_list.html
+msgid "ANIMAL TYPE"
+msgstr "ТИП ЖИВОТНОГО"
+
+# .\redesign\lost_animal_list.html
+msgid "ANIMAL GENDER"
+msgstr "ПОЛ ЖИВОТНОГО"
+
+# .\redesign\lost_animal_list.html
+msgid "LOCATION"
+msgstr "МЕСТОПОЛОЖЕНИЕ"
+
+# .\redesign\lost_animal_list.html
+msgid "DATE LOST"
+msgstr "ДАТА ПОТЕРИ"
+
+# .\redesign\lost_animal_list.html
+msgid "CONTACT NUMBER"
+msgstr "КОНТАКТНЫЙ НОМЕР"
+
+# .\redesign\lost_animal_list.html
+msgid "POSTED BY"
+msgstr "ОБЪЯВЛЕНИЕ РАЗМЕСТИЛ"

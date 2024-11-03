@@ -1,22 +1,9 @@
 {% extends 'redesign/base.html' %}
+{% load i18n %}
 
 {% block custom_css %}
 <style type="text/tailwindcss">
 @layer utilities {
-    blockquote {
-        font-size: 1.1em;
-        width: 90%;
-        margin: 30px auto;
-        font-family: Open Sans;
-        font-style: italic;
-        color: #555555;
-        padding: 1em 10px 1em 7px;
-        border-left: 8px solid #78C0A8;
-        line-height: 1.6;
-        position: relative;
-        background: #EDEDED;
-    }
-
     h1, h2, h3, h4, p {
         opacity: 0.75;
     }
@@ -49,19 +36,19 @@
                 <!-- Text Section -->
                 <div class="flex-1 p-3 text-white">
                     <div class="grid grid-cols-2 gap-4 border-b border-gray-700 py-2">
-                        <span class="font-semibold text-gray-300">Name</span>
+                        <span class="font-semibold text-gray-300">{% trans 'NAME' %}</span>
                         <span class="text-gray-200">{{ post.title }} <span class=" text-blue-400 font-normal">{{ post.gender_type }} {{ post.animal_type }}</span>
                     </span>
 
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 border-b border-gray-700 py-2">
-                        <span class="font-semibold text-gray-300">REPORTED AT</span>
+                        <span class="font-semibold text-gray-300">{% trans 'REPORTED AT' %}</span>
                         <span class="text-gray-200">{{ post.created_at }}</span>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 border-b border-gray-700 py-2">
-                        <span class="font-semibold text-gray-300">LOCATION</span>
+                        <span class="font-semibold text-gray-300">{% trans 'LOCATION' %}</span>
                         <span class="text-gray-200">{{ post.location }}</span>
                     </div>
                 </div>

@@ -1549,3 +1549,53 @@ msgstr "ishlasenchi birodar befarq bo'lmang"
 # .\redesign\lost_animal_form.html
 msgid "Submit report"
 msgstr "Xabar jo'natish"
+
+
+# .\redesign\lost_animal_list.html
+msgid "IS MISSING"
+msgstr "QIDIRILYAPTI"
+
+# .\redesign\lost_animal_list.html
+msgid "REPORTED AT"
+msgstr "E'LON QILINGAN SANA"
+
+# .\redesign\lost_animal_list.html
+msgid "UPDATED AT"
+msgstr "TAHRIRLANGAN SANA"
+
+# .\redesign\lost_animal_list.html
+msgid "NAME"
+msgstr "ISMI"
+
+# .\redesign\lost_animal_list.html
+msgid "PHOTO"
+msgstr "RASM"
+
+# .\redesign\lost_animal_list.html
+msgid "DESCRIPTION"
+msgstr "IZOH"
+
+# .\redesign\lost_animal_list.html
+msgid "ANIMAL TYPE"
+msgstr "HAYVON TURI"
+
+# .\redesign\lost_animal_list.html
+msgid "ANIMAL GENDER"
+msgstr "HAYVON JINSI"
+
+# .\redesign\lost_animal_list.html
+msgid "LOCATION"
+msgstr "JOYLASHUV"
+
+# .\redesign\lost_animal_list.html
+msgid "DATE LOST"
+msgstr "YOQOLGAN SANASI"
+
+# .\redesign\lost_animal_list.html
+msgid "CONTACT NUMBER"
+msgstr "ALOQA RAQAMI"
+
+# .\redesign\lost_animal_list.html
+msgid "POSTED BY"
+msgstr "E'LON QILGAN"
+
