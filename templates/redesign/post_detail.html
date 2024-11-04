@@ -48,7 +48,10 @@
                 <img src="{{ post.image.url }}" class="card-img-top w-full object-cover h-64" alt="image">
             {% endif %}
             {{ post.content | safe }}
-            <a href="{% url 'common:home' %}" class="btn btn-primary">Back</a>
+            
+            <div class="flex justify-end"> 
+                <a href="{% url 'common:home' %}" class="justify-end bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back</a>
+            </div>
         </div>
     </div>
     <!-- Left main content ends -->
