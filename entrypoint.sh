@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Activate the virtual environment
-source venv/bin/activate
+source ./venv/bin/activate
 
 python manage.py migrate
 python manage.py tailwind install --no-input
