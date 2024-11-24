@@ -13,3 +13,4 @@ python manage.py compilemessages
 # Restart services
 sudo systemctl restart gunicorn
 sudo systemctl restart nginx
+echo "gunicorn and nginx restarted ..."
