@@ -1,0 +1,41 @@
+services:
+  kediuz:
+    container_name: kediuz
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python manage.py runserver 8000
+    # security_opt:
+    #   - seccomp:unconfined
+    volumes:
+      - ./:/home/app/web
+      - ./media:/home/app/media
+      - ./static:/home/app/static
+      - ./locale:/home/app/locale
+      # - ./logs:/home/app/web/logs
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Tashkent
+    # ports:
+    #   - ${DJANGO_WEB_PORT}:${DJANGO_WEB_PORT}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    container_name: "kediuzDB"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PORT=${DB_PORT}
+    restart: always
+
+volumes:
+  postgres_data:

@@ -16,15 +16,10 @@
 {% endblock %}
 
 {% block content %}
-<main class="grid lg:grid-cols-4 max-w-screen-xl items-center mx-auto">
-    <div class="gap-10 lg:col-span-3 h-full">
-        <div class="flex justify-between items-center">
-            <h1 class="font-bold text-3xl px-6">Lost animals</h1>
-            <!-- <i class="fa-solid fa-magnifying-glass mr-9"></i> -->
-        </div>
-        
+<main class="grid lg:grid-cols-1 max-w-screen-xl items-center mx-auto">
+   
         <!-- lost animal list -->
-        <div class="grid gap-6 p-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-6 p-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {% for post in posts %}
             <div class="relative bg-zinc-900 rounded-md flex flex-col  p-3 items-center">
                 
@@ -57,7 +52,6 @@
             </div>
             {% endfor %}
         </div>
-    </div>
 
 </main>
 {% endblock %}

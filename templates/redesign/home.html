@@ -13,7 +13,9 @@
             {% for post in posts %}
             <div class="overflow-hidden relative bg-zinc-900 rounded-md p-3">
                 <a href="{% url 'common:post' post.id %}" class="btn btn-primary">
-                    <img src="{{ post.image.url }}" class="w-full sm:h-32 object-cover rounded-md" alt="img">
+                    <!-- <img src="{{ post.image.url }}" class="w-full sm:h-32 object-cover rounded-md" alt="img"> -->
+                    <img src="{{ post.image.url }}" class="w-full object-cover h-64 md:h-10  rounded-md" alt="image">
+
                 </a>
                 <div>
                     <p class="opacity-50 mt-2">{{post.created_at}}</p>
