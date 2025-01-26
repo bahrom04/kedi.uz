@@ -1,10 +1,9 @@
 from typing import Any
-from django.core.cache import cache
 from django.http import HttpRequest, JsonResponse, HttpResponseForbidden
+from django.core.cache import cache
 from django.views import generic
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models.base import Model as Model
 
 from apps.common.models import Event, About, Post, Position, UserSavedPosition
 
