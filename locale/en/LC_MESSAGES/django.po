@@ -1490,3 +1490,16 @@ msgstr ""
 msgid "Resent posts"
 msgstr ""
 
+
+# .\top_community.html
+msgid "Follow us"
+msgstr ""
+
+# .\top_community.html
+msgid "Join our Telegram channel"
+msgstr ""
+
+# .\top_community.html
+msgid "Join"
+msgstr ""
+

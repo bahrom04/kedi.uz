@@ -1599,3 +1599,15 @@ msgstr "ALOQA RAQAMI"
 msgid "POSTED BY"
 msgstr "E'LON QILGAN"
 
+
+# .\top_community.html
+msgid "Follow us"
+msgstr "Bizni kuzatib boring"
+
+# .\top_community.html
+msgid "Join our Telegram channel"
+msgstr "Bizning Telegram kanalga a'zo bo'ling"
+
+# .\top_community.html
+msgid "Join"
+msgstr "Qo'shilish"

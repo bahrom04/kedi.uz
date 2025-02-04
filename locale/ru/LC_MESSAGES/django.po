@@ -1596,3 +1596,16 @@ msgstr "КОНТАКТНЫЙ НОМЕР"
 # .\redesign\lost_animal_list.html
 msgid "POSTED BY"
 msgstr "ОБЪЯВЛЕНИЕ РАЗМЕСТИЛ"
+
+
+# .\top_community.html
+msgid "Follow us"
+msgstr "Подписывайтесь на нас"
+
+# .\top_community.html
+msgid "Join our Telegram channel"
+msgstr "Присоединяйтесь к нашему каналу Telegram"
+
+# .\top_community.html
+msgid "Join"
+msgstr "стать участником"

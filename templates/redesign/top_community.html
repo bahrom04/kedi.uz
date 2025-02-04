@@ -1,14 +1,19 @@
+{% load static i18n %}
+
 <!-- Right sticky sidebar starts -->
 <div class="lg:col-span-1 mt-4 self-start h-full p-4">
     <div class="p-6 bg-blue-800 rounded-lg">
-        <p>Bizni kuzatib boring</p>
-        <h2 class="font-bold text-xl max-w-60 mt-4">
+        <p>{% trans 'Follow us' %}</p>
+        <!-- <h2 class="font-bold text-xl max-w-60 mt-4">
             Bizning <span class="text-yellow-300">Telegram</span> kanalga a'zo bo'ling
+        </h2> -->
+        <h2 class="font-bold text-xl max-w-60 mt-4">
+           {% trans 'Join our Telegram channel' %}
         </h2>
         <button type="button" class="mt-6 text-white hover:bg-blue-800 focus:ring-4 
             focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 
             py-2 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            <a href="https://t.me/kedi_uz">Qo'shilish</a>
+            <a href="https://t.me/kedi_uz"> {% trans 'Join' %}</a>
             <i class="fa-solid fa-door-open"></i>
         </button>
     </div>
