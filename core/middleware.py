@@ -1,8 +1,13 @@
+import os
 import requests
 import traceback
+from datetime import datetime
 
 from django.conf import settings
-from datetime import datetime
+from django.http import HttpResponseForbidden
+
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS")
 
 
 def send_error_log(message) -> None:
@@ -38,3 +43,13 @@ class ErrorHandlerMiddleware:
                 except:
                     pass
         raise exception
+    
+
+class BlockInvalidHostsMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.get_host().split(":")[0] not in ALLOWED_HOSTS:  # Ignore port numbers
+            return HttpResponseForbidden("Forbidden: Invalid Host Header")
+        return self.get_response(request)
