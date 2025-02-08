@@ -1,5 +1,5 @@
 # Django
-Django==4.2.18
+Django==4.2.19
 
 django-allauth==0.63.3
 cryptography==42.0.8
