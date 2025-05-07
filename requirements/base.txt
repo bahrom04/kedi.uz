@@ -2,7 +2,7 @@
 Django==4.2.20
 
 django-allauth==0.63.3
-cryptography==42.0.8
+cryptography==44.0.1
 
 django-ckeditor==6.6.1
 django-jazzmin==2.6.1
