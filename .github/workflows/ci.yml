@@ -48,6 +48,7 @@ jobs:
 
       - name: Run Tests
         env:
+          ALLOWED_HOSTS: localhost,127.0.0.1
           DEBUG: True
           DJANGO_SETTINGS_MODULE: core.settings.develop
           SECRET_KEY: SOME_SECRET_KEY
