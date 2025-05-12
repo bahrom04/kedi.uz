@@ -17,7 +17,7 @@ django-browser-reload==1.12.1
 
 django-ninja==1.1.0
 
-pillow==9.5.0
+pillow==10.3.0
 
 psycopg2-binary==2.9.9
 
