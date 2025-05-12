@@ -5,7 +5,7 @@ django-allauth==0.63.3
 cryptography==44.0.1
 
 django-ckeditor==6.6.1
-django-jazzmin==2.6.1
+django-jazzmin==3.0.1
 
 django-location-field==2.7.3
 django-map-widgets==0.4.2
