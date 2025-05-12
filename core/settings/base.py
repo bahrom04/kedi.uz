@@ -47,7 +47,7 @@ THIRD_PARTY_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     "location_field.apps.DefaultConfig",
-    "captcha",
+    "django_recaptcha",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS

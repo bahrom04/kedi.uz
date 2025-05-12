@@ -9,7 +9,7 @@ from django.views.generic.base import TemplateView  # new
 
 # captcha
 from django.contrib.auth.forms import AuthenticationForm
-from captcha import fields
+from django_recaptcha import fields
 
 from apps.common.api_endpoints.views import api as common
 
