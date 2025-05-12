@@ -1,4 +1,4 @@
-## Ekologiya
+## kedi.uz
 Cmd venv activation:
 ```
 python -m venv venv
