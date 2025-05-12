@@ -13,7 +13,7 @@ django-map-widgets==0.4.2
 django-modeltranslation==0.18.11
 
 django-tailwind==3.8.0
-django-browser-reload==1.12.1
+django-browser-reload==1.18.0
 
 django-ninja==1.1.0
 
