@@ -47,7 +47,6 @@ THIRD_PARTY_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     "location_field.apps.DefaultConfig",
-    "django_recaptcha",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
@@ -252,11 +251,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 NPM_BIN_PATH = os.getenv("NPM_BIN_PATH")
-
-# captcha
-RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY")
-RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY")
-
 
 # Security settings
 # SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

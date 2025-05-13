@@ -2,9 +2,15 @@ from .base import *  # noqa
 
 DEBUG = False
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://kedi.uz"
+INSTALLED_APPS += [
+    "django_recaptcha"
 ]
+
+CSRF_TRUSTED_ORIGINS = ["https://kedi.uz"]
+
+# captcha
+RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY")
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
@@ -12,10 +18,10 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 import sentry_sdk
 
-sentry_key = os.getenv("sentry_key")
+SENTRY_KEY = os.getenv("SENTRY_KEY")
 
 sentry_sdk.init(
-    dsn=f"https://{sentry_key}.ingest.us.sentry.io/4507560080900096",
+    dsn=f"https://{SENTRY_KEY}.ingest.us.sentry.io/4507560080900096",
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
     traces_sample_rate=1.0,

@@ -7,24 +7,31 @@ from django.conf.urls.i18n import set_language
 from django.conf.urls.i18n import i18n_patterns
 from django.views.generic.base import TemplateView  # new
 
-# captcha
 from django.contrib.auth.forms import AuthenticationForm
-from django_recaptcha import fields
-
 from apps.common.api_endpoints.views import api as common
 
-class LoginForm(AuthenticationForm):
-    captcha = fields.ReCaptchaField()
 
-    def clean(self):
-        captcha = self.cleaned_data.get("captcha")
-        if not captcha:
-            return
-        return super().clean()
+def configure_admin_login():
+    if settings.DEBUG:
+        return
+
+    # captcha
+    from django_recaptcha import fields
+
+    class LoginForm(AuthenticationForm):
+        captcha = fields.ReCaptchaField()
+
+        def clean(self):
+            captcha = self.cleaned_data.get("captcha")
+            if not captcha:
+                return
+            return super().clean()
+
+    admin.site.login_form = LoginForm
+    admin.site.login_template = "login.html"
 
 
-admin.site.login_form = LoginForm
-admin.site.login_template = "login.html"
+configure_admin_login()
 
 
 def trigger_error(request):
@@ -40,7 +47,7 @@ urlpatterns = [
         serve,
         {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
     ),
-    path('sentry-debug/', trigger_error),
+    path("sentry-debug/", trigger_error),
     path("accounts/", include("allauth.urls")),
     path(
         "robots.txt",
