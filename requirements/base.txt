@@ -18,7 +18,7 @@ django-browser-reload==1.18.0
 
 django-ninja==1.4.1
 
-pillow==9.5.0
+pillow==11.2.1
 
 pydantic==2.7.2
 
