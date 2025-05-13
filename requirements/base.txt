@@ -2,6 +2,7 @@
 Django==4.2.21
 
 django-allauth==0.63.3
+PyJWT==2.8.0
 cryptography==44.0.1
 
 django-ckeditor==6.6.1
@@ -21,12 +22,10 @@ pillow==9.5.0
 
 pydantic==2.7.2
 
-PyJWT==2.8.0
-
-python-dotenv==1.0.1
+python-dotenv
 python-environ==0.4.54
 
-requests==2.32.3
+requests
 
 rich==13.7.1
 six==1.16.0
