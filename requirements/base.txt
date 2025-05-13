@@ -19,8 +19,6 @@ django-ninja==1.4.1
 
 pillow==9.5.0
 
-psycopg2-binary==2.9.9
-
 pydantic==2.7.2
 
 PyJWT==2.8.0
