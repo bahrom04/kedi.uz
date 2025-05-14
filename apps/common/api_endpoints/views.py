@@ -1,9 +1,17 @@
 from typing import List, Annotated
 from ninja import NinjaAPI
+from ninja.throttling import AnonRateThrottle, AuthRateThrottle
+
 from apps.common import models
 from apps.common.api_endpoints import schemas
 
-api = NinjaAPI()
+
+api = NinjaAPI(
+    throttle=[
+        AnonRateThrottle("10/s"),
+        AuthRateThrottle("20/s"),
+    ]
+)
 
 
 @api.get("/post/all", response=List[schemas.PostSchema])
