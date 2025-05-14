@@ -4,7 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify
 from django.conf import settings
 
-from ckeditor_uploader.fields import RichTextUploadingField
 from location_field.models.plain import PlainLocationField
 
 
@@ -25,7 +24,7 @@ class BaseModel(models.Model):
 class About(BaseModel):
     image = models.ImageField(upload_to="images/", blank=True)
     title = models.CharField(_("Title"), max_length=128)
-    content = RichTextUploadingField(_("Content"))
+    content = models.TextField(_("Content"))
 
     class Meta:
         verbose_name = _("About")
@@ -85,7 +84,7 @@ class Post(models.Model):
         _("Short Description"),
         max_length=256,
     )
-    content = RichTextUploadingField(_("Content"))
+    content = models.TextField(_("Content"))
     tag = models.ManyToManyField(Tag, related_name="tag", blank=True)
 
     views = models.IntegerField(default=0)
@@ -123,7 +122,7 @@ class Event(BaseModel):
 
 class Position(BaseModel):
     title = models.CharField(_("Title"), max_length=255)
-    description = RichTextUploadingField(_("Description"))
+    description = models.TextField(_("Description"))
     thumbnail = models.ImageField(upload_to="position", null=True, blank=True)
 
     location = PlainLocationField(

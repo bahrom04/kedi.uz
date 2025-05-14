@@ -44,8 +44,6 @@ THIRD_PARTY_APPS = [
     "modeltranslation",
     "tailwind",
     "django_browser_reload",
-    "ckeditor",
-    "ckeditor_uploader",
     "location_field.apps.DefaultConfig",
 ]
 
@@ -69,9 +67,6 @@ SOCIALACCOUNT_PROVIDERS = {
     },
     # Add configurations for other social providers as needed
 }
-
-CKEDITOR_UPLOAD_PATH = "uploads/"
-# CKEDITOR_BASEPATH = "/static/ckeditor/"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -218,24 +213,6 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-CKEDITOR_IMAGE_BACKEND = "pillow"
-CKEDITOR_THUMBNAIL_SIZE = (450, 300)
-CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
-
-CKEDITOR_CONFIGS = {
-    "default": {
-        "config.versionCheck": False,
-        "toolbar": "full",
-        "height": 300,
-        "width": 700,
-        'enterMode': 2,  
-        'shiftEnterMode': 1,  
-        'autoParagraph': False, 
-        'removePlugins': 'elementspath', 
-        'resize_enabled': False,  
-    }
-}
 
 LOCATION_FIELD = {
     "map.provider": "openstreetmap",

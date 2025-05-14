@@ -40,13 +40,7 @@ def trigger_error(request):
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("ckeditor/", include("ckeditor_uploader.urls")),
     path("set_language/", set_language, name="set_language"),
-    path(
-        "ckeditor/upload/",
-        serve,
-        {"document_root": settings.MEDIA_ROOT, "show_indexes": True},
-    ),
     path("sentry-debug/", trigger_error),
     path("accounts/", include("allauth.urls")),
     path(

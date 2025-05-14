@@ -5,8 +5,7 @@ django-allauth==0.63.3
 PyJWT==2.8.0
 cryptography==44.0.1
 
-django-ckeditor==6.7.2
-django-jazzmin==3.0.1
+django-jazzmin
 
 django-location-field==2.7.3
 django-map-widgets==0.4.2
@@ -26,9 +25,6 @@ python-dotenv
 python-environ==0.4.54
 
 requests
-
-rich==13.7.1
-six==1.16.0
 
 # recaptcha
 django-recaptcha==4.1.0
