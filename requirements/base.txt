@@ -19,8 +19,6 @@ django-ninja==1.4.1
 
 pillow==11.2.1
 
-pydantic==2.7.2
-
 python-dotenv
 python-environ==0.4.54
 
@@ -35,4 +33,3 @@ sentry-sdk[django]
 
 # redis
 django-redis
-

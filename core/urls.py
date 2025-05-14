@@ -47,7 +47,7 @@ urlpatterns = [
         "robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
     ),
-    path("api/", common.urls),
+    path("api/v1/", common.urls),
 ]
 
 urlpatterns += i18n_patterns(path("", include("apps.common.urls")))

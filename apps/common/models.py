@@ -49,14 +49,14 @@ class Media(BaseModel):
 
 class Region(models.Model):
 
-    type = models.CharField(
+    title = models.CharField(
         _("Street name (Arentir)"),
         max_length=255,
         unique=True,
     )
 
     def __str__(self):
-        return self.type
+        return self.title
 
     class Meta:
         db_table = "Region"

@@ -13,7 +13,7 @@ class AboutTranslationOption(TranslationOptions):
 
 @register(models.Region)
 class RegionTranslationOption(TranslationOptions):
-    fields = ("type",)
+    fields = ("title",)
 
 
 @register(models.Tag)

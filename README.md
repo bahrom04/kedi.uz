@@ -10,7 +10,7 @@ Clone, create venv and run:
 pip install -r requirements/develop.txt
 python manage.py migrate
 python manage.py createsuperuser
-``` 
+```
 
 ## In Deployment or Develop don't forget that!
 https://stackoverflow.com/questions/35101850/cant-find-msguniq-make-sure-you-have-gnu-gettext-tools-0-15-or-newer-installed
@@ -19,7 +19,7 @@ https://stackoverflow.com/questions/35101850/cant-find-msguniq-make-sure-you-hav
 sudo apt-get install -y gettext
 django-admin makemessages -l en
 python manage.py compilemessages
-python manage.py compilemessages -l uz                                                                                               
+python manage.py compilemessages -l uz
 ```
 
 ## Incase permission denied to upload images
@@ -57,7 +57,7 @@ git config --global --add safe.directory /home/web/kedi.uz
 ```
 redis-server
 
-# mac 
+# mac
 brew services start redis  # start
 brew services stop redis  # stop
 
@@ -70,3 +70,6 @@ keys '*'
 get <key_name>
 
 ```
+
+## Swagger
+http://localhost:8000/api/docs

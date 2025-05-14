@@ -10,17 +10,25 @@ class MediaAdmin(TabbedTranslationAdmin):
 
 @admin.register(models.About)
 class AboutAdmin(TabbedTranslationAdmin):
-    list_display = ("title", "created_at", "updated_at", )
+    list_display = (
+        "title",
+        "created_at",
+        "updated_at",
+    )
 
 
 @admin.register(models.Region)
 class RegionAdmin(TabbedTranslationAdmin):
-    list_display = ("type",)
+    list_display = ("title",)
 
 
 @admin.register(models.Post)
 class PostAdmin(TabbedTranslationAdmin):
-    list_display = ("title", "created_at", "views", )
+    list_display = (
+        "title",
+        "created_at",
+        "views",
+    )
 
 
 @admin.register(models.Tag)
@@ -30,17 +38,37 @@ class TagAdmin(TabbedTranslationAdmin):
 
 @admin.register(models.Event)
 class EventAdmin(TabbedTranslationAdmin):
-    list_display = ("title", "created_at", "updated_at", "is_active",)
+    list_display = (
+        "title",
+        "created_at",
+        "updated_at",
+        "is_active",
+    )
 
 
 @admin.register(models.Position)
 class PositionAdmin(TabbedTranslationAdmin):
-    list_display = ("title", "region", "event", "created_at", "updated_at",)
-    list_select_related = ("region", "event",)
+    list_display = (
+        "title",
+        "region",
+        "event",
+        "created_at",
+        "updated_at",
+    )
+    list_select_related = (
+        "region",
+        "event",
+    )
     exclude = ("latitude", "longitude")
 
 
 @admin.register(models.UserSavedPosition)
 class UserSavedPositionAdmin(admin.ModelAdmin):
-    list_display = ("user", "position",)
-    list_select_related = ("user", "position",)
+    list_display = (
+        "user",
+        "position",
+    )
+    list_select_related = (
+        "user",
+        "position",
+    )
