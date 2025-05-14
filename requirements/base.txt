@@ -26,6 +26,7 @@ python-environ==0.4.54
 
 requests
 
+six
 # recaptcha
 django-recaptcha==4.1.0
 
